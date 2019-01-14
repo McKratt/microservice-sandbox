@@ -15,5 +15,10 @@
             <artifactId>shared-domain</artifactId>
             <version>${shared.version}</version>
         </dependency>
+        <dependency>
+            <groupId>net.bakaar</groupId>
+            <artifactId>event-domain</artifactId>
+            <version>${event.lib.version}</version>
+        </dependency>
     </dependencies>
 </project>

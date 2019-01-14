@@ -3,6 +3,7 @@ package net.bakaar.sandbox.person.domain.cucumber.steps;
 import cucumber.api.DataTable;
 import cucumber.api.java.Before;
 import cucumber.api.java8.En;
+import net.bakaar.sandbox.event.domain.EventStore;
 import net.bakaar.sandbox.person.domain.entity.Partner;
 import net.bakaar.sandbox.person.domain.repository.BusinessNumberRepository;
 import net.bakaar.sandbox.person.domain.repository.PartnerRepository;
@@ -25,7 +26,8 @@ public class PersonCreationStepsDefinitions implements En {
 
     private final PartnerRepository partnerRepository = mock(PartnerRepository.class);
     private final BusinessNumberRepository businessNumberRepository = mock(BusinessNumberRepository.class);
-    private final CreatePartnerUseCase service = new PersonDomaineService(partnerRepository, businessNumberRepository);
+    private final EventStore eventStore = mock(EventStore.class);
+    private final CreatePartnerUseCase service = new PersonDomaineService(partnerRepository, businessNumberRepository, eventStore);
     private Partner createdPartner;
     private Throwable thrown;
 
