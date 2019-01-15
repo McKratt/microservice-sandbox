@@ -54,6 +54,6 @@ public class BusinessNumberConsumerPactIT {
         //When
         PNumber pnumber = store.createPartnerNumber();
         //Then
-        assertThat(pnumber).isNotNull().extracting(PNumber::getValue).isEqualTo(54637289);
+        assertThat(pnumber).isNotNull().extracting(PNumber::getValue).containsExactly(54637289);
     }
 }

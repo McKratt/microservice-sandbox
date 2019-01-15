@@ -1,5 +1,6 @@
 package net.bakaar.sandbox.person.rest.service;
 
+import net.bakaar.sandbox.person.domain.command.CreatePartnerCommand;
 import net.bakaar.sandbox.person.domain.entity.Partner;
 import net.bakaar.sandbox.person.domain.service.CreatePartnerUseCase;
 import net.bakaar.sandbox.person.domain.service.PersonDomaineService;
@@ -8,6 +9,7 @@ import net.bakaar.sandbox.person.rest.mapper.PartnerDomainDtoMapper;
 import net.bakaar.sandbox.person.rest.repository.PartnerReadStore;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 
 import java.time.LocalDate;
 
@@ -28,7 +30,7 @@ public class PersonRestServiceTest {
     public void createPartner_should_call_domain_service() {
         //Given
         Partner mockedPartner = mock(Partner.class);
-        given(domainService.createPartner(any(), any(), any())).willReturn(mockedPartner);
+        given(domainService.createPartner(any(CreatePartnerCommand.class))).willReturn(mockedPartner);
         given(mapper.mapToDto(mockedPartner)).willReturn(mockedDto);
         PartnerDTO input = new PartnerDTO();
         LocalDate birthDate = LocalDate.of(1981, 12, 16);
@@ -40,7 +42,12 @@ public class PersonRestServiceTest {
         //When
         PartnerDTO dto = service.createPartner(input);
         //Then
-        verify(domainService).createPartner(name, forename, birthDate);
+        ArgumentCaptor<CreatePartnerCommand> commandCaptured = ArgumentCaptor.forClass(CreatePartnerCommand.class);
+        verify(domainService).createPartner(commandCaptured.capture());
+        CreatePartnerCommand command = commandCaptured.getValue();
+        assertThat(command.getBirthDate()).isSameAs(birthDate);
+        assertThat(command.getForename()).isEqualTo(forename);
+        assertThat(command.getName()).isEqualTo(name);
         verify(mapper).mapToDto(mockedPartner);
         verify(readRepository, times(0)).fetchPartnerById(any());
         assertThat(dto).isNotNull().isSameAs(mockedDto);

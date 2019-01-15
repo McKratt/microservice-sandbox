@@ -1,5 +1,6 @@
 package net.bakaar.sandbox.person.rest.service;
 
+import net.bakaar.sandbox.person.domain.command.CreatePartnerCommand;
 import net.bakaar.sandbox.person.domain.service.CreatePartnerUseCase;
 import net.bakaar.sandbox.person.rest.dto.PartnerDTO;
 import net.bakaar.sandbox.person.rest.mapper.PartnerDomainDtoMapper;
@@ -23,8 +24,10 @@ public class PersonRestService {
 
     @Transactional
     public PartnerDTO createPartner(PartnerDTO partner) {
+        CreatePartnerCommand command =
+                new CreatePartnerCommand(partner.getName(), partner.getForename(), partner.getBirthDate());
         return mapper.mapToDto(
-                createPartnerUseCase.createPartner(partner.getName(), partner.getForename(), partner.getBirthDate())
+                createPartnerUseCase.createPartner(command)
         );
     }
 
