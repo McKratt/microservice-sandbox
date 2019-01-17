@@ -28,7 +28,7 @@ public class PersonDataConfiguration {
     }
 
     @Bean
-    public PartnerRepository partnerStore(PersonJpaRepository personJpaRepository) {
+    public PartnerRepository readStoreAdapter(PersonJpaRepository personJpaRepository) {
         return new PartnerRepositoryAdapter(personJpaRepository, new PartnerEntityDomainMapper(), new PartnerEntityDTOMapper());
     }
 }
