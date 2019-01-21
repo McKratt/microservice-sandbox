@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 public class PersonDomainConfiguration {
 
   @Bean
-  public CreatePartnerUseCase createPartnerUseCase(PartnerRepository store, BusinessNumberRepository businessNumberRepository) {
+  public CreatePartnerUseCase domainService(PartnerRepository store, BusinessNumberRepository businessNumberRepository) {
     return new PersonDomaineService(store, businessNumberRepository);
   }
 

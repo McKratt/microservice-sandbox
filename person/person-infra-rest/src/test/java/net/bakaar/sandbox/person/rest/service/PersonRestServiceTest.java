@@ -1,60 +1,32 @@
 package net.bakaar.sandbox.person.rest.service;
 
+import net.bakaar.sandbox.person.domain.command.CreatePartnerCommand;
 import net.bakaar.sandbox.person.domain.entity.Partner;
 import net.bakaar.sandbox.person.domain.service.CreatePartnerUseCase;
 import net.bakaar.sandbox.person.domain.service.PersonDomaineService;
-import net.bakaar.sandbox.person.rest.dto.PartnerDTO;
-import net.bakaar.sandbox.person.rest.mapper.PartnerDomainDtoMapper;
-import net.bakaar.sandbox.person.rest.repository.PartnerReadStore;
-import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.junit.Test;
-
-import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class PersonRestServiceTest {
-
-    private final CreatePartnerUseCase domainService = mock(PersonDomaineService.class);
-    private final PartnerReadStore readRepository = mock(PartnerReadStore.class);
-    private final PartnerDomainDtoMapper mapper = mock(PartnerDomainDtoMapper.class);
-    private final PersonRestService service = new PersonRestService(domainService, readRepository, mapper);
-    private final PartnerDTO mockedDto = mock(PartnerDTO.class);
 
     @Test
     public void createPartner_should_call_domain_service() {
         //Given
+        CreatePartnerUseCase domainService = mock(PersonDomaineService.class);
+        PersonRestService service = new PersonRestService(domainService);
         Partner mockedPartner = mock(Partner.class);
-        given(domainService.createPartner(any(), any(), any())).willReturn(mockedPartner);
-        given(mapper.mapToDto(mockedPartner)).willReturn(mockedDto);
-        PartnerDTO input = new PartnerDTO();
-        LocalDate birthDate = LocalDate.of(1981, 12, 16);
-        input.setBirthDate(birthDate);
-        String forename = "forename";
-        input.setForename(forename);
-        String name = "name";
-        input.setName(name);
-        //When
-        PartnerDTO dto = service.createPartner(input);
-        //Then
-        verify(domainService).createPartner(name, forename, birthDate);
-        verify(mapper).mapToDto(mockedPartner);
-        verify(readRepository, times(0)).fetchPartnerById(any());
-        assertThat(dto).isNotNull().isSameAs(mockedDto);
-    }
+        given(domainService.createPartner(any(CreatePartnerCommand.class))).willReturn(mockedPartner);
 
-    @Test
-    public void featchPartnerById_should_return_the_correct_partner() {
-        //Given
-        PNumber id = PNumber.of(12345678L);
-        given(readRepository.fetchPartnerById(any())).willReturn(mockedDto);
+        CreatePartnerCommand input = mock(CreatePartnerCommand.class);
         //When
-        PartnerDTO returnedPartner = service.fetchPartnerById(id);
+        Partner partner = service.createPartner(input);
         //Then
-        assertThat(returnedPartner).isNotNull().isSameAs(mockedDto);
-        verify(readRepository).fetchPartnerById(id);
+        verify(domainService).createPartner(input);
+        assertThat(partner).isNotNull().isSameAs(mockedPartner);
     }
 }

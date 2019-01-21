@@ -4,6 +4,7 @@ import cucumber.api.DataTable;
 import cucumber.api.java.Before;
 import cucumber.api.java8.En;
 import net.bakaar.sandbox.event.domain.EventStore;
+import net.bakaar.sandbox.person.domain.command.CreatePartnerCommand;
 import net.bakaar.sandbox.person.domain.entity.Partner;
 import net.bakaar.sandbox.person.domain.repository.BusinessNumberRepository;
 import net.bakaar.sandbox.person.domain.repository.PartnerRepository;
@@ -39,11 +40,13 @@ public class PersonCreationStepsDefinitions implements En {
             } else {
                 birthDate = LocalDate.of(year, month, day);
             }
-            thrown = catchThrowable(() -> createdPartner = service.createPartner(name, forename, birthDate));
+            CreatePartnerCommand command = new CreatePartnerCommand(name, forename, birthDate);
+            thrown = catchThrowable(() -> createdPartner = service.createPartner(command));
         });
         When("^I create a partner with the following data :$", (DataTable input) -> {
             List<String> table = input.asList(String.class);
-            createdPartner = service.createPartner(table.get(0), table.get(1), convertToDate(table.get(2)));
+            CreatePartnerCommand command = new CreatePartnerCommand(table.get(0), table.get(1), convertToDate(table.get(2)));
+            createdPartner = service.createPartner(command);
         });
         Then("^I should receive an error mentionning that the info ([^\"]*) is missing$", (String fieldName) -> {
             assertThat(thrown).isNotNull();

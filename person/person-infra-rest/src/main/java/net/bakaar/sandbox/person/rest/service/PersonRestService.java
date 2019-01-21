@@ -1,36 +1,19 @@
 package net.bakaar.sandbox.person.rest.service;
 
+import net.bakaar.sandbox.person.domain.command.CreatePartnerCommand;
+import net.bakaar.sandbox.person.domain.entity.Partner;
 import net.bakaar.sandbox.person.domain.service.CreatePartnerUseCase;
-import net.bakaar.sandbox.person.rest.dto.PartnerDTO;
-import net.bakaar.sandbox.person.rest.mapper.PartnerDomainDtoMapper;
-import net.bakaar.sandbox.person.rest.repository.PartnerReadStore;
-import net.bakaar.sandbox.shared.domain.vo.PNumber;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
-
-public class PersonRestService {
+public class PersonRestService implements CreatePartnerUseCase {
     private final CreatePartnerUseCase createPartnerUseCase;
-    private final PartnerReadStore readRepository;
-    private final PartnerDomainDtoMapper mapper;
 
-    public PersonRestService(CreatePartnerUseCase createPartnerUseCase,
-                             PartnerReadStore readRepository,
-                             PartnerDomainDtoMapper mapper) {
+    public PersonRestService(CreatePartnerUseCase createPartnerUseCase) {
         this.createPartnerUseCase = createPartnerUseCase;
-        this.readRepository = readRepository;
-        this.mapper = mapper;
     }
 
     @Transactional
-    public PartnerDTO createPartner(PartnerDTO partner) {
-        return mapper.mapToDto(
-                createPartnerUseCase.createPartner(partner.getName(), partner.getForename(), partner.getBirthDate())
-        );
-    }
-
-    // TODO put readOnly here for non blocking transaction
-    @Transactional
-    public PartnerDTO fetchPartnerById(PNumber pNumber) {
-        return readRepository.fetchPartnerById(pNumber);
+    public Partner createPartner(CreatePartnerCommand command) {
+        return createPartnerUseCase.createPartner(command);
     }
 }
