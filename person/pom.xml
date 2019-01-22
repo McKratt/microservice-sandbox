@@ -16,7 +16,8 @@
         <module>person-domain</module>
         <module>person-infra-data</module>
         <module>person-infra-rest</module>
-        <module>person-frontend</module>
+        <module>person-infra</module>
+        <module>person-application</module>
     </modules>
     <properties>
         <cucumber.version>1.2.5</cucumber.version>
