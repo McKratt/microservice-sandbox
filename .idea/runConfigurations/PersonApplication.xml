@@ -1,13 +1,13 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="PersonApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-    <module name="person-frontend" />
+    <module name="person-application" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="net.bakaar.sandbox.person.*" />
+        <option name="PATTERN" value="net.bakaar.sandbox.person.application.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>
-    <option name="SPRING_BOOT_MAIN_CLASS" value="net.bakaar.sandbox.person.PersonApplication" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="net.bakaar.sandbox.person.application.PersonApplication" />
     <option name="VM_PARAMETERS" value="-Dperson.db.url=jdbc:postgresql://localhost:5432/person_user -Dperson.db.user=person_user -Dperson.db.pass=123456 -Dperson.db.driver=org.postgresql.Driver -Dbusinessnumber.url=http://localhost:8080/business-number" />
     <option name="ALTERNATIVE_JRE_PATH" />
     <method v="2">
