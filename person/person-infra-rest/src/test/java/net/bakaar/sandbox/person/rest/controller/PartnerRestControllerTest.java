@@ -3,6 +3,7 @@ package net.bakaar.sandbox.person.rest.controller;
 import net.bakaar.sandbox.person.domain.command.CreatePartnerCommand;
 import net.bakaar.sandbox.person.domain.entity.Partner;
 import net.bakaar.sandbox.person.domain.service.CreatePartnerUseCase;
+import net.bakaar.sandbox.person.rest.dto.CreatePartnerCommandDTO;
 import net.bakaar.sandbox.person.rest.dto.PartnerDTO;
 import net.bakaar.sandbox.person.rest.mapper.PartnerDomainDtoMapper;
 import net.bakaar.sandbox.person.rest.repository.PartnerReadStore;
@@ -34,7 +35,7 @@ public class PartnerRestControllerTest {
         given(service.createPartner(any(CreatePartnerCommand.class))).willReturn(returnedPartner);
         PartnerDTO expectedDto = mock(PartnerDTO.class);
         given(mapper.mapToDto(returnedPartner)).willReturn(expectedDto);
-        PartnerDTO input = new PartnerDTO();
+        CreatePartnerCommandDTO input = new CreatePartnerCommandDTO();
         String name = "MyName";
         String forename = "MyForename";
         LocalDate birthDate = LocalDate.now();
