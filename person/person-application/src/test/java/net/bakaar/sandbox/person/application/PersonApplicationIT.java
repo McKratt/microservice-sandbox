@@ -1,4 +1,4 @@
-package net.bakaar.sandbox.person;
+package net.bakaar.sandbox.person.application;
 
 import net.bakaar.sandbox.person.domain.repository.BusinessNumberRepository;
 import net.bakaar.sandbox.person.domain.service.CreatePartnerUseCase;
@@ -18,21 +18,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 public class PersonApplicationIT {
 
-  @Autowired
-  private PartnerRestController restController;
-  @Autowired
-  private BusinessNumberRepository numberService;
-  @Autowired
-  @Qualifier("domainService")
-  private CreatePartnerUseCase domaineService;
-  @Autowired
-  private RestTemplate restTemplate;
+    @Autowired
+    private PartnerRestController restController;
+    @Autowired
+    private BusinessNumberRepository numberService;
+    @Autowired
+    @Qualifier("domainService")
+    private CreatePartnerUseCase domaineService;
+    @Autowired
+    private RestTemplate restTemplate;
 
-  @Test
-  public void context_should_load_correctly() {
-    assertThat(restController).isNotNull();
-    assertThat(numberService).isNotNull();
-    assertThat(domaineService).isNotNull().isInstanceOf(PersonDomaineService.class);
-    assertThat(restTemplate).isNotNull();
-  }
+    @Test
+    public void context_should_load_correctly() {
+        assertThat(restController).isNotNull();
+        assertThat(numberService).isNotNull();
+        assertThat(domaineService).isNotNull().isInstanceOf(PersonDomaineService.class);
+        assertThat(restTemplate).isNotNull();
+    }
 }

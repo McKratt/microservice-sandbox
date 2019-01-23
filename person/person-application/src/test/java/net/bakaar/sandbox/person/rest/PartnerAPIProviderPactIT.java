@@ -7,7 +7,7 @@ import au.com.dius.pact.provider.junit.target.Target;
 import au.com.dius.pact.provider.junit.target.TestTarget;
 import au.com.dius.pact.provider.spring.SpringRestPactRunner;
 import au.com.dius.pact.provider.spring.target.SpringBootHttpTarget;
-import net.bakaar.sandbox.person.PersonApplication;
+import net.bakaar.sandbox.person.application.PersonApplication;
 import net.bakaar.sandbox.person.data.jpa.entity.PersonEntity;
 import net.bakaar.sandbox.person.data.jpa.repository.PersonJpaRepository;
 import net.bakaar.sandbox.person.rest.test.config.PactTestConfiguration;
