@@ -14,10 +14,11 @@
     <version>1.0.0-SNAPSHOT</version>
     <modules>
         <module>person-domain</module>
-        <module>person-infra-data</module>
+        <module>person-infra-data-jpa</module>
         <module>person-infra-rest</module>
         <module>person-infra</module>
         <module>person-application</module>
+        <module>person-infra-data-rest</module>
     </modules>
     <properties>
         <cucumber.version>1.2.5</cucumber.version>

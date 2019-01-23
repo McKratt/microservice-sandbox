@@ -77,7 +77,12 @@
     <dependencies>
         <dependency>
             <groupId>net.bakaar</groupId>
-            <artifactId>person-infra-data</artifactId>
+            <artifactId>person-infra-data-jpa</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.bakaar</groupId>
+            <artifactId>person-infra-data-rest</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
