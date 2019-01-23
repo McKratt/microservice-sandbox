@@ -21,7 +21,7 @@ public class PartnerRestController {
     private final PartnerReadStore readStore;
     private final PartnerDomainDtoMapper mapper;
 
-    public PartnerRestController(@Qualifier("createPartnerApplicationService") CreatePartnerUseCase service,
+    public PartnerRestController(CreatePartnerUseCase service,
                                  @Qualifier("readStoreApplicationService") PartnerReadStore readStore,
                                  PartnerDomainDtoMapper mapper) {
         this.service = service;

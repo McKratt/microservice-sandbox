@@ -15,8 +15,7 @@ public class PersonRestConfiguration {
 
     @Bean
     public PartnerReadStore readStoreApplicationService(
-            @Qualifier("readStoreAdapter") PartnerReadStore readRepository
-    ) {
+            @Qualifier("readStoreAdapter") PartnerReadStore readRepository) {
         return new PartnerReadService(readRepository);
     }
 

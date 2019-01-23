@@ -6,14 +6,14 @@ import net.bakaar.sandbox.person.domain.service.CreatePartnerUseCase;
 import org.springframework.transaction.annotation.Transactional;
 
 public class PersonRestService implements CreatePartnerUseCase {
-    private final CreatePartnerUseCase createPartnerUseCase;
+    private final CreatePartnerUseCase domainService;
 
-    public PersonRestService(CreatePartnerUseCase createPartnerUseCase) {
-        this.createPartnerUseCase = createPartnerUseCase;
+    public PersonRestService(CreatePartnerUseCase domainService) {
+        this.domainService = domainService;
     }
 
     @Transactional
     public Partner createPartner(CreatePartnerCommand command) {
-        return createPartnerUseCase.createPartner(command);
+        return domainService.createPartner(command);
     }
 }
