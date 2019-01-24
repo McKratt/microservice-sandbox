@@ -14,9 +14,11 @@
     <packaging>pom</packaging>
     <modules>
         <module>case-domain</module>
-        <module>case-infra-data</module>
+        <module>case-infra-data-jpa</module>
         <module>case-application</module>
         <module>case-infra-rest</module>
+        <module>case-infra</module>
+        <module>case-infra-data-rest</module>
     </modules>
     <properties>
         <cucumber.version>1.2.5</cucumber.version>

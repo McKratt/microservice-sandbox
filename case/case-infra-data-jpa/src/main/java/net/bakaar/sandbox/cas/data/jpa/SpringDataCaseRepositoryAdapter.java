@@ -2,9 +2,7 @@ package net.bakaar.sandbox.cas.data.jpa;
 
 import net.bakaar.sandbox.cas.domain.entity.Case;
 import net.bakaar.sandbox.cas.domain.repository.CaseRepository;
-import org.springframework.stereotype.Component;
 
-@Component
 public class SpringDataCaseRepositoryAdapter implements CaseRepository {
 
     private final SpringDataCaseRepository repository;
