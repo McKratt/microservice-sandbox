@@ -3,7 +3,7 @@ package net.bakaar.sandbox.person.infra;
 import net.bakaar.sandbox.person.domain.repository.BusinessNumberRepository;
 import net.bakaar.sandbox.person.domain.repository.PartnerRepository;
 import net.bakaar.sandbox.person.domain.service.CreatePartnerUseCase;
-import net.bakaar.sandbox.person.infra.service.PersonRestService;
+import net.bakaar.sandbox.person.infra.service.PersonApplicationService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +29,6 @@ public class PersonInfraConfigurationIT {
     @Test
     public void context_should_be_complete() {
         assertThat(service).isNotNull()
-                .isInstanceOf(PersonRestService.class);
+                .isInstanceOf(PersonApplicationService.class);
     }
 }

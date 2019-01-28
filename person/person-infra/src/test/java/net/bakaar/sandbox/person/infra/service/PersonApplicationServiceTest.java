@@ -12,13 +12,13 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class PersonRestServiceTest {
+public class PersonApplicationServiceTest {
 
     @Test
     public void createPartner_should_call_domain_service() {
         //Given
         CreatePartnerUseCase domainService = mock(PersonDomaineService.class);
-        PersonRestService service = new PersonRestService(domainService);
+        PersonApplicationService service = new PersonApplicationService(domainService);
         Partner mockedPartner = mock(Partner.class);
         given(domainService.createPartner(any(CreatePartnerCommand.class))).willReturn(mockedPartner);
 

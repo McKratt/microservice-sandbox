@@ -4,7 +4,7 @@ import net.bakaar.sandbox.person.domain.repository.BusinessNumberRepository;
 import net.bakaar.sandbox.person.domain.repository.PartnerRepository;
 import net.bakaar.sandbox.person.domain.service.CreatePartnerUseCase;
 import net.bakaar.sandbox.person.domain.service.PersonDomaineService;
-import net.bakaar.sandbox.person.infra.service.PersonRestService;
+import net.bakaar.sandbox.person.infra.service.PersonApplicationService;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,7 +22,7 @@ public class PersonInfraConfigurationTest {
         //When
         CreatePartnerUseCase returnedService = configuration.createPartnerApplicationService(partnerRepository, numberRepository);
         //Then
-        assertThat(returnedService).isInstanceOf(PersonRestService.class);
+        assertThat(returnedService).isInstanceOf(PersonApplicationService.class);
         PersonDomaineService domainService = (PersonDomaineService) getField(returnedService, "domainService");
         assertThat(domainService).isNotNull();
         assertThat(getField(domainService, "store")).isSameAs(partnerRepository);

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.bakaar.sandbox.person.domain.command.CreatePartnerCommand;
 import net.bakaar.sandbox.person.domain.entity.Partner;
-import net.bakaar.sandbox.person.infra.service.PersonRestService;
+import net.bakaar.sandbox.person.infra.service.PersonApplicationService;
 import net.bakaar.sandbox.person.rest.PersonRestConfiguration;
 import net.bakaar.sandbox.person.rest.dto.PartnerDTO;
 import net.bakaar.sandbox.person.rest.repository.PartnerReadStore;
@@ -40,7 +40,7 @@ public class PartnerRestControllerIT {
     @Autowired
     private ObjectMapper mapper;
     @MockBean(name = "createPartnerApplicationService")
-    private PersonRestService service;
+    private PersonApplicationService service;
     @MockBean(name = "readStoreApplicationService")
     private PartnerReadStore readStore;
 
