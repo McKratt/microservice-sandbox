@@ -12,9 +12,9 @@ class CaseDomainObjectFactory {
         this.businessIdRepository = businessIdRepository;
     }
 
-    Case createCase(String pnummer) {
+    Case createCase(PNumber pNumber) {
         return Case.builder()
                 .withBusinnessId(businessIdRepository.generateId())
-                .withInjured(PNumber.of(pnummer));
+                .withInjured(pNumber);
     }
 }

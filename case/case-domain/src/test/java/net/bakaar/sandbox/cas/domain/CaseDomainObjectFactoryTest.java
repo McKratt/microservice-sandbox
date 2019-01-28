@@ -26,15 +26,15 @@ public class CaseDomainObjectFactoryTest {
     @Test
     public void createCase_should_create_a_case_with_an_id() {
         //Given
-        String pnummer = "P12345678";
+        PNumber pNumber = PNumber.of(12345678);
         String id = UUID.randomUUID().toString();
         given(businessIdRepository.generateId()).willReturn(id);
         //When
-        Case aCase = factory.createCase(pnummer);
+        Case aCase = factory.createCase(pNumber);
         //Then
         verify(businessIdRepository).generateId();
         assertThat(aCase).isNotNull();
         assertThat(aCase.getId()).isEqualTo(id);
-        assertThat(aCase.getInjured()).isEqualTo(PNumber.of(pnummer));
+        assertThat(aCase.getInjured()).isSameAs(pNumber);
     }
 }

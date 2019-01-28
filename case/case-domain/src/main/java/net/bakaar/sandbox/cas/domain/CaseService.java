@@ -1,5 +1,6 @@
 package net.bakaar.sandbox.cas.domain;
 
+import net.bakaar.sandbox.cas.domain.command.CreateCaseCommand;
 import net.bakaar.sandbox.cas.domain.entity.Case;
 import net.bakaar.sandbox.cas.domain.event.CaseCreated;
 import net.bakaar.sandbox.cas.domain.repository.BusinessIdRepository;
@@ -20,8 +21,8 @@ public class CaseService implements CreateCaseUseCase {
     }
 
     @Override
-    public Case createCase(String pnummer) {
-        Case caseCreated = factory.createCase(pnummer);
+    public Case createCase(CreateCaseCommand command) {
+        Case caseCreated = factory.createCase(command.getInsured());
         CaseCreated event = new CaseCreated(caseCreated.getId(), caseCreated.getInjured());
         eventStore.store(event);
         return repository.save(caseCreated);
