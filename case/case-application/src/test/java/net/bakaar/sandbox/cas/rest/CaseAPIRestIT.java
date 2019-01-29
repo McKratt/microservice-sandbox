@@ -2,9 +2,10 @@ package net.bakaar.sandbox.cas.rest;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import net.bakaar.sandbox.cas.application.CaseApplication;
 import net.bakaar.sandbox.cas.data.jpa.CaseEntity;
 import net.bakaar.sandbox.cas.domain.repository.BusinessIdRepository;
-import net.bakaar.sandbox.cas.rest.dto.CaseDTO;
+import net.bakaar.sandbox.cas.rest.dto.CreateCaseCommandDTO;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.junit.Test;
@@ -30,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = CaseApplication.class)
 @ActiveProfiles("h2")
 @AutoConfigureMockMvc
 public class CaseAPIRestIT {
@@ -48,10 +49,11 @@ public class CaseAPIRestIT {
     @Test
     public void endpoint_should_return_case() throws Exception {
         // Given
-        given(businessIdRepository.generateId()).willReturn(UUID.randomUUID().toString());
+        String id = UUID.randomUUID().toString();
+        given(businessIdRepository.generateId()).willReturn(id);
         String pnummer = "P12345678";
-        CaseDTO caseDTO = new CaseDTO()
-                .addPnummerInjured(pnummer);
+        CreateCaseCommandDTO caseDTO = new CreateCaseCommandDTO();
+        caseDTO.setInsuredNumber(pnummer);
         mockMvc
                 .perform(post("/rest/api/v1/cases")
                         .accept(APPLICATION_JSON_UTF8)
@@ -60,12 +62,10 @@ public class CaseAPIRestIT {
                 )
                 .andDo(print())
                 .andExpect(status().isCreated())
-                //FIXME check if necessary
-//                .andExpect(header().string("location", matches("/cases/([a-f0-9]){8}(-[a-f0-9]{4}){3}-([a-f0-9]){12}")))
                 .andExpect(jsonPath("$.injured.pnummer").value(pnummer))
                 //TODO add this test when Person Service and the link with is established
 //                .andExpect(jsonPath("$.injured.birthDate").value(birthDate.format(DateTimeFormatter.ISO_DATE)))
-                .andExpect(jsonPath("$.id").isNotEmpty())
+                .andExpect(jsonPath("$.id").value(id))
         ;
         List<CaseEntity> cases = entityManager.createQuery("select cas from CaseEntity cas", CaseEntity.class).getResultList();
         assertThat(cases).isNotEmpty();
