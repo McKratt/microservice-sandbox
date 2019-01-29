@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class CaseDataJpaConfiguration {
 
     @Bean
-    public CaseRepository caseRepository(SpringDataCaseRepository caseRepository) {
+    public CaseRepository caseRepositoryAdapter(SpringDataCaseRepository caseRepository) {
         return new SpringDataCaseRepositoryAdapter(caseRepository);
     }
 }
