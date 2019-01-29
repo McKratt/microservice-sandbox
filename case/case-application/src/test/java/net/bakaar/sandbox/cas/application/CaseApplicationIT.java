@@ -1,4 +1,4 @@
-package net.bakaar.sandbox.cas;
+package net.bakaar.sandbox.cas.application;
 
 import net.bakaar.sandbox.cas.domain.CreateCaseUseCase;
 import net.bakaar.sandbox.cas.domain.repository.BusinessIdRepository;

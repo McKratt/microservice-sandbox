@@ -1,10 +1,10 @@
-package net.bakaar.sandbox.cas;
+package net.bakaar.sandbox.cas.rest;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.bakaar.sandbox.cas.data.jpa.CaseEntity;
 import net.bakaar.sandbox.cas.domain.repository.BusinessIdRepository;
-import net.bakaar.sandbox.cas.rest.CaseDTO;
+import net.bakaar.sandbox.cas.rest.dto.CaseDTO;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.junit.Test;
