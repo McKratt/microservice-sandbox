@@ -1,7 +1,11 @@
-package net.bakaar.sandbox.cas.rest;
+package net.bakaar.sandbox.cas.rest.controller;
 
 import net.bakaar.sandbox.cas.domain.CreateCaseUseCase;
+import net.bakaar.sandbox.cas.domain.command.CreateCaseCommand;
 import net.bakaar.sandbox.cas.domain.entity.Case;
+import net.bakaar.sandbox.cas.rest.dto.CaseDTO;
+import net.bakaar.sandbox.cas.rest.dto.CreateCaseCommandDTO;
+import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,18 +17,18 @@ import static org.springframework.web.util.UriComponentsBuilder.fromPath;
 
 @RestController
 @RequestMapping(path = "/rest/api/v1")
-public class CaseResourceControler {
+public class CaseResourceController {
 
     private static final String CASE_ROOT_URI = "/cases";
     private final CreateCaseUseCase service;
 
-    CaseResourceControler(CreateCaseUseCase service) {
+    CaseResourceController(CreateCaseUseCase service) {
         this.service = service;
     }
 
     @PostMapping(value = CASE_ROOT_URI, consumes = "application/json")
-    public ResponseEntity<CaseDTO> addNewCase(@RequestBody CaseDTO aCase) {
-        Case createdCase = service.createCase(aCase.getInjured().getPnummer());
+    public ResponseEntity<CaseDTO> addNewCase(@RequestBody CreateCaseCommandDTO command) {
+        Case createdCase = service.createCase(new CreateCaseCommand(PNumber.of(command.getInsuredNumber())));
         return created(
                 fromPath(CASE_ROOT_URI + "/" + createdCase.getId())
                         .build()

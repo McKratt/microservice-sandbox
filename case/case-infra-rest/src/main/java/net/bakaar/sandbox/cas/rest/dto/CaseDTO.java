@@ -1,4 +1,4 @@
-package net.bakaar.sandbox.cas.rest;
+package net.bakaar.sandbox.cas.rest.dto;
 
 import net.bakaar.sandbox.cas.domain.entity.Case;
 
@@ -9,7 +9,7 @@ public class CaseDTO {
     private PartnerDTO injured;
     private String id;
 
-    static CaseDTO fromCase(Case aCase) {
+    public static CaseDTO fromCase(Case aCase) {
         return new CaseDTO().setId(aCase.getId())
                 .addPnummerInjured(aCase.getInjured().format());
     }

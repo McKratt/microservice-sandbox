@@ -1,4 +1,4 @@
-package net.bakaar.sandbox.cas.rest;
+package net.bakaar.sandbox.cas.rest.error;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

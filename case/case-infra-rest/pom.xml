@@ -12,7 +12,7 @@
     <dependencies>
         <dependency>
             <groupId>net.bakaar</groupId>
-            <artifactId>case-domain</artifactId>
+            <artifactId>case-infra</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

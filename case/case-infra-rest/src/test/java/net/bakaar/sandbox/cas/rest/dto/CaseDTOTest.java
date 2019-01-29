@@ -1,4 +1,4 @@
-package net.bakaar.sandbox.cas.rest;
+package net.bakaar.sandbox.cas.rest.dto;
 
 import org.junit.Test;
 

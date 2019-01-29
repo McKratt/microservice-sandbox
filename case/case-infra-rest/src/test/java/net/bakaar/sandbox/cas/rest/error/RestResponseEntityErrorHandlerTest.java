@@ -1,4 +1,4 @@
-package net.bakaar.sandbox.cas.rest;
+package net.bakaar.sandbox.cas.rest.error;
 
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
