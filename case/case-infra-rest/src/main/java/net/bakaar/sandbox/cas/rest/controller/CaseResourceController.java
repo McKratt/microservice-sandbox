@@ -1,8 +1,8 @@
 package net.bakaar.sandbox.cas.rest.controller;
 
-import net.bakaar.sandbox.cas.domain.CreateCaseUseCase;
 import net.bakaar.sandbox.cas.domain.command.CreateCaseCommand;
 import net.bakaar.sandbox.cas.domain.entity.Case;
+import net.bakaar.sandbox.cas.infra.service.CaseApplicationService;
 import net.bakaar.sandbox.cas.rest.dto.CaseDTO;
 import net.bakaar.sandbox.cas.rest.dto.CreateCaseCommandDTO;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
@@ -20,9 +20,9 @@ import static org.springframework.web.util.UriComponentsBuilder.fromPath;
 public class CaseResourceController {
 
     private static final String CASE_ROOT_URI = "/cases";
-    private final CreateCaseUseCase service;
+    private final CaseApplicationService service;
 
-    CaseResourceController(CreateCaseUseCase service) {
+    CaseResourceController(CaseApplicationService service) {
         this.service = service;
     }
 

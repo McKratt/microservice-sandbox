@@ -87,11 +87,6 @@
         </dependency>
         <dependency>
             <groupId>net.bakaar</groupId>
-            <artifactId>person-infra</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>net.bakaar</groupId>
             <artifactId>person-infra-rest</artifactId>
             <version>${project.version}</version>
         </dependency>

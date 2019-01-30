@@ -1,7 +1,7 @@
 package net.bakaar.sandbox.cas.rest.controller;
 
-import net.bakaar.sandbox.cas.domain.CreateCaseUseCase;
 import net.bakaar.sandbox.cas.domain.entity.Case;
+import net.bakaar.sandbox.cas.infra.service.CaseApplicationService;
 import net.bakaar.sandbox.cas.rest.CaseRestConfiguration;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.junit.Test;
@@ -28,11 +28,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class CaseResourceControllerIT {
 
-    private final String baseUrl = "/rest/api/v1/cases";
     @Autowired
     private MockMvc mockMvc;
     @MockBean
-    private CreateCaseUseCase service;
+    private CaseApplicationService service;
 
     @Test
     public void createCase_should_return_case() throws Exception {
@@ -42,6 +41,7 @@ public class CaseResourceControllerIT {
         Case returnedCase = Case.builder().withBusinnessId(id).withInjured(PNumber.of(pNumber));
         given(service.createCase(any())).willReturn(returnedCase);
         //When //Then
+        String baseUrl = "/rest/api/v1/cases";
         mockMvc.perform(post(baseUrl)
                 .accept(APPLICATION_JSON_UTF8)
                 .contentType(APPLICATION_JSON_UTF8)

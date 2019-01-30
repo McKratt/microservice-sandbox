@@ -1,7 +1,6 @@
 package net.bakaar.sandbox.cas.infra;
 
 import net.bakaar.sandbox.cas.domain.CaseService;
-import net.bakaar.sandbox.cas.domain.CreateCaseUseCase;
 import net.bakaar.sandbox.cas.domain.repository.BusinessIdRepository;
 import net.bakaar.sandbox.cas.domain.repository.CaseRepository;
 import net.bakaar.sandbox.cas.infra.service.CaseApplicationService;
@@ -13,9 +12,9 @@ import org.springframework.context.annotation.Configuration;
 public class CaseInfraConfiguration {
 
     @Bean
-    public CreateCaseUseCase applicationService(EventStore eventStore,
-                                                CaseRepository caseRepository,
-                                                BusinessIdRepository businessNumberRepository) {
+    public CaseApplicationService applicationService(EventStore eventStore,
+                                                     CaseRepository caseRepository,
+                                                     BusinessIdRepository businessNumberRepository) {
         return new CaseApplicationService(new CaseService(eventStore, caseRepository, businessNumberRepository));
     }
 }
