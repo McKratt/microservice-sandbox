@@ -15,6 +15,10 @@ Those diagrams are freely inspired from the C4 model from Simon Brown.
 
 ![Components Diagram](./doc/images/components.png)
 
+#### Component architecture concept
+
+![Architecture Concept](./doc/images/archi.png)
+
 ## Use Cases
 
 - Create a Partner in the dedicated system
