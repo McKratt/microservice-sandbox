@@ -15,7 +15,13 @@ Those diagrams are freely inspired from the C4 model from Simon Brown.
 
 ![Components Diagram](./doc/images/components.png)
 
-#### Component architecture concept
+### Layered View of Modules
+For each component the code is packaged as follow.
+
+![Layered View of Modules](./doc/images/LayeredViewOfModules.png)
+
+#### Module architecture concept
+Main classes involved in modules relationships.
 
 ![Architecture Concept](./doc/images/archi.png)
 
