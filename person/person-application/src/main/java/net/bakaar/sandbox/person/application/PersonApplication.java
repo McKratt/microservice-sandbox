@@ -12,7 +12,10 @@ import org.springframework.context.annotation.Import;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-@Import({PersonInfraConfiguration.class, PersonRestConfiguration.class, PersonDataJpaConfiguration.class, PersonDataRestConfiguration.class})
+@Import({PersonInfraConfiguration.class,
+        PersonRestConfiguration.class,
+        PersonDataJpaConfiguration.class,
+        PersonDataRestConfiguration.class})
 public class PersonApplication {
 
     public static void main(String[] args) {

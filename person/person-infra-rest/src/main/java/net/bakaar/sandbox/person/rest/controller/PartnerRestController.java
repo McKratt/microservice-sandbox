@@ -1,13 +1,13 @@
 package net.bakaar.sandbox.person.rest.controller;
 
 import net.bakaar.sandbox.person.domain.command.CreatePartnerCommand;
+import net.bakaar.sandbox.person.domain.query.ReadPartnerQuery;
+import net.bakaar.sandbox.person.domain.repository.PartnerRepository;
 import net.bakaar.sandbox.person.domain.service.CreatePartnerUseCase;
 import net.bakaar.sandbox.person.rest.dto.CreatePartnerCommandDTO;
 import net.bakaar.sandbox.person.rest.dto.PartnerDTO;
 import net.bakaar.sandbox.person.rest.mapper.PartnerDomainDtoMapper;
-import net.bakaar.sandbox.person.rest.repository.PartnerReadStore;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,14 +18,14 @@ import java.net.URI;
 @RequestMapping(path = "/rest/api/v1/partners")
 public class PartnerRestController {
     private final CreatePartnerUseCase service;
-    private final PartnerReadStore readStore;
+    private final PartnerRepository partnerRepository;
     private final PartnerDomainDtoMapper mapper;
 
-    public PartnerRestController(CreatePartnerUseCase service,
-                                 @Qualifier("readStoreApplicationService") PartnerReadStore readStore,
-                                 PartnerDomainDtoMapper mapper) {
+    PartnerRestController(CreatePartnerUseCase service,
+                          PartnerRepository partnerRepository,
+                          PartnerDomainDtoMapper mapper) {
         this.service = service;
-        this.readStore = readStore;
+        this.partnerRepository = partnerRepository;
         this.mapper = mapper;
     }
 
@@ -39,6 +39,6 @@ public class PartnerRestController {
     @GetMapping("/{partnerId}")
     @ResponseStatus(HttpStatus.OK)
     public PartnerDTO readAPartner(@PathVariable String partnerId) {
-        return readStore.fetchPartnerById(PNumber.of(partnerId));
+        return mapper.mapToDto(partnerRepository.fetchPartner(new ReadPartnerQuery(PNumber.of(partnerId))));
     }
 }
