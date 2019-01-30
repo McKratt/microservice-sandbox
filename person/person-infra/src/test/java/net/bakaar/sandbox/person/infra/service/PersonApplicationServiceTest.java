@@ -3,7 +3,7 @@ package net.bakaar.sandbox.person.infra.service;
 import net.bakaar.sandbox.person.domain.command.CreatePartnerCommand;
 import net.bakaar.sandbox.person.domain.entity.Partner;
 import net.bakaar.sandbox.person.domain.service.CreatePartnerUseCase;
-import net.bakaar.sandbox.person.domain.service.PersonDomaineService;
+import net.bakaar.sandbox.person.domain.service.PersonDomainService;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,7 +17,7 @@ public class PersonApplicationServiceTest {
     @Test
     public void createPartner_should_call_domain_service() {
         //Given
-        CreatePartnerUseCase domainService = mock(PersonDomaineService.class);
+        CreatePartnerUseCase domainService = mock(PersonDomainService.class);
         PersonApplicationService service = new PersonApplicationService(domainService);
         Partner mockedPartner = mock(Partner.class);
         given(domainService.createPartner(any(CreatePartnerCommand.class))).willReturn(mockedPartner);

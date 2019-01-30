@@ -15,7 +15,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class PersonDomaineServiceTest {
+public class PersonDomainServiceTest {
 
     @Test
     public void createPartner_should_create_and_call_number_service() {
@@ -25,7 +25,7 @@ public class PersonDomaineServiceTest {
         BusinessNumberRepository businessNumberRepository = mock(BusinessNumberRepository.class);
         PNumber pNumber = PNumber.of(12345678L);
         given(businessNumberRepository.createPartnerNumber()).willReturn(pNumber);
-        CreatePartnerUseCase service = new PersonDomaineService(partnerRepository, businessNumberRepository);
+        CreatePartnerUseCase service = new PersonDomainService(partnerRepository, businessNumberRepository);
         CreatePartnerCommand command = new CreatePartnerCommand("Einstein", "Albert", LocalDate.of(1879, 3, 14));
         //When
         Partner createdPartner = service.createPartner(command);

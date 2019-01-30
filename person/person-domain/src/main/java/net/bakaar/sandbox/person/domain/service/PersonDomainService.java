@@ -6,12 +6,12 @@ import net.bakaar.sandbox.person.domain.repository.BusinessNumberRepository;
 import net.bakaar.sandbox.person.domain.repository.PartnerRepository;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 
-public class PersonDomaineService implements CreatePartnerUseCase {
+public class PersonDomainService implements CreatePartnerUseCase {
 
     private final PartnerRepository store;
     private final BusinessNumberRepository businessNumberRepository;
 
-    public PersonDomaineService(PartnerRepository store, BusinessNumberRepository businessNumberRepository) {
+    public PersonDomainService(PartnerRepository store, BusinessNumberRepository businessNumberRepository) {
         this.store = store;
         this.businessNumberRepository = businessNumberRepository;
     }

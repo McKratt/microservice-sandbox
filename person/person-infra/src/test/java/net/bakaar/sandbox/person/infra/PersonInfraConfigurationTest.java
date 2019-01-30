@@ -3,7 +3,7 @@ package net.bakaar.sandbox.person.infra;
 import net.bakaar.sandbox.person.domain.repository.BusinessNumberRepository;
 import net.bakaar.sandbox.person.domain.repository.PartnerRepository;
 import net.bakaar.sandbox.person.domain.service.CreatePartnerUseCase;
-import net.bakaar.sandbox.person.domain.service.PersonDomaineService;
+import net.bakaar.sandbox.person.domain.service.PersonDomainService;
 import net.bakaar.sandbox.person.infra.service.PersonApplicationService;
 import org.junit.Test;
 
@@ -23,7 +23,7 @@ public class PersonInfraConfigurationTest {
         CreatePartnerUseCase returnedService = configuration.createPartnerApplicationService(partnerRepository, numberRepository);
         //Then
         assertThat(returnedService).isInstanceOf(PersonApplicationService.class);
-        PersonDomaineService domainService = (PersonDomaineService) getField(returnedService, "domainService");
+        PersonDomainService domainService = (PersonDomainService) getField(returnedService, "domainService");
         assertThat(domainService).isNotNull();
         assertThat(getField(domainService, "store")).isSameAs(partnerRepository);
         assertThat(getField(domainService, "businessNumberRepository")).isSameAs(numberRepository);

@@ -8,7 +8,7 @@ import net.bakaar.sandbox.person.domain.entity.Partner;
 import net.bakaar.sandbox.person.domain.repository.BusinessNumberRepository;
 import net.bakaar.sandbox.person.domain.repository.PartnerRepository;
 import net.bakaar.sandbox.person.domain.service.CreatePartnerUseCase;
-import net.bakaar.sandbox.person.domain.service.PersonDomaineService;
+import net.bakaar.sandbox.person.domain.service.PersonDomainService;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 
 import java.time.LocalDate;
@@ -26,7 +26,7 @@ public class PersonCreationStepsDefinitions implements En {
 
     private final PartnerRepository partnerRepository = mock(PartnerRepository.class);
     private final BusinessNumberRepository businessNumberRepository = mock(BusinessNumberRepository.class);
-    private final CreatePartnerUseCase service = new PersonDomaineService(partnerRepository, businessNumberRepository);
+    private final CreatePartnerUseCase service = new PersonDomainService(partnerRepository, businessNumberRepository);
     private Partner createdPartner;
     private Throwable thrown;
 
