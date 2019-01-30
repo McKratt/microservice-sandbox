@@ -1,8 +1,7 @@
 package net.bakaar.sandbox.person.rest;
 
 import net.bakaar.sandbox.person.domain.repository.BusinessNumberRepository;
-import net.bakaar.sandbox.person.domain.repository.PartnerRepository;
-import net.bakaar.sandbox.person.domain.service.CreatePartnerUseCase;
+import net.bakaar.sandbox.person.infra.service.PersonApplicationService;
 import net.bakaar.sandbox.person.rest.controller.PartnerRestController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,10 +23,7 @@ public class PersonRestConfigurationIT {
     private BusinessNumberRepository businessNumberRepository;
 
     @MockBean
-    private PartnerRepository partnerRepository;
-
-    @MockBean
-    private CreatePartnerUseCase createPartnerUseCase;
+    private PersonApplicationService service;
 
     @Test
     public void context_should_be_complete() {

@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan(basePackageClasses = PartnerRestController.class)
 public class PersonRestConfiguration {
 
+
     @Bean
     public PartnerDomainDtoMapper partnerDomainDtoMapper() {
         return new PartnerDomainDtoMapper();

@@ -3,8 +3,7 @@ package net.bakaar.sandbox.person.rest.controller;
 import net.bakaar.sandbox.person.domain.command.CreatePartnerCommand;
 import net.bakaar.sandbox.person.domain.entity.Partner;
 import net.bakaar.sandbox.person.domain.query.ReadPartnerQuery;
-import net.bakaar.sandbox.person.domain.repository.PartnerRepository;
-import net.bakaar.sandbox.person.domain.service.CreatePartnerUseCase;
+import net.bakaar.sandbox.person.infra.service.PersonApplicationService;
 import net.bakaar.sandbox.person.rest.dto.CreatePartnerCommandDTO;
 import net.bakaar.sandbox.person.rest.dto.PartnerDTO;
 import net.bakaar.sandbox.person.rest.mapper.PartnerDomainDtoMapper;
@@ -24,10 +23,9 @@ import static org.mockito.Mockito.verify;
 
 public class PartnerRestControllerTest {
 
-    private final CreatePartnerUseCase service = mock(CreatePartnerUseCase.class);
+    private final PersonApplicationService service = mock(PersonApplicationService.class);
     private final PartnerDomainDtoMapper mapper = mock(PartnerDomainDtoMapper.class);
-    private final PartnerRepository partnerRepository = mock(PartnerRepository.class);
-    private final PartnerRestController controller = new PartnerRestController(service, partnerRepository, mapper);
+    private final PartnerRestController controller = new PartnerRestController(service, mapper);
     private final Partner returnedPartner = mock(Partner.class);
     private final PartnerDTO expectedDto = mock(PartnerDTO.class);
 
@@ -63,14 +61,14 @@ public class PartnerRestControllerTest {
         //Given
         long id = 45678909L;
         PNumber pNumber = PNumber.of(id);
-        given(partnerRepository.fetchPartner(any())).willReturn(returnedPartner);
+        given(service.readPartner(any())).willReturn(returnedPartner);
         given(mapper.mapToDto(returnedPartner)).willReturn(expectedDto);
         //When
         PartnerDTO dto = controller.readAPartner("P" + id);
         //Then
         assertThat(dto).isNotNull().isSameAs(expectedDto);
         ArgumentCaptor<ReadPartnerQuery> queryCaptor = ArgumentCaptor.forClass(ReadPartnerQuery.class);
-        verify(partnerRepository).fetchPartner(queryCaptor.capture());
+        verify(service).readPartner(queryCaptor.capture());
         ReadPartnerQuery query = queryCaptor.getValue();
         assertThat(query.getNumberOfPartnerToFound()).isEqualTo(pNumber);
     }

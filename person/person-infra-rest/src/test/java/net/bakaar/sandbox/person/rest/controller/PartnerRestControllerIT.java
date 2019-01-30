@@ -4,8 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.bakaar.sandbox.person.domain.command.CreatePartnerCommand;
 import net.bakaar.sandbox.person.domain.entity.Partner;
-import net.bakaar.sandbox.person.domain.repository.PartnerRepository;
-import net.bakaar.sandbox.person.domain.service.CreatePartnerUseCase;
+import net.bakaar.sandbox.person.infra.service.PersonApplicationService;
 import net.bakaar.sandbox.person.rest.PersonRestConfiguration;
 import net.bakaar.sandbox.person.rest.dto.PartnerDTO;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
@@ -40,9 +39,7 @@ public class PartnerRestControllerIT {
     @Autowired
     private ObjectMapper mapper;
     @MockBean
-    private CreatePartnerUseCase service;
-    @MockBean
-    private PartnerRepository partnerRepository;
+    private PersonApplicationService service;
 
     @Test
     public void create_should_return_a_complete_partner() throws Exception {
@@ -74,7 +71,7 @@ public class PartnerRestControllerIT {
         String name = "MyName";
         String forename = "MyForename";
         Partner returnedDto = Partner.of(pNumber, name, forename, null);
-        given(partnerRepository.fetchPartner(any())).willReturn(returnedDto);
+        given(service.readPartner(any())).willReturn(returnedDto);
         mockMvc.perform(get(baseUrl + "/" + pNumber.format())
                 .accept(APPLICATION_JSON_UTF8)
                 .contentType(APPLICATION_JSON_UTF8)
