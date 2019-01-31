@@ -46,9 +46,9 @@ services:
   person-service:
     container_name: "person-service"
     build:
-      context: ./person/person-frontend
+      context: ./person/person-application
       args:
-        JAR_FILE: target/person-frontend.jar
+        JAR_FILE: target/person-application.jar
     image: bakaar/person:local
     ports:
       - "9081:8080"

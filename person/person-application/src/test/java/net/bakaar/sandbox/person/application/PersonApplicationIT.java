@@ -2,6 +2,7 @@ package net.bakaar.sandbox.person.application;
 
 import net.bakaar.sandbox.person.domain.repository.BusinessNumberRepository;
 import net.bakaar.sandbox.person.domain.repository.PartnerRepository;
+import net.bakaar.sandbox.person.infra.service.PersonApplicationService;
 import net.bakaar.sandbox.person.rest.controller.PartnerRestController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,6 +25,8 @@ public class PersonApplicationIT {
     private RestTemplate restTemplate;
     @Autowired
     private PartnerRepository partnerRepository;
+    @Autowired
+    private PersonApplicationService personApplicationService;
 
 
     @Test
@@ -32,5 +35,6 @@ public class PersonApplicationIT {
         assertThat(numberService).isNotNull();
         assertThat(restTemplate).isNotNull();
         assertThat(partnerRepository).isNotNull();
+        assertThat(personApplicationService).isNotNull();
     }
 }
