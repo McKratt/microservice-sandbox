@@ -30,7 +30,7 @@ public class CaseResourceControllerTest {
         //Given
         String pNumber = "P12345678";
         CreateCaseCommandDTO dto = new CreateCaseCommandDTO();
-        dto.setInsuredNumber(pNumber);
+        dto.setInjuredNumber(pNumber);
         LocalDate birthDate = LocalDate.of(1981, 12, 16);
         given(service.createCase(any())).willReturn(Case.builder()
                 .withBusinnessId(UUID.randomUUID().toString())

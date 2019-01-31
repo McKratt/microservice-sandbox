@@ -45,7 +45,7 @@ public class CaseResourceControllerIT {
         mockMvc.perform(post(baseUrl)
                 .accept(APPLICATION_JSON_UTF8)
                 .contentType(APPLICATION_JSON_UTF8)
-                .content(String.format("{\"insuredNumber\": \"%s\"}", pNumber)))
+                .content(String.format("{\"injuredNumber\": \"%s\"}", pNumber)))
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.injured.pnummer").value(pNumber))

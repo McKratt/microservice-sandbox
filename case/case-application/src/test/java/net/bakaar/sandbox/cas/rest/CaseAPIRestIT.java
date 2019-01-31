@@ -53,7 +53,7 @@ public class CaseAPIRestIT {
         given(businessIdRepository.generateId()).willReturn(id);
         String pnummer = "P12345678";
         CreateCaseCommandDTO caseDTO = new CreateCaseCommandDTO();
-        caseDTO.setInsuredNumber(pnummer);
+        caseDTO.setInjuredNumber(pnummer);
         mockMvc
                 .perform(post("/rest/api/v1/cases")
                         .accept(APPLICATION_JSON_UTF8)

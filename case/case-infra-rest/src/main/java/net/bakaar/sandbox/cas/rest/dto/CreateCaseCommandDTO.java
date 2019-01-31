@@ -7,5 +7,5 @@ import lombok.Setter;
 @Setter
 public class CreateCaseCommandDTO {
 
-    private String insuredNumber;
+    private String injuredNumber;
 }

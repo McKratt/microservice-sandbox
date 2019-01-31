@@ -28,7 +28,7 @@ public class CaseResourceController {
 
     @PostMapping(value = CASE_ROOT_URI, consumes = "application/json")
     public ResponseEntity<CaseDTO> addNewCase(@RequestBody CreateCaseCommandDTO command) {
-        Case createdCase = service.createCase(new CreateCaseCommand(PNumber.of(command.getInsuredNumber())));
+        Case createdCase = service.createCase(new CreateCaseCommand(PNumber.of(command.getInjuredNumber())));
         return created(
                 fromPath(CASE_ROOT_URI + "/" + createdCase.getId())
                         .build()
