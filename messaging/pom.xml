@@ -6,9 +6,9 @@
         <groupId>net.bakaar</groupId>
         <artifactId>simple-parent</artifactId>
         <version>1.0.0</version>
+        <relativePath>../simple-parent/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>net.bakaar</groupId>
     <packaging>pom</packaging>
     <version>1.0.0-SNAPSHOT</version>
     <modules>
