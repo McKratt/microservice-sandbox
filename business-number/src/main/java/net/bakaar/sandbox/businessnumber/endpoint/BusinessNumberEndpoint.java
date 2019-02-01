@@ -12,6 +12,8 @@ import java.util.UUID;
 @RequestMapping("/rest/api/v1/business-number")
 class BusinessNumberEndpoint {
 
+    private final Random r = new Random();
+
     @GetMapping("/case-id")
     public ResponseEntity<UUID> createCaseId() {
         return ResponseEntity.ok(UUID.randomUUID());
@@ -19,7 +21,6 @@ class BusinessNumberEndpoint {
 
     @GetMapping("/partner-id")
     public ResponseEntity<Long> createPartnerId() {
-        Random r = new Random();
         // Don't do that at home...
         int highest = 99999999;
         int lowest = 10000000;
