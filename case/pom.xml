@@ -25,6 +25,14 @@
         <event.version>1.0.0-SNAPSHOT</event.version>
         <shared.version>1.0.0-SNAPSHOT</shared.version>
         <messaging.version>1.0.0-SNAPSHOT</messaging.version>
+        <jacoco.version>0.8.3</jacoco.version>
+        <docker.image.prefix>bakaar</docker.image.prefix>
+        <docker.image.name>case</docker.image.name>
+        <!-- additional JVM arguments passed to the surefire and failsafe plugins -->
+        <surefire.jvm.args></surefire.jvm.args>
+        <failsafe.jvm.args></failsafe.jvm.args>
+        <!-- SonarQube -->
+        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
     </properties>
     <build>
         <plugins>
@@ -39,6 +47,95 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <argLine>${jacoco.agent.it.argLine} ${failsafe.jvm.args}</argLine>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <!-- prepare configuration for surefire tests -->
+                    <execution>
+                        <id>prepare-agent</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <configuration>
+                            <propertyName>jacoco.agent.argLine</propertyName>
+                            <append>true</append>
+                        </configuration>
+                    </execution>
+                    <!-- prepare configuration for failsafe integration tests -->
+                    <execution>
+                        <id>prepare-agent-integration</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>prepare-agent-integration</goal>
+                        </goals>
+                        <configuration>
+                            <propertyName>jacoco.agent.it.argLine</propertyName>
+                            <append>true</append>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <properties>
+                        <property>
+                            <name>listener</name>
+                            <value>org.sonar.java.jacoco.JUnitListener</value>
+                        </property>
+                    </properties>
+                    <argLine>${jacoco.agent.argLine} ${surefire.jvm.args}</argLine>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.3</version>
+                <executions>
+                    <execution>
+                        <id>build</id>
+                        <phase>none</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>latest</id>
+                        <phase>none</phase>
+                        <goals>
+                            <goal>tag</goal>
+                            <goal>push</goal>
+                        </goals>
+                        <configuration>
+                            <tag>latest</tag>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>version</id>
+                        <phase>none</phase>
+                        <goals>
+                            <goal>tag</goal>
+                            <goal>push</goal>
+                        </goals>
+                        <configuration>
+                            <tag>${project.version}</tag>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <repository>${docker.image.prefix}/${docker.image.name}</repository>
+                    <buildArgs>
+                        <JAR_FILE>./target/${project.build.finalName}.jar</JAR_FILE>
+                    </buildArgs>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>eu.stamp-project</groupId>
@@ -110,6 +207,13 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.4</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.sonarsource.java</groupId>
+            <artifactId>sonar-jacoco-listeners</artifactId>
+            <version>5.10.2.17019</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
