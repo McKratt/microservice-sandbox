@@ -14,11 +14,11 @@ Feature: Partner Creation
     When I create a partner with name "Do" and forename "John" born the 16.12.1981 and a social security number 7561234567890
     Then this new partner should have an id
 
-#  Scenario Outline: Creation should not be authorized if something is missing
-#    When I create a partner with name <name> and forename <forename> born the <day>.<month>.<year>
-#    Then I should receive an error mentioning that the info <info> is missing
-#    Examples:
-#      | name | forename | day | month | year | info      |
-#      |      | John     | 16  | 12    | 1981 | name      |
-#      | Do   |          | 16  | 12    | 1981 | forename  |
-#      | Do   | John     | 9   | 12    | 9999 | birthDate |
+  Scenario Outline: Creation should not be authorized if something is missing
+    When I create a partner with name "<name>" and forename "<forename>" born the <day>.<month>.<year>
+    Then I should receive an error mentioning that the info "<info>" is missing
+    Examples:
+      | name | forename | day | month | year | info      |
+      |      | John     | 16  | 12    | 1981 | name      |
+      | Do   |          | 16  | 12    | 1981 | forename  |
+      | Do   | John     | 9   | 12    | 9999 | birthDate |
