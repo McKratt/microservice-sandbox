@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PartnerTest {
 
     @Test
-    public void builder_should_build_correct_partner() {
+    public void builder_should_build_partner_without_socialNumber() {
         //Given
         String name = "myName";
         String forename = "myForename";
@@ -25,5 +25,28 @@ public class PartnerTest {
         assertThat(createdPartner.getName().getLine()).isEqualTo(name);
         assertThat(createdPartner.getBirthDate()).isEqualTo(birthDate);
         assertThat(createdPartner.getId()).isEqualTo(number);
+        assertThat(createdPartner.getSocialSecurityNumber()).isNull();
+    }
+
+    @Test
+    public void builder_should_build_partner_with_socialNumber() {
+        //Given
+        String name = "myName";
+        String forename = "myForename";
+        LocalDate birthDate = LocalDate.now().minus(1, ChronoUnit.YEARS);
+        PNumber number = PNumber.of(12345678);
+        long socialNumber = 75604537281L;
+        //When
+        Partner createdPartner = Partner.of(name, forename, birthDate)
+                .withId(number)
+                .withSocialSecurityNumber(socialNumber)
+                .build();
+        //Then
+        assertThat(createdPartner).isNotNull();
+        assertThat(createdPartner.getForename().getLine()).isEqualTo(forename);
+        assertThat(createdPartner.getName().getLine()).isEqualTo(name);
+        assertThat(createdPartner.getBirthDate()).isEqualTo(birthDate);
+        assertThat(createdPartner.getId()).isEqualTo(number);
+        assertThat(createdPartner.getSocialSecurityNumber()).isEqualTo(socialNumber);
     }
 }

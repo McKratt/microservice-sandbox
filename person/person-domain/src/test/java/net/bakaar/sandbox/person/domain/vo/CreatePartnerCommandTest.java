@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 public class CreatePartnerCommandTest {
 
     @Test
-    public void of_should_set_the_madatory_value() {
+    public void of_only_mandatory_should_set_the_value() {
         //Given
         String name = "myName";
         String forename = "myForeName";
@@ -29,6 +29,23 @@ public class CreatePartnerCommandTest {
         assertThat(createdCommand.getName()).isEqualTo(name);
         assertThat(createdCommand.getForename()).isEqualTo(forename);
         assertThat(createdCommand.getBirthDate()).isEqualTo(birthDate);
+    }
+
+    @Test
+    public void of_should_set_the_value() {
+        //Given
+        String name = "myName";
+        String forename = "myForeName";
+        LocalDate birthDate = LocalDate.now();
+        long number = 7564352164758L;
+        //When
+        CreatePartnerCommand createdCommand = CreatePartnerCommand.of(name, forename, birthDate, number);
+        //Then
+        assertThat(createdCommand).isNotNull();
+        assertThat(createdCommand.getName()).isEqualTo(name);
+        assertThat(createdCommand.getForename()).isEqualTo(forename);
+        assertThat(createdCommand.getBirthDate()).isEqualTo(birthDate);
+        assertThat(createdCommand.getSocialSecurityNumber()).isEqualTo(number);
     }
 
     @Test

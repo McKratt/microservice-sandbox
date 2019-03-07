@@ -14,14 +14,17 @@ public class CreatePartnerStepDef implements En {
 
 
     private Partner createdPartner;
+    private final PartnerFactory factory = new PartnerFactory(() -> PNumber.of(12345678));
 
     public CreatePartnerStepDef() {
         When("^I create a partner with name \"([^\"]*)\" and forename \"([^\"]*)\" born the (\\d+)\\.(\\d+)\\.(\\d+)$", (String name, String forename, Integer day, Integer month, Integer year) -> {
-            PartnerFactory factory = new PartnerFactory(() -> PNumber.of(12345678));
             createdPartner = factory.createPartner(CreatePartnerCommand.of(name, forename, LocalDate.of(year, month, day)));
         });
         Then("^this new partner should have an id$", () -> {
             assertThat(createdPartner.getId()).isNotNull();
+        });
+        When("^I create a partner with name \"([^\"]*)\" and forename \"([^\"]*)\" born the (\\d+)\\.(\\d+)\\.(\\d+) and a social security number (\\d+)$", (String name, String forename, Integer day, Integer month, Integer year, Long ssn) -> {
+            createdPartner = factory.createPartner(CreatePartnerCommand.of(name, forename, LocalDate.of(year, month, day), ssn));
         });
     }
 }
