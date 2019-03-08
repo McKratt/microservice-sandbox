@@ -1,8 +1,7 @@
 package net.bakaar.sandbox.person.infra;
 
-import net.bakaar.sandbox.person.domain.repository.BusinessNumberRepository;
-import net.bakaar.sandbox.person.domain.repository.PartnerRepository;
-import net.bakaar.sandbox.person.domain.service.CreatePartnerUseCase;
+import net.bakaar.sandbox.person.domain.BusinessNumberRepository;
+import net.bakaar.sandbox.person.domain.PartnerRepository;
 import net.bakaar.sandbox.person.infra.service.PersonApplicationService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PersonInfraConfigurationIT {
 
     @Autowired
-    private CreatePartnerUseCase service;
+    private PersonApplicationService service;
 
     @MockBean
     private PartnerRepository partnerRepository;

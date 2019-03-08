@@ -1,28 +1,27 @@
 package net.bakaar.sandbox.person.infra.service;
 
-import net.bakaar.sandbox.person.domain.command.CreatePartnerCommand;
+import net.bakaar.sandbox.person.domain.PartnerFactory;
+import net.bakaar.sandbox.person.domain.PartnerRepository;
 import net.bakaar.sandbox.person.domain.entity.Partner;
-import net.bakaar.sandbox.person.domain.query.ReadPartnerQuery;
-import net.bakaar.sandbox.person.domain.repository.PartnerRepository;
-import net.bakaar.sandbox.person.domain.service.CreatePartnerUseCase;
+import net.bakaar.sandbox.person.domain.vo.CreatePartnerCommand;
 import org.springframework.transaction.annotation.Transactional;
 
-public class PersonApplicationService implements CreatePartnerUseCase {
-    private final CreatePartnerUseCase domainService;
+public class PersonApplicationService {
     private final PartnerRepository partnerRepository;
+    private final PartnerFactory partnerFactory;
 
-    public PersonApplicationService(CreatePartnerUseCase domainService, PartnerRepository partnerRepository) {
-        this.domainService = domainService;
+    public PersonApplicationService(PartnerRepository partnerRepository, PartnerFactory factory) {
         this.partnerRepository = partnerRepository;
+        this.partnerFactory = factory;
     }
 
     @Transactional
     public Partner createPartner(CreatePartnerCommand command) {
-        return domainService.createPartner(command);
+        return partnerRepository.putPartner(partnerFactory.createPartner(command));
     }
 
-    @Transactional(readOnly = true)
-    public Partner readPartner(ReadPartnerQuery query) {
-        return partnerRepository.fetchPartner(query);
-    }
+//    @Transactional(readOnly = true)
+//    public Partner readPartner(ReadPartnerQuery query) {
+//        return partnerRepository.fetchPartner(query);
+//    }
 }

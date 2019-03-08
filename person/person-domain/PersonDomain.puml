@@ -19,9 +19,9 @@ package partner {
         + fetchNextPNumber() : PNumber
     }
     class PartnerRepository <<repository>> {
-        + putPartner(Partner)
-        + fetchPartnerById(PNumber)
-        + searchPartner(SearchPartnerQuery)
+        + putPartner(Partner) : Partner
+        + fetchPartnerById(PNumber) : Partner
+        + searchPartner(SearchPartnerQuery) : List<Partner>
     }
     class CreatePartnerCommand <<vo>> {
         - name : String
