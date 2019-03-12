@@ -1,6 +1,6 @@
 package net.bakaar.sandbox.person.data.rest;
 
-import net.bakaar.sandbox.person.domain.repository.BusinessNumberRepository;
+import net.bakaar.sandbox.person.domain.BusinessNumberRepository;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,7 +16,7 @@ public class BusinessNumberRepositoryAdapter implements BusinessNumberRepository
     }
 
     @Override
-    public PNumber createPartnerNumber() {
+    public PNumber fetchNextPNumber() {
         String url = String.format("%s/%s/partner-id", properties.getUrl(), API_URL);
         return PNumber.of(restTemplate.getForObject(url, Long.class));
     }

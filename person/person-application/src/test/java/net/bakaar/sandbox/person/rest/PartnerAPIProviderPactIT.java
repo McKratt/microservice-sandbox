@@ -15,27 +15,28 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
+
 @RunWith(SpringRestPactRunner.class)
 @SpringBootTest(classes = {PactTestConfiguration.class, PersonApplication.class}, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Provider("partner-api")
 @PactFolder("pacts")
 public class PartnerAPIProviderPactIT {
 
-  @Autowired
-  private PersonJpaRepository repository;
+    @TestTarget
+    public final Target target = new SpringBootHttpTarget();
+    @Autowired
+    private PersonJpaRepository repository;
 
-  @TestTarget
-  public final Target target = new SpringBootHttpTarget();
+    @State("Exist a Partner")
+    public void createAPartner() {
 
-  @State("Exist a Partner")
-  public void createAPartner() {
-
-    PersonEntity entity = new PersonEntity();
-    entity.setPNumber(12345678L);
-    entity.setBirthDate(null);
-    entity.setName("Einstein");
-    entity.setForename("Albert");
-    repository.save(entity);
-  }
+        PersonEntity entity = new PersonEntity();
+        entity.setPNumber(12345678L);
+        entity.setBirthDate(LocalDate.of(1879, 3, 14));
+        entity.setName("Einstein");
+        entity.setForename("Albert");
+        repository.save(entity);
+    }
 
 }

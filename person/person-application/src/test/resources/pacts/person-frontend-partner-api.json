@@ -13,7 +13,8 @@
         "path": "/person/rest/api/v1/partners",
         "body": {
           "name": "Einstein",
-          "forename": "Albert"
+          "forename": "Albert",
+          "birthDate": "14.03.1879"
         }
       },
       "response": {
@@ -47,7 +48,8 @@
         "body": {
           "id": "P12345678",
           "name": "Einstein",
-          "forename": "Albert"
+          "forename": "Albert",
+          "birthDate": "14.03.1879"
         }
       }
     }

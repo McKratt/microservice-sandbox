@@ -4,7 +4,6 @@ import net.bakaar.sandbox.person.data.jpa.entity.PersonEntity;
 import net.bakaar.sandbox.person.data.jpa.mapper.PartnerEntityDomainMapper;
 import net.bakaar.sandbox.person.data.jpa.repository.PersonJpaRepository;
 import net.bakaar.sandbox.person.domain.entity.Partner;
-import net.bakaar.sandbox.person.domain.query.ReadPartnerQuery;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.junit.Test;
 
@@ -30,7 +29,7 @@ public class PartnerRepositoryAdapterTest {
         given(repository.save(any(PersonEntity.class))).willAnswer(invocation -> invocation.getArgument(0));
         given(entityDomainMapper.mapToDomain(mockedEntity)).willReturn(returned);
         //When
-        Partner partner = adapter.push(input);
+        Partner partner = adapter.putPartner(input);
         //Then
         verify(entityDomainMapper).mapToEntity(input);
         verify(repository).save(mockedEntity);
@@ -46,7 +45,7 @@ public class PartnerRepositoryAdapterTest {
         given(repository.findByPNumber(id)).willReturn(mockedEntity);
         given(entityDomainMapper.mapToDomain(mockedEntity)).willReturn(returned);
         //When
-        Partner partner = adapter.fetchPartner(new ReadPartnerQuery(pNumber));
+        Partner partner = adapter.fetchPartnerById(pNumber);
         //Then
         assertThat(partner).isNotNull().isSameAs(returned);
         verify(repository).findByPNumber(id);

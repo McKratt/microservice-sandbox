@@ -7,7 +7,7 @@ import au.com.dius.pact.consumer.dsl.PactDslRootValue;
 import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
 import au.com.dius.pact.model.RequestResponsePact;
 import net.bakaar.sandbox.person.data.rest.test.PactTestConfiguration;
-import net.bakaar.sandbox.person.domain.repository.BusinessNumberRepository;
+import net.bakaar.sandbox.person.domain.BusinessNumberRepository;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.junit.Before;
 import org.junit.Rule;
@@ -65,7 +65,7 @@ public class BusinessNumberConsumerPactIT {
     public void control_get_partner_businessnumber() {
         //Given
         //When
-        PNumber pnumber = store.createPartnerNumber();
+        PNumber pnumber = store.fetchNextPNumber();
         //Then
         assertThat(pnumber).isNotNull().extracting(PNumber::getValue).isEqualTo(54637289);
     }

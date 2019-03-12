@@ -23,7 +23,7 @@ public class BusinessNumberRepositoryAdapterTest {
         given(properties.getUrl()).willReturn(baseUrl);
         BusinessNumberRepositoryAdapter client = new BusinessNumberRepositoryAdapter(properties, restTemplate);
         //When
-        PNumber number = client.createPartnerNumber();
+        PNumber number = client.fetchNextPNumber();
         //Then
         verify(restTemplate).getForObject(completeUrl, Long.class);
         verify(properties).getUrl();

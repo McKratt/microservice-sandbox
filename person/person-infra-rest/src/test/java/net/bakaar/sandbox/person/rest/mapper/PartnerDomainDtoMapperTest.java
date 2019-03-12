@@ -21,7 +21,7 @@ public class PartnerDomainDtoMapperTest {
         String forename = "Joshua";
         LocalDate birthDate = LocalDate.now();
         PartnerDomainDtoMapper mapper = new PartnerDomainDtoMapper();
-        Partner inputPartner = Partner.of(pNumber, name, forename, birthDate);
+        Partner inputPartner = Partner.of(name, forename, birthDate).withId(pNumber).build();
         //When
         PartnerDTO dto = mapper.mapToDto(inputPartner);
         //Then

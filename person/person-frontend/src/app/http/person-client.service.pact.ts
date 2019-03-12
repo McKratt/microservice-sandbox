@@ -51,7 +51,8 @@ describe('Partner API', () => {
         path: '/person/rest/api/v1/partners',
         body: {
           name: 'Einstein',
-          forename: 'Albert'
+          forename: 'Albert',
+          birthDate: '14.03.1879'
         }
       },
       willRespondWith: {
@@ -76,7 +77,7 @@ describe('Partner API', () => {
   it('should answer that the partner is created', (done) => {
     const client: PersonClientService = TestBed.get(PersonClientService);
     client.createPartner({
-      name: 'Einstein', forename: 'Albert'
+      name: 'Einstein', forename: 'Albert', birthDate: '14.03.1879'
     })
       .subscribe(
         (partner) => {
@@ -100,7 +101,8 @@ describe('Partner API', () => {
         body: {
           id: 'P12345678',
           name: 'Einstein',
-          forename: 'Albert'
+          forename: 'Albert',
+          birthDate: '14.03.1879'
         }
       }
     }).then(

@@ -1,7 +1,6 @@
 package net.bakaar.sandbox.person.rest.controller;
 
-import net.bakaar.sandbox.person.domain.command.CreatePartnerCommand;
-import net.bakaar.sandbox.person.domain.query.ReadPartnerQuery;
+import net.bakaar.sandbox.person.domain.vo.CreatePartnerCommand;
 import net.bakaar.sandbox.person.infra.service.PersonApplicationService;
 import net.bakaar.sandbox.person.rest.dto.CreatePartnerCommandDTO;
 import net.bakaar.sandbox.person.rest.dto.PartnerDTO;
@@ -27,7 +26,7 @@ public class PartnerRestController {
 
     @PostMapping
     public ResponseEntity<PartnerDTO> create(@RequestBody CreatePartnerCommandDTO dto) {
-        CreatePartnerCommand command = new CreatePartnerCommand(dto.getName(), dto.getForename(), dto.getBirthDate());
+        CreatePartnerCommand command = CreatePartnerCommand.of(dto.getName(), dto.getForename(), dto.getBirthDate());
         return ResponseEntity.created(URI.create("")).body(mapper.mapToDto(service.createPartner(command)));
     }
 
@@ -35,6 +34,6 @@ public class PartnerRestController {
     @GetMapping("/{partnerId}")
     @ResponseStatus(HttpStatus.OK)
     public PartnerDTO readAPartner(@PathVariable String partnerId) {
-        return mapper.mapToDto(service.readPartner(new ReadPartnerQuery(PNumber.of(partnerId))));
+        return mapper.mapToDto(service.readPartner(PNumber.of(partnerId)));
     }
 }

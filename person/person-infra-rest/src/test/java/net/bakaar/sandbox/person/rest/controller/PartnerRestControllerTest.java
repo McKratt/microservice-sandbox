@@ -1,8 +1,7 @@
 package net.bakaar.sandbox.person.rest.controller;
 
-import net.bakaar.sandbox.person.domain.command.CreatePartnerCommand;
 import net.bakaar.sandbox.person.domain.entity.Partner;
-import net.bakaar.sandbox.person.domain.query.ReadPartnerQuery;
+import net.bakaar.sandbox.person.domain.vo.CreatePartnerCommand;
 import net.bakaar.sandbox.person.infra.service.PersonApplicationService;
 import net.bakaar.sandbox.person.rest.dto.CreatePartnerCommandDTO;
 import net.bakaar.sandbox.person.rest.dto.PartnerDTO;
@@ -67,9 +66,9 @@ public class PartnerRestControllerTest {
         PartnerDTO dto = controller.readAPartner("P" + id);
         //Then
         assertThat(dto).isNotNull().isSameAs(expectedDto);
-        ArgumentCaptor<ReadPartnerQuery> queryCaptor = ArgumentCaptor.forClass(ReadPartnerQuery.class);
-        verify(service).readPartner(queryCaptor.capture());
-        ReadPartnerQuery query = queryCaptor.getValue();
-        assertThat(query.getNumberOfPartnerToFound()).isEqualTo(pNumber);
+        ArgumentCaptor<PNumber> numberCaptor = ArgumentCaptor.forClass(PNumber.class);
+        verify(service).readPartner(numberCaptor.capture());
+        PNumber capturedNumber = numberCaptor.getValue();
+        assertThat(capturedNumber).isEqualTo(pNumber);
     }
 }

@@ -21,7 +21,9 @@ public class PartnerEntityDomainMapperTest {
     @Test
     public void mapToEntity_should_map_correctly() {
         //Given
-        Partner partner = Partner.of(pNumber, name, forename, birthDate);
+        Partner partner = Partner.of(name, forename, birthDate)
+                .withId(pNumber)
+                .build();
         //When
         PersonEntity entity = mapper.mapToEntity(partner);
         //Then
@@ -46,8 +48,8 @@ public class PartnerEntityDomainMapperTest {
         //Then
         assertThat(domain).isNotNull();
         assertThat(domain.getId()).isEqualTo(pNumber);
-        assertThat(domain.getName()).isEqualTo(name);
-        assertThat(domain.getForename()).isEqualTo(forename);
+        assertThat(domain.getName().getLine()).isEqualTo(name);
+        assertThat(domain.getForename().getLine()).isEqualTo(forename);
         assertThat(domain.getBirthDate()).isSameAs(birthDate);
     }
 }

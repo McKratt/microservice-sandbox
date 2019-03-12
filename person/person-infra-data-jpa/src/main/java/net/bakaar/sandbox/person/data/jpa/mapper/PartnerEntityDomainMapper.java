@@ -6,13 +6,15 @@ import net.bakaar.sandbox.shared.domain.vo.PNumber;
 
 public class PartnerEntityDomainMapper {
     public Partner mapToDomain(PersonEntity entity) {
-        return Partner.of(PNumber.of(entity.getPNumber()), entity.getName(), entity.getForename(), entity.getBirthDate());
+        return Partner.of(entity.getName(), entity.getForename(), entity.getBirthDate())
+                .withId(PNumber.of(entity.getPNumber()))
+                .build();
     }
 
     public PersonEntity mapToEntity(Partner partner) {
         PersonEntity entity = new PersonEntity();
-        entity.setName(partner.getName());
-        entity.setForename(partner.getForename());
+        entity.setName(partner.getName().getLine());
+        entity.setForename(partner.getForename().getLine());
         entity.setBirthDate(partner.getBirthDate());
         entity.setPNumber(partner.getId().getValue());
         return entity;

@@ -2,11 +2,10 @@ package net.bakaar.sandbox.person.rest.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import net.bakaar.sandbox.person.domain.command.CreatePartnerCommand;
 import net.bakaar.sandbox.person.domain.entity.Partner;
+import net.bakaar.sandbox.person.domain.vo.CreatePartnerCommand;
 import net.bakaar.sandbox.person.infra.service.PersonApplicationService;
 import net.bakaar.sandbox.person.rest.PersonRestConfiguration;
-import net.bakaar.sandbox.person.rest.dto.PartnerDTO;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,14 +46,17 @@ public class PartnerRestControllerIT {
         String name = "MyName";
         String forename = "MyForename";
         PNumber pNumber = PNumber.of(pid);
-        Partner returnedPartner = Partner.of(pNumber, name, forename, null);
+        Partner returnedPartner = Partner.of(name, forename, null).withId(pNumber).build();
         given(service.createPartner(any(CreatePartnerCommand.class))).willReturn(returnedPartner);
-        PartnerDTO input = new PartnerDTO();
         mockMvc
                 .perform(post(baseUrl)
                         .accept(APPLICATION_JSON_UTF8)
                         .contentType(APPLICATION_JSON_UTF8)
-                        .content(asJsonString(input))
+                        .content("{" +
+                                "  \"name\": \"myName\"," +
+                                "  \"forename\": \"myForename\"," +
+                                "  \"birthDate\": \"12.03.1945\"" +
+                                "}")
                 )
                 .andDo(print())
                 .andExpect(status().isCreated())
@@ -70,7 +72,7 @@ public class PartnerRestControllerIT {
         PNumber pNumber = PNumber.of(id);
         String name = "MyName";
         String forename = "MyForename";
-        Partner returnedDto = Partner.of(pNumber, name, forename, null);
+        Partner returnedDto = Partner.of(name, forename, null).withId(pNumber).build();
         given(service.readPartner(any())).willReturn(returnedDto);
         mockMvc.perform(get(baseUrl + "/" + pNumber.format())
                 .accept(APPLICATION_JSON_UTF8)

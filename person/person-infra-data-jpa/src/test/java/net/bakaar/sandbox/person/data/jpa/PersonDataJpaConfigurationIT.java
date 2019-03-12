@@ -1,7 +1,7 @@
 package net.bakaar.sandbox.person.data.jpa;
 
 import net.bakaar.sandbox.person.data.jpa.repository.PersonJpaRepository;
-import net.bakaar.sandbox.person.domain.repository.PartnerRepository;
+import net.bakaar.sandbox.person.domain.PartnerRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
