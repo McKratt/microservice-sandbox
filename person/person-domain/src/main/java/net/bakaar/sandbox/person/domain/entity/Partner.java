@@ -23,7 +23,7 @@ public class Partner {
         this.socialSecurityNumber = socialSecurityNumber;
     }
 
-    public static withIdBuilder of(String name, String forename, LocalDate birthDate) {
+    public static WithIdBuilder of(String name, String forename, LocalDate birthDate) {
         return new Builder(name, forename, birthDate);
     }
 
@@ -35,11 +35,11 @@ public class Partner {
         Partner build();
     }
 
-    public interface withIdBuilder {
+    public interface WithIdBuilder {
         BaseBuilder withId(PNumber id);
     }
 
-    public static class Builder implements BaseBuilder, withIdBuilder {
+    public static class Builder implements BaseBuilder, WithIdBuilder {
         private final String name;
         private final String forename;
         private final LocalDate birthDate;

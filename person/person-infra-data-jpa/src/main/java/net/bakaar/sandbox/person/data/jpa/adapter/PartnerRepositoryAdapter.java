@@ -6,7 +6,7 @@ import net.bakaar.sandbox.person.domain.PartnerRepository;
 import net.bakaar.sandbox.person.domain.entity.Partner;
 import net.bakaar.sandbox.person.domain.vo.SearchPartnerQuery;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 
 import java.util.List;
 
@@ -31,6 +31,6 @@ public class PartnerRepositoryAdapter implements PartnerRepository {
 
     @Override
     public List<Partner> searchPartner(SearchPartnerQuery query) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("searchPartner");
     }
 }
