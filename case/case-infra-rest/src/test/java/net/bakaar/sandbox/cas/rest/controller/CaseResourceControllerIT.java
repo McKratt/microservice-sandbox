@@ -39,7 +39,7 @@ public class CaseResourceControllerIT {
         String pNumber = "P98765432";
         String id = "MyId";
         Case returnedCase = Case.builder().withBusinnessId(id).withInjured(PNumber.of(pNumber));
-        given(service.createCase(any())).willReturn(returnedCase);
+        given(service.openCase(any())).willReturn(returnedCase);
         //When //Then
         String baseUrl = "/rest/api/v1/cases";
         mockMvc.perform(post(baseUrl)

@@ -1,6 +1,6 @@
 package net.bakaar.sandbox.cas.domain;
 
-import net.bakaar.sandbox.cas.domain.command.CreateCaseCommand;
+import net.bakaar.sandbox.cas.domain.command.OpenCaseCommand;
 import net.bakaar.sandbox.cas.domain.entity.Case;
 import net.bakaar.sandbox.cas.domain.event.CaseCreated;
 import net.bakaar.sandbox.cas.domain.repository.BusinessIdRepository;
@@ -32,7 +32,7 @@ public class CaseServiceTest {
         given(repository.save(any(Case.class))).willAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
         given(businessIdRepository.generateId()).willReturn(UUID.randomUUID().toString());
         // When
-        Case aCase = service.createCase(new CreateCaseCommand(pNumber));
+        Case aCase = service.openCase(new OpenCaseCommand(pNumber));
         // Then
         assertThat(aCase).isNotNull();
         assertThat(aCase.getInjured()).isSameAs(pNumber);
@@ -45,7 +45,7 @@ public class CaseServiceTest {
         given(repository.save(any(Case.class))).willAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
         given(businessIdRepository.generateId()).willReturn(UUID.randomUUID().toString());
         // When
-        Case aCase = service.createCase(new CreateCaseCommand(pNumber));
+        Case aCase = service.openCase(new OpenCaseCommand(pNumber));
         // Then
         ArgumentCaptor<CaseCreated> captor = ArgumentCaptor.forClass(CaseCreated.class);
         verify(emitter).store(captor.capture());

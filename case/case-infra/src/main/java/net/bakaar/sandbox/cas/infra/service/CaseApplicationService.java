@@ -1,21 +1,21 @@
 package net.bakaar.sandbox.cas.infra.service;
 
-import net.bakaar.sandbox.cas.domain.CreateCaseUseCase;
-import net.bakaar.sandbox.cas.domain.command.CreateCaseCommand;
+import net.bakaar.sandbox.cas.domain.OpenCaseUseCase;
+import net.bakaar.sandbox.cas.domain.command.OpenCaseCommand;
 import net.bakaar.sandbox.cas.domain.entity.Case;
 import org.springframework.transaction.annotation.Transactional;
 
-public class CaseApplicationService implements CreateCaseUseCase {
+public class CaseApplicationService implements OpenCaseUseCase {
 
-    private final CreateCaseUseCase domainService;
+    private final OpenCaseUseCase domainService;
 
-    public CaseApplicationService(CreateCaseUseCase domainService) {
+    public CaseApplicationService(OpenCaseUseCase domainService) {
         this.domainService = domainService;
     }
 
     @Transactional
     @Override
-    public Case createCase(CreateCaseCommand command) {
-        return domainService.createCase(command);
+    public Case openCase(OpenCaseCommand command) {
+        return domainService.openCase(command);
     }
 }

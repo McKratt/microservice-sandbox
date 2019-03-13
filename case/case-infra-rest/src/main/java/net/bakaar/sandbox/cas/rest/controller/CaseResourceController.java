@@ -1,6 +1,6 @@
 package net.bakaar.sandbox.cas.rest.controller;
 
-import net.bakaar.sandbox.cas.domain.command.CreateCaseCommand;
+import net.bakaar.sandbox.cas.domain.command.OpenCaseCommand;
 import net.bakaar.sandbox.cas.domain.entity.Case;
 import net.bakaar.sandbox.cas.infra.service.CaseApplicationService;
 import net.bakaar.sandbox.cas.rest.dto.CaseDTO;
@@ -28,7 +28,7 @@ public class CaseResourceController {
 
     @PostMapping(value = CASE_ROOT_URI, consumes = "application/json")
     public ResponseEntity<CaseDTO> addNewCase(@RequestBody CreateCaseCommandDTO command) {
-        Case createdCase = service.createCase(new CreateCaseCommand(PNumber.of(command.getInjuredNumber())));
+        Case createdCase = service.openCase(new OpenCaseCommand(PNumber.of(command.getInjuredNumber())));
         return created(
                 fromPath(CASE_ROOT_URI + "/" + createdCase.getId())
                         .build()

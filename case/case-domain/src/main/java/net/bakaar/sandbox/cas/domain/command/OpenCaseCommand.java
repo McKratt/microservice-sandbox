@@ -6,6 +6,6 @@ import net.bakaar.sandbox.shared.domain.vo.PNumber;
 
 @Getter
 @AllArgsConstructor
-public class CreateCaseCommand {
+public class OpenCaseCommand {
     private PNumber insured;
 }

@@ -1,6 +1,6 @@
 package net.bakaar.sandbox.cas.application;
 
-import net.bakaar.sandbox.cas.domain.CreateCaseUseCase;
+import net.bakaar.sandbox.cas.domain.OpenCaseUseCase;
 import net.bakaar.sandbox.cas.domain.repository.BusinessIdRepository;
 import net.bakaar.sandbox.cas.domain.repository.CaseRepository;
 import net.bakaar.sandbox.event.domain.EventStore;
@@ -26,7 +26,7 @@ public class CaseApplicationIT {
     @Autowired(required = false)
     private BusinessIdRepository idProvider;
     @Autowired(required = false)
-    private CreateCaseUseCase useCase;
+    private OpenCaseUseCase useCase;
     @Autowired(required = false)
     private RestTemplate restTemplate;
 

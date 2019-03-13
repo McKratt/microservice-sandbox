@@ -1,6 +1,6 @@
 package net.bakaar.sandbox.cas.rest.controller;
 
-import net.bakaar.sandbox.cas.domain.command.CreateCaseCommand;
+import net.bakaar.sandbox.cas.domain.command.OpenCaseCommand;
 import net.bakaar.sandbox.cas.domain.entity.Case;
 import net.bakaar.sandbox.cas.infra.service.CaseApplicationService;
 import net.bakaar.sandbox.cas.rest.dto.CaseDTO;
@@ -32,15 +32,15 @@ public class CaseResourceControllerTest {
         CreateCaseCommandDTO dto = new CreateCaseCommandDTO();
         dto.setInjuredNumber(pNumber);
         LocalDate birthDate = LocalDate.of(1981, 12, 16);
-        given(service.createCase(any())).willReturn(Case.builder()
+        given(service.openCase(any())).willReturn(Case.builder()
                 .withBusinnessId(UUID.randomUUID().toString())
                 .withInjured(PNumber.of(pNumber)));
         //When
         ResponseEntity<CaseDTO> responseEntity = controler.addNewCase(dto);
         //Then
-        ArgumentCaptor<CreateCaseCommand> commandCaptor = ArgumentCaptor.forClass(CreateCaseCommand.class);
-        verify(service).createCase(commandCaptor.capture());
-        CreateCaseCommand command = commandCaptor.getValue();
+        ArgumentCaptor<OpenCaseCommand> commandCaptor = ArgumentCaptor.forClass(OpenCaseCommand.class);
+        verify(service).openCase(commandCaptor.capture());
+        OpenCaseCommand command = commandCaptor.getValue();
         assertThat(command).isNotNull();
         assertThat(command.getInsured().format()).isEqualTo(pNumber);
         assertThat(responseEntity).isNotNull();

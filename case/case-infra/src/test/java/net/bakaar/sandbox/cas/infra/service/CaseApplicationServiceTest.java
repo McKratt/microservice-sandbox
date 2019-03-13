@@ -1,7 +1,7 @@
 package net.bakaar.sandbox.cas.infra.service;
 
-import net.bakaar.sandbox.cas.domain.CreateCaseUseCase;
-import net.bakaar.sandbox.cas.domain.command.CreateCaseCommand;
+import net.bakaar.sandbox.cas.domain.OpenCaseUseCase;
+import net.bakaar.sandbox.cas.domain.command.OpenCaseCommand;
 import net.bakaar.sandbox.cas.domain.entity.Case;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.junit.Test;
@@ -16,16 +16,16 @@ public class CaseApplicationServiceTest {
     @Test
     public void createCase_should_call_domaineService() {
         //Given
-        CreateCaseUseCase domainService = mock(CreateCaseUseCase.class);
+        OpenCaseUseCase domainService = mock(OpenCaseUseCase.class);
         CaseApplicationService service = new CaseApplicationService(domainService);
         PNumber pNumber = PNumber.of(98765432);
-        CreateCaseCommand command = new CreateCaseCommand(pNumber);
+        OpenCaseCommand command = new OpenCaseCommand(pNumber);
         Case expectedCase = mock(Case.class);
-        given(domainService.createCase(command)).willReturn(expectedCase);
+        given(domainService.openCase(command)).willReturn(expectedCase);
         //When
-        Case returnedCase = service.createCase(command);
+        Case returnedCase = service.openCase(command);
         //Then
         assertThat(returnedCase).isSameAs(expectedCase);
-        verify(domainService).createCase(command);
+        verify(domainService).openCase(command);
     }
 }
