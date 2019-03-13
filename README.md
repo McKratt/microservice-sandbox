@@ -62,7 +62,7 @@ Main classes involved in modules relationships.
 - [x] Fix build travis
 - [x] Create Partner service
 - [x] Create a Person frontend with Angular, Jest tested and CDC test with pact
-- [x] Add frontend build to the maven build of person
+- [ ] Add frontend build to the maven build of person
 - [ ] Make all the docker image deploy to DockerHub
 - [ ] Refactor all the docker compose yaml files to use Dockerhub images
 - [ ] Update Spring-Boot version for all project
