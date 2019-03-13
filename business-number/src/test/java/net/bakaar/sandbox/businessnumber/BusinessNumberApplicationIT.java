@@ -7,10 +7,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class BusinessnumberApplicationIT {
+public class BusinessNumberApplicationIT {
 
     @Test
-    public void contextLoads() {
+    public void contextLoads() throws Exception {
+        // Check only that the context correctly load...
     }
 
 }
