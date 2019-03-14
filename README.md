@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.org/McKratt/microservice-sandbox.svg?branch=master)](https://travis-ci.org/McKratt/microservice-sandbox)
 [![Quality Status](https://sonarcloud.io/api/project_badges/measure?project=net.bakaar%3Amicroservice-sandbox&metric=alert_status)](https://sonarcloud.io/api/project_badges/measure?project=net.bakaar%3Amicroservice-sandbox&metric=alert_status)
 [![Code coverage](https://sonarcloud.io/api/project_badges/measure?project=net.bakaar%3Amicroservice-sandbox&metric=coverage)](https://sonarcloud.io/api/project_badges/measure?project=net.bakaar%3Amicroservice-sandbox&metric=coverage)
 # Microservice Sandbox 
@@ -15,6 +14,16 @@ Those diagrams are freely inspired from the C4 model from Simon Brown.
 ### Components
 
 ![Components Diagram](./doc/images/components.png)
+
+### Layered View of Modules
+For each component the code is packaged as follow.
+
+![Layered View of Modules](./doc/images/LayeredViewOfModules.png)
+
+#### Module architecture concept
+Main classes involved in modules relationships.
+
+![Architecture Concept](./doc/images/archi.png)
 
 ## Use Cases
 
@@ -53,7 +62,7 @@ Those diagrams are freely inspired from the C4 model from Simon Brown.
 - [x] Fix build travis
 - [x] Create Partner service
 - [x] Create a Person frontend with Angular, Jest tested and CDC test with pact
-- [x] Add frontend build to the maven build of person
+- [ ] Add frontend build to the maven build of person
 - [ ] Make all the docker image deploy to DockerHub
 - [ ] Refactor all the docker compose yaml files to use Dockerhub images
 - [ ] Update Spring-Boot version for all project

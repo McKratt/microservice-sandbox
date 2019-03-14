@@ -1,56 +1,52 @@
 package net.bakaar.sandbox.person.domain.entity;
 
-import junitparams.JUnitParamsRunner;
-import junitparams.Parameters;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
 
-@RunWith(JUnitParamsRunner.class)
 public class PartnerTest {
 
     @Test
-    public void of_should_set_all_the_mandatory_value() {
+    public void builder_should_build_partner_without_socialNumber() {
         //Given
-        String name = "Kubrick";
-        String forename = "Stanley";
-        PNumber id = PNumber.of(12345678);
-        LocalDate birthDate = LocalDate.of(1928, 7, 26);
+        String name = "myName";
+        String forename = "myForename";
+        LocalDate birthDate = LocalDate.now().minus(1, ChronoUnit.YEARS);
+        PNumber number = PNumber.of(12345678);
         //When
-        Partner createdPartner = Partner.of(id, name, forename, birthDate);
+        Partner createdPartner = Partner.of(name, forename, birthDate).withId(number).build();
         //Then
-        assertThat(createdPartner.getId()).isSameAs(id);
-        assertThat(createdPartner.getName()).isEqualTo(name);
-        assertThat(createdPartner.getForename()).isEqualTo(forename);
+        assertThat(createdPartner).isNotNull();
+        assertThat(createdPartner.getForename().getLine()).isEqualTo(forename);
+        assertThat(createdPartner.getName().getLine()).isEqualTo(name);
         assertThat(createdPartner.getBirthDate()).isEqualTo(birthDate);
+        assertThat(createdPartner.getId()).isEqualTo(number);
+        assertThat(createdPartner.getSocialSecurityNumber()).isNull();
     }
 
     @Test
-    @Parameters(method = "parametersForMissingArguments")
-    public void of_should_throw_exception_if_field_is_missing(PNumber id, String name, String forename, LocalDate birthdate, String... errors) {
+    public void builder_should_build_partner_with_socialNumber() {
         //Given
+        String name = "myName";
+        String forename = "myForename";
+        LocalDate birthDate = LocalDate.now().minus(1, ChronoUnit.YEARS);
+        PNumber number = PNumber.of(12345678);
+        long socialNumber = 75604537281L;
         //When
-        Throwable thrown = catchThrowable(() -> Partner.of(id, name, forename, birthdate));
+        Partner createdPartner = Partner.of(name, forename, birthDate)
+                .withId(number)
+                .withSocialSecurityNumber(socialNumber)
+                .build();
         //Then
-        assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
-        assertThat(thrown.getMessage()).contains(errors);
-    }
-
-    private Object[] parametersForMissingArguments() {
-        return new Object[][]{
-
-                {null, "Kubrick", "Stanley", LocalDate.of(1928, 7, 26), "id"},
-                {PNumber.of(12345678L), null, "Stanley", LocalDate.of(1928, 7, 26), "name"},
-                {PNumber.of(12345678L), "Kubrick", null, LocalDate.of(1928, 7, 26), "forename"},
-                {PNumber.of(12345678L), "", "Stanley", LocalDate.of(1928, 7, 26), "name"},
-                {PNumber.of(12345678L), "Kubrick", "", LocalDate.of(1928, 7, 26), "forename"},
-                {PNumber.of(12345678L), " ", "Stanley", LocalDate.of(1928, 7, 26), "name"},
-                {PNumber.of(12345678L), "Kubrick", " ", LocalDate.of(1928, 7, 26), "forename"},
-        };
+        assertThat(createdPartner).isNotNull();
+        assertThat(createdPartner.getForename().getLine()).isEqualTo(forename);
+        assertThat(createdPartner.getName().getLine()).isEqualTo(name);
+        assertThat(createdPartner.getBirthDate()).isEqualTo(birthDate);
+        assertThat(createdPartner.getId()).isEqualTo(number);
+        assertThat(createdPartner.getSocialSecurityNumber()).isEqualTo(socialNumber);
     }
 }

@@ -2,11 +2,13 @@ package net.bakaar.sandbox.cas.domain.cucumber.steps;
 
 import cucumber.api.java8.En;
 import net.bakaar.sandbox.cas.domain.CaseService;
+import net.bakaar.sandbox.cas.domain.command.OpenCaseCommand;
 import net.bakaar.sandbox.cas.domain.entity.Case;
 import net.bakaar.sandbox.cas.domain.event.CaseCreated;
 import net.bakaar.sandbox.cas.domain.repository.BusinessIdRepository;
 import net.bakaar.sandbox.cas.domain.repository.CaseRepository;
 import net.bakaar.sandbox.event.domain.EventStore;
+import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.mockito.ArgumentCaptor;
 
 import java.util.UUID;
@@ -32,7 +34,7 @@ public class CaseStepDefintion implements En {
         When("^we create a case with a Partner number (.+)$", (String pnummer) -> {
             given(repository.save(any(Case.class))).willAnswer(invocation -> invocation.getArgument(0));
             given(businessIdRepository.generateId()).willReturn(UUID.randomUUID().toString());
-            Throwable throwable = catchThrowable(() -> aCase = this.service.createCase(pnummer));
+            Throwable throwable = catchThrowable(() -> aCase = this.service.openCase(new OpenCaseCommand(PNumber.of(pnummer))));
             verify(repository).save(any(Case.class));
             verify(publisher).store(eventArgumentCaptor.capture());
             assertThat(throwable).isNull();

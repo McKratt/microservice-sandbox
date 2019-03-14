@@ -1,0 +1,79 @@
+@startuml
+skinparam class {
+    BackgroundColor<<root entity>> #chartreuse
+    BackgroundColor<<entity>> #DodgerBlue
+    FontColor<<entity>> #Linen
+    AttributeFontColor<<entity>> #Linen
+    StereotypeFontColor<<entity>> #Linen
+    BackgroundColor<<vo>> #White
+    BackgroundColor<<service>> #PaleTurquoise
+    BackgroundColor<<repository>> #lightgreen
+}
+
+package partner {
+    class PartnerFactory <<service>> {
+        - idRepository : BusinessNumberRepository
+        + createPartner(CreatePartnerCommand) : Partner
+    }
+    class BusinessNumberRepository <<repository>> {
+        + fetchNextPNumber() : PNumber
+    }
+    class PartnerRepository <<repository>> {
+        + putPartner(Partner) : Partner
+        + fetchPartnerById(PNumber) : Partner
+        + searchPartner(SearchPartnerQuery) : List<Partner>
+    }
+    class CreatePartnerCommand <<vo>> {
+        - name : String
+        - forename : String
+        - birthDate : LocalDate
+        - socialSecurityNumber : String
+    }
+    class SearchPartnerQuery <<vo>> {
+        - name : String
+        - socialSecurityNumber : String
+    }
+    class Partner <<root entity>> {
+        - id : PNumber
+        - forename : PostalLine
+        - name : PostalLine
+        - birthDate : LocalDate
+        - socialSecurityNumber : SocialSecurityNumber
+    }
+    class PostalLine <<vo>> {
+        - line : String
+    }
+    class SocialSecurityNumber <<vo>> {
+        number : long
+    }
+    PartnerFactory --> BusinessNumberRepository
+    PartnerFactory --> CreatePartnerCommand
+
+    PartnerRepository --> Partner
+    PartnerRepository --> SearchPartnerQuery
+
+    Partner --> PostalLine
+    Partner --> SocialSecurityNumber
+}
+
+package shared {
+    class PNumber <<vo>>
+
+    abstract BusinessNumber <<vo>> {
+        - number : long
+        {abstract} format() : String
+    }
+
+    PNumber --|> BusinessNumber
+}
+
+Partner -left-> PNumber
+
+legend left
+- PNumber has format 'P' followed by 8 digits (ex : P12345678)
+- PostalLine can only contains 30 characters
+- SocialSecurityNumber is 13 digits number which begin by '756' that is formatted in string as 756.XXXX.XXXX.XX
+
+end legend
+
+@enduml

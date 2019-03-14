@@ -1,11 +1,11 @@
 package net.bakaar.sandbox.person.rest.controller;
 
-import net.bakaar.sandbox.person.domain.command.CreatePartnerCommand;
 import net.bakaar.sandbox.person.domain.entity.Partner;
-import net.bakaar.sandbox.person.domain.service.CreatePartnerUseCase;
+import net.bakaar.sandbox.person.domain.vo.CreatePartnerCommand;
+import net.bakaar.sandbox.person.infra.service.PersonApplicationService;
+import net.bakaar.sandbox.person.rest.dto.CreatePartnerCommandDTO;
 import net.bakaar.sandbox.person.rest.dto.PartnerDTO;
 import net.bakaar.sandbox.person.rest.mapper.PartnerDomainDtoMapper;
-import net.bakaar.sandbox.person.rest.repository.PartnerReadStore;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -22,19 +22,18 @@ import static org.mockito.Mockito.verify;
 
 public class PartnerRestControllerTest {
 
-    private final CreatePartnerUseCase service = mock(CreatePartnerUseCase.class);
+    private final PersonApplicationService service = mock(PersonApplicationService.class);
     private final PartnerDomainDtoMapper mapper = mock(PartnerDomainDtoMapper.class);
-    private final PartnerReadStore readStore = mock(PartnerReadStore.class);
-    private final PartnerRestController controller = new PartnerRestController(service, readStore, mapper);
+    private final PartnerRestController controller = new PartnerRestController(service, mapper);
+    private final Partner returnedPartner = mock(Partner.class);
+    private final PartnerDTO expectedDto = mock(PartnerDTO.class);
 
     @Test
     public void create_should_call_service() {
-        Partner returnedPartner = mock(Partner.class);
         //Given
         given(service.createPartner(any(CreatePartnerCommand.class))).willReturn(returnedPartner);
-        PartnerDTO expectedDto = mock(PartnerDTO.class);
         given(mapper.mapToDto(returnedPartner)).willReturn(expectedDto);
-        PartnerDTO input = new PartnerDTO();
+        CreatePartnerCommandDTO input = new CreatePartnerCommandDTO();
         String name = "MyName";
         String forename = "MyForename";
         LocalDate birthDate = LocalDate.now();
@@ -59,13 +58,17 @@ public class PartnerRestControllerTest {
     @Test
     public void fetchAPartnerById_should_return_the_correct_partner() {
         //Given
-        final PartnerDTO returnedPartner = mock(PartnerDTO.class);
         long id = 45678909L;
         PNumber pNumber = PNumber.of(id);
-        given(readStore.fetchPartnerById(pNumber)).willReturn(returnedPartner);
+        given(service.readPartner(any())).willReturn(returnedPartner);
+        given(mapper.mapToDto(returnedPartner)).willReturn(expectedDto);
         //When
         PartnerDTO dto = controller.readAPartner("P" + id);
         //Then
-        assertThat(dto).isNotNull().isSameAs(returnedPartner);
+        assertThat(dto).isNotNull().isSameAs(expectedDto);
+        ArgumentCaptor<PNumber> numberCaptor = ArgumentCaptor.forClass(PNumber.class);
+        verify(service).readPartner(numberCaptor.capture());
+        PNumber capturedNumber = numberCaptor.getValue();
+        assertThat(capturedNumber).isEqualTo(pNumber);
     }
 }

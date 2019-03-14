@@ -16,7 +16,12 @@
     <dependencies>
         <dependency>
             <groupId>net.bakaar</groupId>
-            <artifactId>case-infra-data</artifactId>
+            <artifactId>case-infra-data-jpa</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.bakaar</groupId>
+            <artifactId>case-infra-data-rest</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -28,11 +33,6 @@
             <groupId>net.bakaar</groupId>
             <artifactId>event-infra-inmemory</artifactId>
             <version>${event.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.testcontainers</groupId>
@@ -56,7 +56,7 @@
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>1.4.3</version>
+                <version>${dockerfile.plugin.version}</version>
                 <executions>
                     <execution>
                         <id>build</id>

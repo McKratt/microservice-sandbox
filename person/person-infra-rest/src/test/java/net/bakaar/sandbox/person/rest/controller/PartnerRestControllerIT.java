@@ -2,12 +2,10 @@ package net.bakaar.sandbox.person.rest.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import net.bakaar.sandbox.person.domain.command.CreatePartnerCommand;
 import net.bakaar.sandbox.person.domain.entity.Partner;
+import net.bakaar.sandbox.person.domain.vo.CreatePartnerCommand;
+import net.bakaar.sandbox.person.infra.service.PersonApplicationService;
 import net.bakaar.sandbox.person.rest.PersonRestConfiguration;
-import net.bakaar.sandbox.person.rest.dto.PartnerDTO;
-import net.bakaar.sandbox.person.rest.repository.PartnerReadStore;
-import net.bakaar.sandbox.person.rest.service.PersonRestService;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,11 +37,8 @@ public class PartnerRestControllerIT {
     private MockMvc mockMvc;
     @Autowired
     private ObjectMapper mapper;
-    @MockBean(name = "createPartnerApplicationService")
-    private PersonRestService service;
-    @MockBean(name = "readStoreApplicationService")
-    private PartnerReadStore readStore;
-
+    @MockBean
+    private PersonApplicationService service;
 
     @Test
     public void create_should_return_a_complete_partner() throws Exception {
@@ -51,14 +46,17 @@ public class PartnerRestControllerIT {
         String name = "MyName";
         String forename = "MyForename";
         PNumber pNumber = PNumber.of(pid);
-        Partner returnedPartner = Partner.of(pNumber, name, forename, null);
+        Partner returnedPartner = Partner.of(name, forename, null).withId(pNumber).build();
         given(service.createPartner(any(CreatePartnerCommand.class))).willReturn(returnedPartner);
-        PartnerDTO input = new PartnerDTO();
         mockMvc
                 .perform(post(baseUrl)
                         .accept(APPLICATION_JSON_UTF8)
                         .contentType(APPLICATION_JSON_UTF8)
-                        .content(asJsonString(input))
+                        .content("{" +
+                                "  \"name\": \"myName\"," +
+                                "  \"forename\": \"myForename\"," +
+                                "  \"birthDate\": \"12.03.1945\"" +
+                                "}")
                 )
                 .andDo(print())
                 .andExpect(status().isCreated())
@@ -73,16 +71,18 @@ public class PartnerRestControllerIT {
         long id = 56743245L;
         PNumber pNumber = PNumber.of(id);
         String name = "MyName";
-        PartnerDTO returnedDto = new PartnerDTO();
-        returnedDto.setName(name);
-        given(readStore.fetchPartnerById(pNumber)).willReturn(returnedDto);
+        String forename = "MyForename";
+        Partner returnedDto = Partner.of(name, forename, null).withId(pNumber).build();
+        given(service.readPartner(any())).willReturn(returnedDto);
         mockMvc.perform(get(baseUrl + "/" + pNumber.format())
                 .accept(APPLICATION_JSON_UTF8)
                 .contentType(APPLICATION_JSON_UTF8)
         )
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value(name));
+                .andExpect(jsonPath("$.name").value(name))
+                .andExpect(jsonPath("$.forename").value(forename))
+                .andExpect(jsonPath("$.id").value(pNumber.format()));
     }
 
     private String asJsonString(Object object) throws JsonProcessingException {

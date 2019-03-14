@@ -17,7 +17,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n\t\"injured\" : {\n\t\t\"pnummer\":\"P12345678\"\n\t}\n}"
+          "raw": "{\n\t\"injuredNumber\":\"P12345678\"\n}"
         },
         "url": {
           "raw": "http://localhost:9080/case/rest/api/v1/cases",
@@ -134,7 +134,7 @@
           "raw": "{\n\t\"name\": \"Cury\",\n\t\"forename\": \"Marie\"\n}"
         },
         "url": {
-          "raw": "http://localhost:9081/person/rest/api/v1/partners/P36664297",
+          "raw": "http://localhost:9081/person/rest/api/v1/partners/P90198173",
           "protocol": "http",
           "host": [
             "localhost"
@@ -146,7 +146,7 @@
             "api",
             "v1",
             "partners",
-            "P36664297"
+            "P90198173"
           ]
         }
       },

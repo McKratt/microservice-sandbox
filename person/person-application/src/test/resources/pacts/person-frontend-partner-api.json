@@ -1,0 +1,62 @@
+{
+  "consumer": {
+    "name": "person-frontend"
+  },
+  "provider": {
+    "name": "partner-api"
+  },
+  "interactions": [
+    {
+      "description": "create partner",
+      "request": {
+        "method": "POST",
+        "path": "/person/rest/api/v1/partners",
+        "body": {
+          "name": "Einstein",
+          "forename": "Albert",
+          "birthDate": "14.03.1879"
+        }
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+        },
+        "body": {
+          "id": "P87654321",
+          "name": "Einstein",
+          "forename": "Albert"
+        },
+        "matchingRules": {
+          "$.body.id": {
+            "match": "regex",
+            "regex": "P[0-9]{8}"
+          }
+        }
+      }
+    },
+    {
+      "description": "read partner",
+      "providerState": "Exist a Partner",
+      "request": {
+        "method": "GET",
+        "path": "/person/rest/api/v1/partners/P12345678"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+        },
+        "body": {
+          "id": "P12345678",
+          "name": "Einstein",
+          "forename": "Albert",
+          "birthDate": "14.03.1879"
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}
