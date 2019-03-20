@@ -1,14 +1,14 @@
 package net.bakaar.sandbox.event.inmemory;
 
-import net.bakaar.sandbox.event.domain.Event;
+import net.bakaar.sandbox.event.domain.DomainEvent;
 
 import java.time.Instant;
 
 public class InMemoryEventRaised {
-    private final Event event;
+    private final DomainEvent event;
     private Instant raised;
 
-    InMemoryEventRaised(Event event) {
+    InMemoryEventRaised(DomainEvent event) {
         this.event = event;
     }
 
@@ -17,7 +17,7 @@ public class InMemoryEventRaised {
         return this;
     }
 
-    public Event getEvent() {
+    public DomainEvent getEvent() {
         return event;
     }
 

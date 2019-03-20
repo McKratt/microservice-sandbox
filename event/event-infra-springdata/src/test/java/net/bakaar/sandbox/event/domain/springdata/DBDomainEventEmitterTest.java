@@ -1,6 +1,6 @@
 package net.bakaar.sandbox.event.domain.springdata;
 
-import net.bakaar.sandbox.event.domain.Event;
+import net.bakaar.sandbox.event.domain.DomainEvent;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -14,7 +14,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DBEventEmitterTest {
+public class DBDomainEventEmitterTest {
 
     @Mock
     private EventRaisedRepository repository;
@@ -26,7 +26,7 @@ public class DBEventEmitterTest {
     @Test
     public void emit_should_save_event_in_db() {
         // Given
-        Event event = mock(Event.class);
+        DomainEvent event = mock(DomainEvent.class);
         DBEventRaised raised = mock(DBEventRaised.class);
         given(factory.fromEvent(event)).willReturn(raised);
         // When

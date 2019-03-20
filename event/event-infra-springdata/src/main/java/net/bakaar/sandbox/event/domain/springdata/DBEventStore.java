@@ -1,6 +1,6 @@
 package net.bakaar.sandbox.event.domain.springdata;
 
-import net.bakaar.sandbox.event.domain.Event;
+import net.bakaar.sandbox.event.domain.DomainEvent;
 import net.bakaar.sandbox.event.domain.EventStore;
 
 public class DBEventStore implements EventStore {
@@ -14,7 +14,7 @@ public class DBEventStore implements EventStore {
     }
 
     @Override
-    public void store(Event event) {
+    public void store(DomainEvent event) {
 
         repository.save(factory.fromEvent(event));
     }

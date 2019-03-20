@@ -40,7 +40,7 @@ public class CaseStepDefintion implements En {
             assertThat(throwable).isNull();
         });
 
-        Then("^an Event mentioning the new case is emitted$", () -> {
+        Then("^an DomainEvent mentioning the new case is emitted$", () -> {
             CaseCreated event = eventArgumentCaptor.getValue();
             assertThat(event.getId()).isEqualTo(aCase.getId());
             assertThat(event.getPNumber()).isEqualTo(aCase.getInjured());

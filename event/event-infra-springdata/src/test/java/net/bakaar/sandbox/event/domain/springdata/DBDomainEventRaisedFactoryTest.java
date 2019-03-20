@@ -2,7 +2,7 @@ package net.bakaar.sandbox.event.domain.springdata;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import net.bakaar.sandbox.event.domain.Event;
+import net.bakaar.sandbox.event.domain.DomainEvent;
 import net.bakaar.sandbox.shared.domain.exception.TechnicalException;
 import org.junit.Test;
 import org.mockito.ArgumentMatchers;
@@ -14,14 +14,14 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
-public class DBEventRaisedFactoryTest {
+public class DBDomainEventRaisedFactoryTest {
 
     private DBEventRaisedFactory factory;
 
     @Test
     public void fromEvent_should_serialze_event() {
         //Given
-        Event event = mock(Event.class);
+        DomainEvent event = mock(DomainEvent.class);
         ObjectMapper mapper = new ObjectMapper();
         factory = new DBEventRaisedFactory(mapper);
         Instant before = Instant.now();
@@ -38,7 +38,7 @@ public class DBEventRaisedFactoryTest {
     @Test
     public void fromEvent_should_throw_technicalException() throws Exception {
         //Given
-        Event event = mock(Event.class);
+        DomainEvent event = mock(DomainEvent.class);
         ObjectMapper mapper = mock(ObjectMapper.class);
         Throwable t = new SimpleJsonProcessingException("Error");
         given(mapper.writeValueAsString(ArgumentMatchers.any())).willThrow(t);

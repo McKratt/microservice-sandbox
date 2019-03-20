@@ -1,6 +1,6 @@
 package net.bakaar.sandbox.event.inmemory;
 
-import net.bakaar.sandbox.event.domain.Event;
+import net.bakaar.sandbox.event.domain.DomainEvent;
 import org.junit.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
@@ -10,14 +10,14 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
-public class InMemoryEventStoreTest {
+public class InMemoryDomainEventStoreTest {
 
     private InMemoryEventStore store = new InMemoryEventStore();
 
     @Test
     public void emit_should_store_event_localy() {
         //Given
-        Event event = mock(Event.class);
+        DomainEvent event = mock(DomainEvent.class);
         Instant before = Instant.now();
         //When
         store.store(event);
