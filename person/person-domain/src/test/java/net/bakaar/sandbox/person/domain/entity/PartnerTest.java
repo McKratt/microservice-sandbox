@@ -49,4 +49,46 @@ public class PartnerTest {
         assertThat(createdPartner.getId()).isEqualTo(number);
         assertThat(createdPartner.getSocialSecurityNumber()).isEqualTo(socialNumber);
     }
+
+    @Test
+    public void changeName_should_update_name() {
+        //Given
+        String name = "myName";
+        String forename = "myForename";
+        String newName = "NewNames";
+        LocalDate birthDate = LocalDate.now().minus(1, ChronoUnit.YEARS);
+        PNumber number = PNumber.of(12345678);
+        Partner toModify = Partner.of(name, forename, birthDate)
+                .withId(number)
+                .build();
+        //When
+        assertThat(toModify.changeName(newName)).isNotNull();
+        //Then
+        assertThat(toModify).isNotNull();
+        assertThat(toModify.getForename().getLine()).isEqualTo(forename);
+        assertThat(toModify.getName().getLine()).isEqualTo(newName);
+        assertThat(toModify.getBirthDate()).isEqualTo(birthDate);
+        assertThat(toModify.getId()).isEqualTo(number);
+    }
+
+    @Test
+    public void changeForename_should_update_forename() {
+        //Given
+        String name = "myName";
+        String forename = "myForename";
+        String newForename = "NewNames";
+        LocalDate birthDate = LocalDate.now().minus(1, ChronoUnit.YEARS);
+        PNumber number = PNumber.of(12345678);
+        Partner toModify = Partner.of(name, forename, birthDate)
+                .withId(number)
+                .build();
+        //When
+        assertThat(toModify.changeForename(newForename)).isNotNull();
+        //Then
+        assertThat(toModify).isNotNull();
+        assertThat(toModify.getForename().getLine()).isEqualTo(newForename);
+        assertThat(toModify.getName().getLine()).isEqualTo(name);
+        assertThat(toModify.getBirthDate()).isEqualTo(birthDate);
+        assertThat(toModify.getId()).isEqualTo(number);
+    }
 }

@@ -18,6 +18,10 @@ package partner {
     class BusinessNumberRepository <<repository>> {
         + fetchNextPNumber() : PNumber
     }
+    class PartnerService <<service>> {
+        - eventStore : EventStore
+        + modifyPartner(Partner) : Partner
+    }
     class PartnerRepository <<repository>> {
         + putPartner(Partner) : Partner
         + fetchPartnerById(PNumber) : Partner
@@ -46,6 +50,8 @@ package partner {
     class SocialSecurityNumber <<vo>> {
         number : long
     }
+    PartnerService -- PartnerRepository
+
     PartnerFactory --> BusinessNumberRepository
     PartnerFactory --> CreatePartnerCommand
 

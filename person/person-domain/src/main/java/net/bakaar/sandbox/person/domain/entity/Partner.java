@@ -10,8 +10,8 @@ import java.time.LocalDate;
 public class Partner {
 
     private final PNumber id;
-    private final PostalLine name;
-    private final PostalLine forename;
+    private PostalLine name;
+    private PostalLine forename;
     private final LocalDate birthDate;
     private final Long socialSecurityNumber;
 
@@ -25,6 +25,16 @@ public class Partner {
 
     public static WithIdBuilder of(String name, String forename, LocalDate birthDate) {
         return new Builder(name, forename, birthDate);
+    }
+
+    public Partner changeForename(String forename) {
+        this.forename = PostalLine.of(forename);
+        return this;
+    }
+
+    public Partner changeName(String name) {
+        this.name = PostalLine.of(name);
+        return this;
     }
 
 
