@@ -1,4 +1,4 @@
-package net.bakaar.sandbox.person.domain.cucumber;
+package net.bakaar.sandbox.person.cucumber;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
