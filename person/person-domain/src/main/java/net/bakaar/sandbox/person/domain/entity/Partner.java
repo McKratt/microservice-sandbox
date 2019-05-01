@@ -5,6 +5,8 @@ import net.bakaar.sandbox.person.domain.vo.PostalLine;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 public class Partner {
@@ -14,6 +16,7 @@ public class Partner {
     private PostalLine forename;
     private final LocalDate birthDate;
     private final Long socialSecurityNumber;
+    private List<Address> addresses = new ArrayList<>();
 
     private Partner(PNumber id, PostalLine name, PostalLine forename, LocalDate birthDate, Long socialSecurityNumber) {
         this.id = id;
@@ -35,6 +38,18 @@ public class Partner {
     public Partner changeName(String name) {
         this.name = PostalLine.of(name);
         return this;
+    }
+
+    public Partner addNewAddress(Address address) {
+        if (addresses.isEmpty()) {
+            address.makeItMain();
+        }
+        addresses.add(address);
+        return this;
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
     }
 
 

@@ -2,14 +2,10 @@ package net.bakaar.sandbox.person.cucumber.steps;
 
 import cucumber.api.java8.En;
 import lombok.extern.slf4j.Slf4j;
-import net.bakaar.sandbox.person.application.PersonApplication;
-import net.bakaar.sandbox.person.cucumber.config.CucumberSpringConfiguration;
 import net.bakaar.sandbox.person.domain.entity.Partner;
 import net.bakaar.sandbox.person.domain.vo.CreatePartnerCommand;
 import net.bakaar.sandbox.person.infra.service.PersonApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
 
 import java.time.LocalDate;
 
@@ -17,9 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
 @Slf4j
-@SpringBootTest(classes = {CucumberSpringConfiguration.class, PersonApplication.class})
-@ContextConfiguration
-public class CreatePartnerStepDef implements En {
+public class CreatePartnerStepDef extends AbstractSpringSteps implements En {
 
     @Autowired
     private PersonApplicationService service;

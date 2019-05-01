@@ -1,4 +1,4 @@
-package net.bakaar.sandbox.person.domain;
+package net.bakaar.sandbox.person.infra.service;
 
 import net.bakaar.sandbox.person.domain.entity.Partner;
 import net.bakaar.sandbox.person.domain.vo.CreatePartnerCommand;
@@ -9,15 +9,18 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 
 public class PartnerFactoryTest {
 
-
-    private PartnerFactory factory = new PartnerFactory(() -> PNumber.of(12345678));
+    private BusinessNumberRepository idRepository = mock(BusinessNumberRepository.class);
+    private PartnerFactory factory = new PartnerFactory(idRepository);
 
     @Test
     public void createPartner_should_call_BusinessNumberRepository_and_return_a_partner_containing_command_fields() {
         //Given
+        given(idRepository.fetchNextPNumber()).willReturn(mock(PNumber.class));
         CreatePartnerCommand command = CreatePartnerCommand.of("name", "forename", LocalDate.now().minus(1, ChronoUnit.YEARS));
         //When
         Partner createdPartner = factory.createPartner(command);

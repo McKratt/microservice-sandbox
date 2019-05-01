@@ -13,7 +13,7 @@
     <dependencies>
         <dependency>
             <groupId>net.bakaar</groupId>
-            <artifactId>person-domain</artifactId>
+            <artifactId>person-infra</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

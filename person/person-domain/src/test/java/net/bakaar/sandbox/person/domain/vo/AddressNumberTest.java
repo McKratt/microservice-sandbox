@@ -1,20 +1,23 @@
-package net.bakaar.sandbox.shared.domain.vo;
+package net.bakaar.sandbox.person.domain.vo;
 
+import net.bakaar.sandbox.shared.domain.vo.BusinessNumber;
 import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.util.ReflectionTestUtils.getField;
 
-public class PNumberTest {
+public class AddressNumberTest {
+
 
     @Test
-    public void of_should_create_a_new_PNummer() {
+    public void of_should_create_a_new_AddressNumber() {
         //Given
-        String pnummer = "P12345678";
+        String pnummer = "A12345678";
         //When
-        PNumber created = PNumber.of(pnummer);
+        AddressNumber created = AddressNumber.of(pnummer);
         //Then
         assertThat(created).isNotNull();
     }
@@ -22,9 +25,9 @@ public class PNumberTest {
     @Test
     public void should_only_store_number() {
         //Given
-        String pnummer = "P12345678";
+        String pnummer = "A12345678";
         //When
-        PNumber created = PNumber.of(pnummer);
+        AddressNumber created = AddressNumber.of(pnummer);
         //Then
         assertThat((Long) getField(created, "value")).isEqualTo(12345678);
     }
@@ -33,7 +36,7 @@ public class PNumberTest {
     public void of_should_throw_exception_arg_null() {
         //Given
         //When
-        Throwable thrown = Assertions.catchThrowable(() -> PNumber.of(null));
+        Throwable thrown = Assertions.catchThrowable(() -> AddressNumber.of(null));
         //Then
         assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
         assertThat(thrown.getMessage()).contains("null");
@@ -43,25 +46,26 @@ public class PNumberTest {
     public void of_should_throw_exception_if_pattern_wrong() {
         //Given
         //When
-        Throwable thrown = Assertions.catchThrowable(() -> PNumber.of("jhd31"));
+        Throwable thrown = Assertions.catchThrowable(() -> AddressNumber.of("jhd31"));
         //Then
         assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
-        assertThat(thrown.getMessage()).contains("PNumber should follow the pattern P[0-9]{8}");
+        assertThat(thrown.getMessage()).contains("The input should follow the pattern A[0-9]{8}");
     }
 
     @Test
     public void format_should_return_in_good_pattern() {
         //Given
-        PNumber pNumber = PNumber.of("P12345678");
+        AddressNumber pNumber = AddressNumber.of("A12345678");
         //When
         String formated = pNumber.format();
         //Then
-        assertThat(formated).matches("P[0-9]{8}");
+        assertThat(formated).matches("A[0-9]{8}");
     }
 
     @Test
     public void equalsContract() {
-        EqualsVerifier.forClass(PNumber.class)
+        EqualsVerifier.forClass(BusinessNumber.class)
+                .suppress(Warning.STRICT_INHERITANCE)
                 .verify();
     }
 
@@ -70,8 +74,9 @@ public class PNumberTest {
         //Given
         long id = 12345678L;
         //When
-        PNumber created = PNumber.of(id);
+        AddressNumber created = AddressNumber.of(id);
         //Then
-        assertThat(created.format()).isEqualTo("P12345678");
+        assertThat(created.format()).isEqualTo("A12345678");
     }
+
 }

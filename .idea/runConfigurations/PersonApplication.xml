@@ -3,7 +3,7 @@
     <module name="person-application" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="net.bakaar.sandbox.person.application.*" />
+        <option name="PATTERN" value="net.bakaar.sandbox.person.infra.service.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

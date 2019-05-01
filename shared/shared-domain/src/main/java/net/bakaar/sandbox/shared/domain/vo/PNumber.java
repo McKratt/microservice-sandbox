@@ -3,49 +3,30 @@ package net.bakaar.sandbox.shared.domain.vo;
 
 import java.util.regex.Pattern;
 
-public final class PNumber {
+public final class PNumber extends BusinessNumber {
 
-    private final int value;
+    private PNumber(long value) {
+        super(value);
+    }
 
-    private PNumber(String pnummer) {
-        if (pnummer == null) {
+    public static PNumber of(String pNumber) {
+        if (pNumber == null) {
             throw new IllegalArgumentException("PNumber should not be null");
         }
         Pattern pattern = Pattern.compile("P[0-9]{8}");
-        if (!pattern.matcher(pnummer).matches()) {
+        if (!pattern.matcher(pNumber).matches()) {
             throw new IllegalArgumentException("PNumber should follow the pattern P[0-9]{8}");
         }
-        this.value = Integer.parseInt(pnummer.substring(1));
-    }
-
-    public static PNumber of(String pnummer) {
-        return new PNumber(pnummer);
+        return new PNumber(Integer.parseInt(pNumber.substring(1)));
     }
 
     public static PNumber of(long id) {
-        return new PNumber("P" + id);
+        return new PNumber(id);
     }
 
+    @Override
     public String format() {
-        return "P" + value;
+        return "P" + getValue();
     }
 
-    public int getValue() {
-        return value;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        PNumber pNumber = (PNumber) o;
-
-        return value == pNumber.value;
-    }
-
-    @Override
-    public int hashCode() {
-        return value;
-    }
 }

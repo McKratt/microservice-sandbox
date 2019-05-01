@@ -1,5 +1,6 @@
 package net.bakaar.sandbox.person.domain.entity;
 
+import net.bakaar.sandbox.person.domain.vo.AddressNumber;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.junit.Test;
 
@@ -7,6 +8,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class PartnerTest {
 
@@ -90,5 +92,43 @@ public class PartnerTest {
         assertThat(toModify.getName().getLine()).isEqualTo(name);
         assertThat(toModify.getBirthDate()).isEqualTo(birthDate);
         assertThat(toModify.getId()).isEqualTo(number);
+    }
+
+    @Test
+    public void addAddress_should_add_an_address_to_the_list() {
+        //Given
+        String name = "myName";
+        String forename = "myForename";
+        LocalDate birthDate = LocalDate.now().minus(1, ChronoUnit.YEARS);
+        PNumber number = PNumber.of(12345678);
+        Partner partner = Partner.of(name, forename, birthDate)
+                .withId(number)
+                .build();
+        Address address = Address.of(mock(AddressNumber.class), "Test address");
+        assertThat(partner.getAddresses()).isEmpty();
+        //When
+        Partner modifiedPartner = partner.addNewAddress(address);
+        //Then
+        assertThat(modifiedPartner).isNotNull();
+        assertThat(modifiedPartner.getAddresses()).containsOnly(address);
+    }
+
+    @Test
+    public void addAddress_should_set_address_to_main_if_it_is_the_first_one() {
+        //Given
+        String name = "myName";
+        String forename = "myForename";
+        LocalDate birthDate = LocalDate.now().minus(1, ChronoUnit.YEARS);
+        PNumber number = PNumber.of(12345678);
+        Partner partner = Partner.of(name, forename, birthDate)
+                .withId(number)
+                .build();
+        Address address = Address.of(mock(AddressNumber.class), "Test address");
+        assertThat(partner.getAddresses()).isEmpty();
+        assertThat(address.isMain()).isFalse();
+        //When
+        Partner modifiedPartner = partner.addNewAddress(address);
+        //Then
+        assertThat(modifiedPartner.getAddresses().get(0).isMain()).isTrue();
     }
 }

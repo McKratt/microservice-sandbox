@@ -1,9 +1,9 @@
 package net.bakaar.sandbox.person.infra;
 
-import net.bakaar.sandbox.person.domain.BusinessNumberRepository;
-import net.bakaar.sandbox.person.domain.PartnerFactory;
 import net.bakaar.sandbox.person.domain.PartnerRepository;
 import net.bakaar.sandbox.person.domain.entity.Partner;
+import net.bakaar.sandbox.person.infra.service.BusinessNumberRepository;
+import net.bakaar.sandbox.person.infra.service.PartnerFactory;
 import net.bakaar.sandbox.person.infra.service.PersonApplicationService;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.junit.Test;
@@ -22,7 +22,8 @@ public class PersonInfraConfigurationTest {
         PersonInfraConfiguration configuration = new PersonInfraConfiguration();
         PartnerRepository partnerRepository = mock(PartnerRepository.class);
         given(partnerRepository.putPartner(any(Partner.class))).willAnswer(invocation -> invocation.getArgument(0));
-        BusinessNumberRepository numberRepository = () -> PNumber.of(12345678);
+        BusinessNumberRepository numberRepository = mock(BusinessNumberRepository.class);
+        given(numberRepository.fetchNextPNumber()).willReturn(PNumber.of(12345678));
 
         //When
         PersonApplicationService returnedService = configuration.createPartnerApplicationService(partnerRepository, numberRepository);

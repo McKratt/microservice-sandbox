@@ -1,4 +1,4 @@
-package net.bakaar.sandbox.person.domain;
+package net.bakaar.sandbox.person.infra.service;
 
 import net.bakaar.sandbox.person.domain.entity.Partner;
 import net.bakaar.sandbox.person.domain.vo.CreatePartnerCommand;

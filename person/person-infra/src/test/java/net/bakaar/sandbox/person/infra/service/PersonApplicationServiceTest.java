@@ -1,10 +1,12 @@
 package net.bakaar.sandbox.person.infra.service;
 
-import net.bakaar.sandbox.person.domain.PartnerFactory;
 import net.bakaar.sandbox.person.domain.PartnerRepository;
+import net.bakaar.sandbox.person.domain.entity.Address;
 import net.bakaar.sandbox.person.domain.entity.Partner;
+import net.bakaar.sandbox.person.domain.vo.AddressNumber;
 import net.bakaar.sandbox.person.domain.vo.CreatePartnerCommand;
 import net.bakaar.sandbox.person.domain.vo.SearchPartnerQuery;
+import net.bakaar.sandbox.person.infra.service.vo.CreateAddressCommand;
 import net.bakaar.sandbox.person.infra.service.vo.SearchPartnerCommand;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.junit.Test;
@@ -14,6 +16,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
@@ -22,8 +25,9 @@ public class PersonApplicationServiceTest {
 
     private final Partner mockedPartner = mock(Partner.class);
     private PartnerRepository repository = mock(PartnerRepository.class);
+    private BusinessNumberRepository idRepository = mock(BusinessNumberRepository.class);
     private PartnerFactory factory = mock(PartnerFactory.class);
-    private PersonApplicationService service = new PersonApplicationService(repository, factory);
+    private PersonApplicationService service = new PersonApplicationService(repository, factory, idRepository);
 
     @Test
     public void createPartner_should_call_domain_service() {
@@ -116,5 +120,40 @@ public class PersonApplicationServiceTest {
         SearchPartnerQuery queryCaptured = queryCaptor.getValue();
         assertThat(queryCaptured.getName()).isEqualTo(name);
         assertThat(queryCaptured.getSocialSocialNumber()).isEqualTo(socialNumber);
+    }
+
+    @Test
+    public void addAddressToPartner_should_add_the_address_to_the_corresponding_partner() {
+        //Given
+        PNumber concernedPartnerId = PNumber.of(76452174);
+        CreateAddressCommand command = CreateAddressCommand.of("Blabla Address");
+        given(repository.fetchPartnerById(concernedPartnerId)).willReturn(mockedPartner);
+        given(idRepository.fetchNextAddressNumber()).willReturn(mock(AddressNumber.class));
+        given(repository.putPartner(any())).willAnswer(invocation -> invocation.getArgument(0));
+        //When
+        Partner returnedPartner = service.addAddressToPartner(concernedPartnerId, command);
+        //Then
+        verify(repository).fetchPartnerById(concernedPartnerId);
+        assertThat(returnedPartner).isSameAs(mockedPartner);
+        ArgumentCaptor<Address> addressCaptor = ArgumentCaptor.forClass(Address.class);
+        verify(idRepository).fetchNextAddressNumber();
+        verify(mockedPartner).addNewAddress(addressCaptor.capture());
+        Address capturedAddress = addressCaptor.getValue();
+        assertThat(capturedAddress).isNotNull();
+        assertThat(capturedAddress.isMain()).isEqualTo(command.isMain());
+        assertThat(capturedAddress.getAddress()).isEqualTo(command.getAddress());
+    }
+
+    @Test
+    public void addAddressToPartner_should_throw_error_if_partner_not_exists() {
+        //Given
+        PNumber concernedPartnerId = PNumber.of(76452174);
+        CreateAddressCommand command = CreateAddressCommand.of("Blabla Address");
+        given(repository.fetchPartnerById(any())).willReturn(null);
+        //When
+        Throwable thrown = catchThrowable(() -> service.addAddressToPartner(concernedPartnerId, command));
+        //Then
+        assertThat(thrown).isNotNull().isInstanceOf(IllegalArgumentException.class);
+        assertThat(thrown.getMessage()).contains("partner", concernedPartnerId.format());
     }
 }
