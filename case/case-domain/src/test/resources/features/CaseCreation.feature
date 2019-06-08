@@ -8,4 +8,4 @@ Feature: Case Creation
   Scenario: Create Case with Partner
     When we create a case with a Partner number P12345678
     Then this Case should have an id
-    Then an Event mentioning the new case is emitted
+#    Then an Event mentioning the new case is emitted

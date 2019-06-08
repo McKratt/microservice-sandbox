@@ -3,7 +3,6 @@ package net.bakaar.sandbox.cas.application;
 import net.bakaar.sandbox.cas.domain.OpenCaseUseCase;
 import net.bakaar.sandbox.cas.domain.repository.BusinessIdRepository;
 import net.bakaar.sandbox.cas.domain.repository.CaseRepository;
-import net.bakaar.sandbox.event.domain.DomainEventEmitter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +19,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CaseApplicationIT {
 
     @Autowired(required = false)
-    private DomainEventEmitter eventEmitter;
-    @Autowired(required = false)
     private CaseRepository repository;
     @Autowired(required = false)
     private BusinessIdRepository idProvider;
@@ -32,7 +29,6 @@ public class CaseApplicationIT {
 
     @Test
     public void interfaces_should_be_instantiated() {
-        assertThat(eventEmitter).isNotNull();
         assertThat(repository).isNotNull();
         assertThat(idProvider).isNotNull();
         assertThat(useCase).isNotNull();

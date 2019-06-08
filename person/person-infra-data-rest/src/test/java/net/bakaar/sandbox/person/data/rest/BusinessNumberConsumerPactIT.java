@@ -33,7 +33,7 @@ public class BusinessNumberConsumerPactIT {
     public PactProviderRuleMk2 mockProvider = new PactProviderRuleMk2("businessNumber-provider", "localhost", 8090, this);
 
     @Autowired
-    private BusinessNumberRepository store;
+    private BusinessNumberRepository repository;
 
     @MockBean
     private BusinessNumberServiceProperties properties;
@@ -65,9 +65,9 @@ public class BusinessNumberConsumerPactIT {
     public void control_get_partner_businessnumber() {
         //Given
         //When
-        PNumber pnumber = store.fetchNextPNumber();
+        PNumber pnumber = repository.fetchNextPNumber();
         //Then
-        assertThat(pnumber).isNotNull().extracting(PNumber::getValue).isEqualTo(54637289);
+        assertThat(pnumber).isNotNull().extracting(PNumber::getValue).isEqualTo(54637289L);
     }
 
 }
