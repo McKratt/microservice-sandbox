@@ -11,11 +11,12 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@Table(name = "T_PERSON")
 public class PersonEntity {
 
     @Id
     @GeneratedValue
-    @Column(name = "PERSON_ID", nullable = false, unique = true)
+    @Column(name = "PERSON_PK", nullable = false, unique = true)
     private Long id;
 
     private String name;
@@ -24,7 +25,7 @@ public class PersonEntity {
 
     private long pNumber;
 
-    @OneToMany(mappedBy = "id.address", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private List<PersonAddressesEntity> personAddresses = new ArrayList<>();
 
     @Column(name = "birth_date")

@@ -8,7 +8,7 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <properties>
-        <postgresql.lib.version>42.2.2</postgresql.lib.version>
+        <postgresql.lib.version>42.2.5</postgresql.lib.version>
     </properties>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>person-infra-data-jpa</artifactId>
@@ -26,6 +26,17 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>${postgresql.lib.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>1.10.6</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

@@ -10,6 +10,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@Table(name = "T_ADDRESS")
 public class AddressEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +19,6 @@ public class AddressEntity {
     private long number;
     private String addressLine;
 
-    @OneToMany
+    @OneToMany(mappedBy = "address")
     private Set<PersonAddressesEntity> personAddresses = new HashSet<>();
 }

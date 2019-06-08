@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@ContextConfiguration(classes = {PersonDataJpaConfiguration.class})
+@ContextConfiguration(classes = PersonDataJpaConfiguration.class)
 public class PersonDataJpaConfigurationIT {
 
     @Autowired
