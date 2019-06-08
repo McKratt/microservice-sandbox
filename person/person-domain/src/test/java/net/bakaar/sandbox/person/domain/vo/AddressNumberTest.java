@@ -15,7 +15,7 @@ public class AddressNumberTest {
     @Test
     public void of_should_create_a_new_AddressNumber() {
         //Given
-        String pnummer = "A12345678";
+        String pnummer = "A123456789";
         //When
         AddressNumber created = AddressNumber.of(pnummer);
         //Then
@@ -25,11 +25,11 @@ public class AddressNumberTest {
     @Test
     public void should_only_store_number() {
         //Given
-        String pnummer = "A12345678";
+        String pnummer = "A123456789";
         //When
         AddressNumber created = AddressNumber.of(pnummer);
         //Then
-        assertThat((Long) getField(created, "value")).isEqualTo(12345678);
+        assertThat((Long) getField(created, "value")).isEqualTo(123456789);
     }
 
     @Test
@@ -49,17 +49,17 @@ public class AddressNumberTest {
         Throwable thrown = Assertions.catchThrowable(() -> AddressNumber.of("jhd31"));
         //Then
         assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
-        assertThat(thrown.getMessage()).contains("The input should follow the pattern A[0-9]{8}");
+        assertThat(thrown.getMessage()).contains("The input should follow the pattern A[0-9]{9}");
     }
 
     @Test
     public void format_should_return_in_good_pattern() {
         //Given
-        AddressNumber pNumber = AddressNumber.of("A12345678");
+        AddressNumber pNumber = AddressNumber.of("A123456789");
         //When
         String formated = pNumber.format();
         //Then
-        assertThat(formated).matches("A[0-9]{8}");
+        assertThat(formated).matches("A[0-9]{9}");
     }
 
     @Test

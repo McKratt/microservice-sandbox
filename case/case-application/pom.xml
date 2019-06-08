@@ -31,7 +31,7 @@
         </dependency>
         <dependency>
             <groupId>net.bakaar</groupId>
-            <artifactId>event-infra-inmemory</artifactId>
+            <artifactId>event-store-inmemory</artifactId>
             <version>${event.version}</version>
         </dependency>
         <dependency>

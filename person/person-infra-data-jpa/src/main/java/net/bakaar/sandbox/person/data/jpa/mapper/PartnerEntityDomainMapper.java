@@ -5,6 +5,12 @@ import net.bakaar.sandbox.person.domain.entity.Partner;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 
 public class PartnerEntityDomainMapper {
+    private final AddressEntityDomainMapper addressMapper;
+
+    public PartnerEntityDomainMapper(AddressEntityDomainMapper addressMapper) {
+        this.addressMapper = addressMapper;
+    }
+
     public Partner mapToDomain(PersonEntity entity) {
         return Partner.of(entity.getName(), entity.getForename(), entity.getBirthDate())
                 .withId(PNumber.of(entity.getPNumber()))
@@ -17,6 +23,9 @@ public class PartnerEntityDomainMapper {
         entity.setForename(partner.getForename().getLine());
         entity.setBirthDate(partner.getBirthDate());
         entity.setPNumber(partner.getId().getValue());
+//        for (Address current : partner.getAddresses()) {
+//            entity.getAddresses().add(addressMapper.mapToEntity(current));
+//        }
         return entity;
     }
 }

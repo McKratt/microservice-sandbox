@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -12,7 +14,8 @@ import java.time.LocalDate;
 public class PersonEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
+    @Column(name = "PERSON_ID", nullable = false, unique = true)
     private Long id;
 
     private String name;
@@ -20,6 +23,9 @@ public class PersonEntity {
     private String forename;
 
     private long pNumber;
+
+    @OneToMany(mappedBy = "id.address", cascade = CascadeType.ALL)
+    private List<PersonAddressesEntity> personAddresses = new ArrayList<>();
 
     @Column(name = "birth_date")
     private LocalDate birthDate;

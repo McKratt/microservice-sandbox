@@ -1,6 +1,6 @@
 package net.bakaar.sandbox.person.data.rest;
 
-import net.bakaar.sandbox.person.domain.BusinessNumberRepository;
+import net.bakaar.sandbox.person.infra.service.BusinessNumberRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

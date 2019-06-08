@@ -39,7 +39,7 @@ public class AddressTest {
 
 
     @Test
-    public void constructore_should_throw_error_if_address_empty() {
+    public void constructor_should_throw_error_if_address_empty() {
         //Given
         AddressNumber id = mock(AddressNumber.class);
         //When
@@ -60,4 +60,6 @@ public class AddressTest {
         //Then
         assertThat(modifiedAddress.isMain()).isTrue();
     }
+
+
 }

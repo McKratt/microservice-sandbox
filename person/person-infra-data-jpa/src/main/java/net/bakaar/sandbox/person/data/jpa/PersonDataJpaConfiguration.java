@@ -2,7 +2,9 @@ package net.bakaar.sandbox.person.data.jpa;
 
 import net.bakaar.sandbox.person.data.jpa.adapter.PartnerRepositoryAdapter;
 import net.bakaar.sandbox.person.data.jpa.entity.PersonEntity;
+import net.bakaar.sandbox.person.data.jpa.mapper.AddressEntityDomainMapper;
 import net.bakaar.sandbox.person.data.jpa.mapper.PartnerEntityDomainMapper;
+import net.bakaar.sandbox.person.data.jpa.repository.AddressJpaRepository;
 import net.bakaar.sandbox.person.data.jpa.repository.PersonJpaRepository;
 import net.bakaar.sandbox.person.domain.PartnerRepository;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -16,7 +18,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class PersonDataJpaConfiguration {
 
     @Bean
-    public PartnerRepository readStoreAdapter(PersonJpaRepository personJpaRepository) {
-        return new PartnerRepositoryAdapter(personJpaRepository, new PartnerEntityDomainMapper());
+    public PartnerRepository readStoreAdapter(PersonJpaRepository personJpaRepository, AddressJpaRepository addressJpaRepository) {
+        return new PartnerRepositoryAdapter(personJpaRepository, new PartnerEntityDomainMapper(new AddressEntityDomainMapper(addressJpaRepository)));
     }
 }

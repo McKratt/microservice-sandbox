@@ -5,7 +5,7 @@ import net.bakaar.sandbox.cas.domain.entity.Case;
 import net.bakaar.sandbox.cas.domain.event.CaseCreated;
 import net.bakaar.sandbox.cas.domain.repository.BusinessIdRepository;
 import net.bakaar.sandbox.cas.domain.repository.CaseRepository;
-import net.bakaar.sandbox.event.domain.EventStore;
+import net.bakaar.sandbox.event.domain.DomainEventEmitter;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -20,7 +20,7 @@ import static org.mockito.Mockito.verify;
 
 public class CaseServiceTest {
 
-    private EventStore emitter = mock(EventStore.class);
+    private DomainEventEmitter emitter = mock(DomainEventEmitter.class);
     private CaseRepository repository = mock(CaseRepository.class);
     private BusinessIdRepository businessIdRepository = mock(BusinessIdRepository.class);
     private CaseService service = new CaseService(emitter, repository, businessIdRepository);
@@ -48,7 +48,7 @@ public class CaseServiceTest {
         Case aCase = service.openCase(new OpenCaseCommand(pNumber));
         // Then
         ArgumentCaptor<CaseCreated> captor = ArgumentCaptor.forClass(CaseCreated.class);
-        verify(emitter).store(captor.capture());
+        verify(emitter).emit(captor.capture());
         CaseCreated eventEmitted = captor.getValue();
         assertThat(eventEmitted.getId()).isEqualTo(aCase.getId());
         assertThat(eventEmitted.getPNumber()).isEqualTo(aCase.getInjured());
