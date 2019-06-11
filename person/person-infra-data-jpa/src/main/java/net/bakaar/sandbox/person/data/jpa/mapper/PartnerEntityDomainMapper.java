@@ -12,9 +12,12 @@ public class PartnerEntityDomainMapper {
     }
 
     public Partner mapToDomain(PersonEntity entity) {
-        return Partner.of(entity.getName(), entity.getForename(), entity.getBirthDate())
-                .withId(PNumber.of(entity.getPNumber()))
-                .build();
+        Partner.BaseBuilder builder = Partner.of(entity.getName(), entity.getForename(), entity.getBirthDate())
+                .withId(PNumber.of(entity.getPNumber()));
+        if (entity.getSocialSecurityNumber() != 0) {
+            builder.withSocialSecurityNumber(entity.getSocialSecurityNumber());
+        }
+        return builder.build();
     }
 
     public PersonEntity mapToEntity(Partner partner) {
@@ -23,6 +26,8 @@ public class PartnerEntityDomainMapper {
         entity.setForename(partner.getForename().getLine());
         entity.setBirthDate(partner.getBirthDate());
         entity.setPNumber(partner.getId().getValue());
+        entity.setSocialSecurityNumber(partner.getSocialSecurityNumber());
+
 //        for (Address current : partner.getAddresses()) {
 //            entity.getAddresses().add(addressMapper.mapToEntity(current));
 //        }

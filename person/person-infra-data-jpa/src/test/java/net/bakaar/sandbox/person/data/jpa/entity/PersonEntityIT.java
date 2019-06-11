@@ -4,6 +4,7 @@ import net.bakaar.sandbox.person.data.jpa.PersonDataJpaConfiguration;
 import net.bakaar.sandbox.person.data.jpa.repository.AddressJpaRepository;
 import net.bakaar.sandbox.person.data.jpa.repository.PersonJpaRepository;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
 @ContextConfiguration(classes = PersonDataJpaConfiguration.class, initializers = {PersonEntityIT.Initializer.class})
 @AutoConfigureTestDatabase(replace = NONE)
 @Transactional
+@Ignore("should be replaced by the adapter integration test")
 public class PersonEntityIT {
 
     // TODO do a test which test the cascade behaviour in the DB when we remove a person, the attached address should remain in the DB

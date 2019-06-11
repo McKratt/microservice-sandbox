@@ -25,9 +25,11 @@ public class PersonEntity {
 
     private long pNumber;
 
+    private long socialSecurityNumber;
+
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private List<PersonAddressesEntity> personAddresses = new ArrayList<>();
 
-    @Column(name = "birth_date")
+    @Column(name = "BIRTH_DATE")
     private LocalDate birthDate;
 }
