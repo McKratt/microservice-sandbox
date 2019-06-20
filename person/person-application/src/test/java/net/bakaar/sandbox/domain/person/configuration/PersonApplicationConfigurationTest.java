@@ -1,10 +1,9 @@
 package net.bakaar.sandbox.domain.person.configuration;
 
+import net.bakaar.sandbox.domain.number.BusinessNumberRepository;
 import net.bakaar.sandbox.domain.person.PartnerFactory;
 import net.bakaar.sandbox.domain.person.PersonApplicationService;
 import net.bakaar.sandbox.domain.person.PersonRepository;
-import net.bakaar.sandbox.domain.person.address.AddressRepository;
-import net.bakaar.sandbox.domain.person.number.BusinessNumberRepository;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,13 +17,10 @@ public class PersonApplicationConfigurationTest {
         //Given
         PersonApplicationConfiguration configuration = new PersonApplicationConfiguration();
         PersonRepository personRepository = mock(PersonRepository.class);
-//        given(personRepository.putPartner(any(Person.class))).willAnswer(invocation -> invocation.getArgument(0));
         BusinessNumberRepository numberRepository = mock(BusinessNumberRepository.class);
-//        given(numberRepository.fetchNextPNumber()).willReturn(PNumber.of(12345678));
-        AddressRepository addressRepository = mock(AddressRepository.class);
 
         //When
-        PersonApplicationService returnedService = configuration.createPartnerApplicationService(personRepository, numberRepository, addressRepository);
+        PersonApplicationService returnedService = configuration.createPartnerApplicationService(personRepository, numberRepository);
         //Then
         assertThat(returnedService).isInstanceOf(PersonApplicationService.class);
         assertThat(getField(returnedService, "personRepository")).isSameAs(personRepository);

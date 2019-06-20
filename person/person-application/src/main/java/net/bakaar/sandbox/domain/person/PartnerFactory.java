@@ -1,6 +1,6 @@
 package net.bakaar.sandbox.domain.person;
 
-import net.bakaar.sandbox.domain.person.number.BusinessNumberRepository;
+import net.bakaar.sandbox.domain.number.BusinessNumberRepository;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 
 public class PartnerFactory {
@@ -13,6 +13,9 @@ public class PartnerFactory {
 
     Person createPartner(CreatePersonCommand command) {
         PNumber number = businessNumberRepository.fetchNextPNumber();
-        return Person.of(command.getName(), command.getForename(), command.getBirthDate(), command.getMainAddress()).withId(number).build();
+        return Person
+                .of(command.getName(), command.getForename(), command.getBirthDate(), command.getMainAddress())
+                .withId(number)
+                .build();
     }
 }

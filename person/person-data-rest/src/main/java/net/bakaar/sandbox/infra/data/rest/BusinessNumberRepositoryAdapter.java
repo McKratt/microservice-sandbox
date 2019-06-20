@@ -1,6 +1,6 @@
 package net.bakaar.sandbox.infra.data.rest;
 
-import net.bakaar.sandbox.domain.person.number.BusinessNumberRepository;
+import net.bakaar.sandbox.domain.number.BusinessNumberRepository;
 import net.bakaar.sandbox.domain.shared.AddressNumber;
 import net.bakaar.sandbox.infra.data.rest.configuration.BusinessNumberServiceProperties;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;

@@ -6,7 +6,7 @@ import au.com.dius.pact.consumer.PactVerification;
 import au.com.dius.pact.consumer.dsl.PactDslRootValue;
 import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
 import au.com.dius.pact.model.RequestResponsePact;
-import net.bakaar.sandbox.domain.person.number.BusinessNumberRepository;
+import net.bakaar.sandbox.domain.number.BusinessNumberRepository;
 import net.bakaar.sandbox.infra.data.rest.configuration.BusinessNumberServiceProperties;
 import net.bakaar.sandbox.infra.data.rest.configuration.PersonDataRestConfiguration;
 import net.bakaar.sandbox.infra.data.rest.test.PactTestConfiguration;

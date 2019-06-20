@@ -1,7 +1,7 @@
 package net.bakaar.sandbox.rest;
 
+import net.bakaar.sandbox.domain.number.BusinessNumberRepository;
 import net.bakaar.sandbox.domain.person.PersonApplicationService;
-import net.bakaar.sandbox.domain.person.number.BusinessNumberRepository;
 import net.bakaar.sandbox.rest.controller.PartnerRestController;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,6 +1,5 @@
 package net.bakaar.sandbox.domain.person;
 
-import net.bakaar.sandbox.domain.person.number.BusinessNumberRepository;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,18 +11,17 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 public class PersonApplicationService {
     private final PersonRepository personRepository;
     private final PartnerFactory partnerFactory;
-    private final BusinessNumberRepository idRepository;
 
-    public PersonApplicationService(PersonRepository personRepository, PartnerFactory factory, BusinessNumberRepository idRepository) {
+    public PersonApplicationService(PersonRepository personRepository, PartnerFactory factory) {
         this.personRepository = personRepository;
         this.partnerFactory = factory;
-        this.idRepository = idRepository;
     }
 
     @Transactional
     public Person createPartner(CreatePersonCommand command) {
         return personRepository.putPartner(partnerFactory.createPartner(command));
     }
+
 
     @Transactional(readOnly = true)
     public List<Person> searchPartners(SearchPartnerCommand command) {

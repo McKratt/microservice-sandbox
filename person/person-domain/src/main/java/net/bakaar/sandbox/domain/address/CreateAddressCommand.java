@@ -1,4 +1,4 @@
-package net.bakaar.sandbox.domain.person;
+package net.bakaar.sandbox.domain.address;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

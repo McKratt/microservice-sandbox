@@ -1,6 +1,6 @@
 package net.bakaar.sandbox.infra.data.rest.configuration;
 
-import net.bakaar.sandbox.domain.person.number.BusinessNumberRepository;
+import net.bakaar.sandbox.domain.number.BusinessNumberRepository;
 import net.bakaar.sandbox.infra.data.rest.BusinessNumberRepositoryAdapter;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;

@@ -1,9 +1,8 @@
 package net.bakaar.sandbox.domain.person.configuration;
 
+import net.bakaar.sandbox.domain.number.BusinessNumberRepository;
 import net.bakaar.sandbox.domain.person.PersonApplicationService;
 import net.bakaar.sandbox.domain.person.PersonRepository;
-import net.bakaar.sandbox.domain.person.address.AddressRepository;
-import net.bakaar.sandbox.domain.person.number.BusinessNumberRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +24,6 @@ public class PersonApplicationConfigurationIT {
 
     @MockBean
     private BusinessNumberRepository businessNumberRepository;
-
-    @MockBean
-    private AddressRepository addressRepository;
 
     @Test
     public void context_should_be_complete() {

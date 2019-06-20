@@ -1,6 +1,5 @@
 package net.bakaar.sandbox.domain.person;
 
-import net.bakaar.sandbox.domain.person.number.BusinessNumberRepository;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -17,9 +16,8 @@ public class PersonApplicationServiceTest {
 
     private final Person mockedPerson = mock(Person.class);
     private PersonRepository repository = mock(PersonRepository.class);
-    private BusinessNumberRepository idRepository = mock(BusinessNumberRepository.class);
     private PartnerFactory factory = mock(PartnerFactory.class);
-    private PersonApplicationService service = new PersonApplicationService(repository, factory, idRepository);
+    private PersonApplicationService service = new PersonApplicationService(repository, factory);
 
     @Test
     public void createPartner_should_call_domain_service() {

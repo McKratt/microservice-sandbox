@@ -1,6 +1,6 @@
 package net.bakaar.sandbox.rest.test.config;
 
-import net.bakaar.sandbox.domain.person.number.BusinessNumberRepository;
+import net.bakaar.sandbox.domain.number.BusinessNumberRepository;
 import net.bakaar.sandbox.domain.shared.AddressNumber;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.springframework.boot.test.context.TestConfiguration;

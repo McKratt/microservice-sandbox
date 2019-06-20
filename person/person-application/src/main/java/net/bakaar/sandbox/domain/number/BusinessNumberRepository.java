@@ -1,4 +1,4 @@
-package net.bakaar.sandbox.domain.person.number;
+package net.bakaar.sandbox.domain.number;
 
 import net.bakaar.sandbox.domain.shared.AddressNumber;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
