@@ -22,7 +22,7 @@ package Person {
         - forename : String
         - birthDate : LocalDate
         - socialSecurityNumber : String
-        - mainAddress : PersonalAddress
+        - mainAddressNumber : PersonalAddress
     }
     class SearchPersonQuery <<vo>> {
         - name : String
@@ -34,17 +34,17 @@ package Person {
         - name : PostalLine
         - birthDate : LocalDate
         - socialSecurityNumber : SocialSecurityNumber¨
-        - mainAddress : PersonalAddress
+        - mainAddressNumber : PersonalAddress
         - secondaryAddresses : List<PersonalAddress>
         + move(PersonalAddress) : void
         + addSecondaryAddress(PersonalAddress) : void
         + removeSecondaryAddress(PersonalAddress) : void
         + secondaryAddresses() : List<PersonalAddress>
-        + mainAddress() : PersonalAddress
+        + mainAddressNumber() : PersonalAddress
     }
     class PersonalAddress <<vo>> {
         - id : AddressNumber
-        - address : String
+        - addressNumber : String
     }
     class PostalLine <<vo>> {
         - line : String
@@ -81,12 +81,12 @@ package Address {
         + putAddress(Address) : Address
     }
     class CreateAddressCommand <<vo>> {
-        - address : String
+        - addressNumber : String
         - main : boolean
     }
     class Address <<root entity>> {
         - id : AddressNumber
-        - address : String
+        - addressNumber : String
     }
 
     AddressApplicationService -- AddressRepository

@@ -1,6 +1,5 @@
 package net.bakaar.sandbox.domain.person;
 
-import net.bakaar.sandbox.domain.person.address.Address;
 import net.bakaar.sandbox.domain.person.address.AddressRepository;
 import net.bakaar.sandbox.domain.person.number.BusinessNumberRepository;
 import net.bakaar.sandbox.domain.shared.AddressNumber;
@@ -25,8 +24,8 @@ public class PersonFactoryTest {
         //Given
         given(idRepository.fetchNextPNumber()).willReturn(mock(PNumber.class));
         AddressNumber addressNumber = mock(AddressNumber.class);
-        Address mockedAddress = mock(Address.class);
-        given(addressRepository.fetchAddress(addressNumber)).willReturn(mockedAddress);
+        net.bakaar.sandbox.domain.person.PersonalAddress mockedPersonalAddress = mock(net.bakaar.sandbox.domain.person.PersonalAddress.class);
+        given(addressRepository.fetchAddress(addressNumber)).willReturn(mockedPersonalAddress);
         CreatePersonCommand command = CreatePersonCommand.of("name", "forename", LocalDate.now().minus(1, ChronoUnit.YEARS), addressNumber);
         //When
         Person createdPerson = factory.createPartner(command);
@@ -36,6 +35,6 @@ public class PersonFactoryTest {
         assertThat(createdPerson.getForename().getLine()).isEqualTo(command.getForename());
         assertThat(createdPerson.getBirthDate()).isEqualTo(command.getBirthDate());
         assertThat(createdPerson.getId()).isNotNull();
-        assertThat(createdPerson.getMainAddress()).isSameAs(mockedAddress);
+        assertThat(createdPerson.getMainPersonalAddress()).isSameAs(mockedPersonalAddress);
     }
 }

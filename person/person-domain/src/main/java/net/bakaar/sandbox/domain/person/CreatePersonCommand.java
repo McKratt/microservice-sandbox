@@ -1,7 +1,6 @@
 package net.bakaar.sandbox.domain.person;
 
 import lombok.Getter;
-import net.bakaar.sandbox.domain.shared.AddressNumber;
 
 import java.time.LocalDate;
 
@@ -14,17 +13,17 @@ class CreatePersonCommand {
     private final String forename;
     private final LocalDate birthDate;
     private final Long socialSecurityNumber;
-    private final AddressNumber mainAddressNumber;
+    private final PersonalAddress mainAddress;
 
-    private CreatePersonCommand(String name, String forename, LocalDate birthDate, Long socialSecurityNumber, AddressNumber mainAddressNumber) {
+    private CreatePersonCommand(String name, String forename, LocalDate birthDate, Long socialSecurityNumber, PersonalAddress mainAddress) {
         this.name = name;
         this.forename = forename;
         this.birthDate = birthDate;
         this.socialSecurityNumber = socialSecurityNumber;
-        this.mainAddressNumber = mainAddressNumber;
+        this.mainAddress = mainAddress;
     }
 
-    public static CreatePersonCommand of(String name, String forename, LocalDate birthDate, AddressNumber mainAddressNumber) {
+    public static CreatePersonCommand of(String name, String forename, LocalDate birthDate, PersonalAddress mainAddressNumber) {
         return of(name, forename, birthDate, null, mainAddressNumber);
     }
 
@@ -34,14 +33,14 @@ class CreatePersonCommand {
         }
     }
 
-    public static CreatePersonCommand of(String name, String forename, LocalDate birthDate, Long socialSecurityNumber, AddressNumber mainAddressNumber) {
+    public static CreatePersonCommand of(String name, String forename, LocalDate birthDate, Long socialSecurityNumber, PersonalAddress mainAddressNumber) {
         checkStringParam(forename, "forename");
         checkStringParam(name, "name");
         if (birthDate == null || birthDate.isAfter(LocalDate.now())) {
             throw new IllegalArgumentException("birthDate should have a value and should not be in the future");
         }
         if (mainAddressNumber == null) {
-            throw new IllegalArgumentException("mainAddressNumber is mandatory");
+            throw new IllegalArgumentException("mainAddress is mandatory");
         }
         return new CreatePersonCommand(name, forename, birthDate, socialSecurityNumber, mainAddressNumber);
     }

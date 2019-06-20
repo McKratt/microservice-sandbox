@@ -1,6 +1,5 @@
 package net.bakaar.sandbox.domain.person;
 
-import net.bakaar.sandbox.domain.person.address.Address;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.junit.Test;
 
@@ -11,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 public class PersonTest {
-    private Address address = mock(Address.class);
+    private PersonalAddress personalAddress = mock(PersonalAddress.class);
 
     @Test
     public void builder_should_build_partner_without_socialNumber() {
@@ -21,7 +20,7 @@ public class PersonTest {
         LocalDate birthDate = LocalDate.now().minus(1, ChronoUnit.YEARS);
         PNumber number = PNumber.of(12345678);
         //When
-        Person createdPerson = Person.of(name, forename, birthDate, address).withId(number).build();
+        Person createdPerson = Person.of(name, forename, birthDate, personalAddress).withId(number).build();
         //Then
         assertThat(createdPerson).isNotNull();
         assertThat(createdPerson.getForename().getLine()).isEqualTo(forename);
@@ -29,8 +28,8 @@ public class PersonTest {
         assertThat(createdPerson.getBirthDate()).isEqualTo(birthDate);
         assertThat(createdPerson.getId()).isEqualTo(number);
         assertThat(createdPerson.getSocialSecurityNumber()).isNull();
-        assertThat(createdPerson.getMainAddress()).isSameAs(address);
-        assertThat(createdPerson.getSecondaryAddresses()).isEmpty();
+        assertThat(createdPerson.getMainPersonalAddress()).isSameAs(personalAddress);
+        assertThat(createdPerson.getSecondaryPersonalAddresses()).isEmpty();
     }
 
     @Test
@@ -42,7 +41,7 @@ public class PersonTest {
         PNumber number = PNumber.of(12345678);
         long socialNumber = 75604537281L;
         //When
-        Person createdPerson = Person.of(name, forename, birthDate, address)
+        Person createdPerson = Person.of(name, forename, birthDate, personalAddress)
                 .withId(number)
                 .withSocialSecurityNumber(socialNumber)
                 .build();
@@ -53,8 +52,8 @@ public class PersonTest {
         assertThat(createdPerson.getBirthDate()).isEqualTo(birthDate);
         assertThat(createdPerson.getId()).isEqualTo(number);
         assertThat(createdPerson.getSocialSecurityNumber()).isEqualTo(socialNumber);
-        assertThat(createdPerson.getMainAddress()).isSameAs(address);
-        assertThat(createdPerson.getSecondaryAddresses()).isEmpty();
+        assertThat(createdPerson.getMainPersonalAddress()).isSameAs(personalAddress);
+        assertThat(createdPerson.getSecondaryPersonalAddresses()).isEmpty();
     }
 
     @Test
@@ -65,7 +64,7 @@ public class PersonTest {
         String newName = "NewNames";
         LocalDate birthDate = LocalDate.now().minus(1, ChronoUnit.YEARS);
         PNumber number = PNumber.of(12345678);
-        Person toModify = Person.of(name, forename, birthDate, address)
+        Person toModify = Person.of(name, forename, birthDate, personalAddress)
                 .withId(number)
                 .build();
         //When
@@ -76,8 +75,8 @@ public class PersonTest {
         assertThat(toModify.getName().getLine()).isEqualTo(newName);
         assertThat(toModify.getBirthDate()).isEqualTo(birthDate);
         assertThat(toModify.getId()).isEqualTo(number);
-        assertThat(toModify.getMainAddress()).isSameAs(address);
-        assertThat(toModify.getSecondaryAddresses()).isEmpty();
+        assertThat(toModify.getMainPersonalAddress()).isSameAs(personalAddress);
+        assertThat(toModify.getSecondaryPersonalAddresses()).isEmpty();
 
     }
 
@@ -88,17 +87,17 @@ public class PersonTest {
         String forename = "myForename";
         LocalDate birthDate = LocalDate.now().minus(1, ChronoUnit.YEARS);
         PNumber number = PNumber.of(12345678);
-        Person person = Person.of(name, forename, birthDate, address)
+        Person person = Person.of(name, forename, birthDate, personalAddress)
                 .withId(number)
                 .build();
-        Address secondaryAddress = mock(Address.class);
-        assertThat(person.getSecondaryAddresses()).isEmpty();
+        PersonalAddress secondaryPersonalAddress = mock(PersonalAddress.class);
+        assertThat(person.getSecondaryPersonalAddresses()).isEmpty();
         //When
-        Person modifiedPerson = person.addSecondaryAddress(secondaryAddress);
+        Person modifiedPerson = person.addSecondaryAddress(secondaryPersonalAddress);
         //Then
         assertThat(modifiedPerson).isNotNull();
-        assertThat(modifiedPerson.getSecondaryAddresses()).containsOnly(secondaryAddress);
-        assertThat(modifiedPerson.getMainAddress()).isSameAs(address);
+        assertThat(modifiedPerson.getSecondaryPersonalAddresses()).containsOnly(secondaryPersonalAddress);
+        assertThat(modifiedPerson.getMainPersonalAddress()).isSameAs(personalAddress);
     }
 
     @Test
@@ -108,15 +107,15 @@ public class PersonTest {
         String forename = "myForename";
         LocalDate birthDate = LocalDate.now().minus(1, ChronoUnit.YEARS);
         PNumber number = PNumber.of(12345678);
-        Person person = Person.of(name, forename, birthDate, address)
+        Person person = Person.of(name, forename, birthDate, personalAddress)
                 .withId(number)
                 .build();
-        Address newAddress = mock(Address.class);
-        assertThat(person.getSecondaryAddresses()).isEmpty();
-        assertThat(person.getMainAddress()).isSameAs(address);
+        PersonalAddress newPersonalAddress = mock(PersonalAddress.class);
+        assertThat(person.getSecondaryPersonalAddresses()).isEmpty();
+        assertThat(person.getMainPersonalAddress()).isSameAs(personalAddress);
         // When
-        person.relocate(newAddress);
+        person.relocate(newPersonalAddress);
         // Then
-        assertThat(person.getMainAddress()).isSameAs(newAddress);
+        assertThat(person.getMainPersonalAddress()).isSameAs(newPersonalAddress);
     }
 }

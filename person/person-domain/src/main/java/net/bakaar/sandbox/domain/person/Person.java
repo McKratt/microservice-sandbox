@@ -1,7 +1,6 @@
 package net.bakaar.sandbox.domain.person;
 
 import lombok.Getter;
-import net.bakaar.sandbox.domain.person.address.Address;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 
 import java.time.LocalDate;
@@ -13,24 +12,24 @@ import java.util.List;
 public class Person {
 
     private final PNumber id;
-    private Address mainAddress;
+    private PersonalAddress mainPersonalAddress;
     private PostalLine name;
     private PostalLine forename;
     private final LocalDate birthDate;
     private final Long socialSecurityNumber;
-    private List<Address> secondaryAddresses = new ArrayList<>();
+    private List<PersonalAddress> secondaryPersonalAddresses = new ArrayList<>();
 
-    private Person(PNumber id, PostalLine name, PostalLine forename, LocalDate birthDate, Long socialSecurityNumber, Address address) {
+    private Person(PNumber id, PostalLine name, PostalLine forename, LocalDate birthDate, Long socialSecurityNumber, PersonalAddress personalAddress) {
         this.id = id;
         this.name = name;
         this.forename = forename;
         this.birthDate = birthDate;
         this.socialSecurityNumber = socialSecurityNumber;
-        this.mainAddress = address;
+        this.mainPersonalAddress = personalAddress;
     }
 
-    public static WithIdBuilder of(String name, String forename, LocalDate birthDate, Address mainAddress) {
-        return new Builder(name, forename, birthDate, mainAddress);
+    public static WithIdBuilder of(String name, String forename, LocalDate birthDate, PersonalAddress mainPersonalAddress) {
+        return new Builder(name, forename, birthDate, mainPersonalAddress);
     }
 
     public Person changeName(String name) {
@@ -38,17 +37,17 @@ public class Person {
         return this;
     }
 
-    public Person addSecondaryAddress(Address address) {
-        secondaryAddresses.add(address);
+    public Person addSecondaryAddress(PersonalAddress personalAddress) {
+        secondaryPersonalAddresses.add(personalAddress);
         return this;
     }
 
-    public List<Address> getSecondaryAddresses() {
-        return Collections.unmodifiableList(secondaryAddresses);
+    public List<PersonalAddress> getSecondaryPersonalAddresses() {
+        return Collections.unmodifiableList(secondaryPersonalAddresses);
     }
 
-    public Person relocate(Address newAddress) {
-        mainAddress = newAddress;
+    public Person relocate(PersonalAddress newPersonalAddress) {
+        mainPersonalAddress = newPersonalAddress;
         return this;
     }
 
@@ -67,15 +66,15 @@ public class Person {
         private final String name;
         private final String forename;
         private final LocalDate birthDate;
-        private final Address mainAddress;
+        private final PersonalAddress mainPersonalAddress;
         private PNumber id;
         private Long ssn;
 
-        Builder(String name, String forename, LocalDate birthDate, Address mainAddress) {
+        Builder(String name, String forename, LocalDate birthDate, PersonalAddress mainPersonalAddress) {
             this.name = name;
             this.forename = forename;
             this.birthDate = birthDate;
-            this.mainAddress = mainAddress;
+            this.mainPersonalAddress = mainPersonalAddress;
         }
 
         public BaseBuilder withId(PNumber id) {
@@ -90,7 +89,7 @@ public class Person {
         }
 
         public Person build() {
-            return new Person(id, PostalLine.of(name), PostalLine.of(forename), birthDate, ssn, mainAddress);
+            return new Person(id, PostalLine.of(name), PostalLine.of(forename), birthDate, ssn, mainPersonalAddress);
         }
 
     }

@@ -24,7 +24,7 @@ package person {
         - socialSecurityNumber : String
     }
     class CreateAddressCommand <<vo>> {
-        - address : String
+        - addressNumber : String
         - main : boolean
     }
     class SearchPartnerQuery <<vo>> {
@@ -42,11 +42,11 @@ package person {
         + modifyAddress(Address) : void
         + removeAddress(Address) : void
         + allAddresses() : List<Address>
-        + mainAddress() : Address
+        + mainAddressNumber() : Address
     }
     class Address <<entity>> {
         - id : AddressNumber
-        - address : String
+        - addressNumber : String
         - main : boolean
     }
     class AddressNumber <<vo>>
