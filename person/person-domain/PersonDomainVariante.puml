@@ -10,7 +10,7 @@ package Person {
     }
     class PersonFactory <<service>> {
         - idRepository : BusinessNumberRepository
-        + createAddress (CreateAddressCommand) : Address
+        + createPerson (CreatePersonCommand) : Person
     }
     class PersonRepository <<repository>> {
         + putPerson(Person) : Person
@@ -22,7 +22,7 @@ package Person {
         - forename : String
         - birthDate : LocalDate
         - socialSecurityNumber : String
-        - mainAddress : AddressNumber
+        - mainAddress : PersonalAddress
     }
     class SearchPersonQuery <<vo>> {
         - name : String
@@ -34,15 +34,15 @@ package Person {
         - name : PostalLine
         - birthDate : LocalDate
         - socialSecurityNumber : SocialSecurityNumber¨
-        - mainAddress : Address
-        - secondaryAddresses : List<Address>
-        + move(Address) : void
-        + addSecondaryAddress(Address) : void
-        + removeSecondaryAddress(Address) : void
-        + secondaryAddresses() : List<Address>
-        + mainAddress() : Address
+        - mainAddress : PersonalAddress
+        - secondaryAddresses : List<PersonalAddress>
+        + move(PersonalAddress) : void
+        + addSecondaryAddress(PersonalAddress) : void
+        + removeSecondaryAddress(PersonalAddress) : void
+        + secondaryAddresses() : List<PersonalAddress>
+        + mainAddress() : PersonalAddress
     }
-    class AddressVO <<vo>> {
+    class PersonalAddress <<vo>> {
         - id : AddressNumber
         - address : String
     }
@@ -58,11 +58,13 @@ package Person {
     PersonFactory -- CreatePersonCommand
 
     PersonRepository -- Person
-    PersonRepository -- SearchPersonQuery
+    PersonRepository -right- SearchPersonQuery
 
     Person -- PostalLine
-    Person o-- AddressVO
-    Person -- SocialSecurityNumber
+    Person o-- PersonalAddress
+    Person -right- SocialSecurityNumber
+
+    CreatePersonCommand -- PersonalAddress
 
 }
 
@@ -110,7 +112,7 @@ package shared {
 }
 
 Address -- AddressNumber
-AddressVO -- AddressNumber
+PersonalAddress -- AddressNumber
 Person -> PNumber
 
 legend left
