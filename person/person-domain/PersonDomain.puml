@@ -1,5 +1,5 @@
 @startuml
-package partner {
+package person {
     class PersonApplicationService <<application service>> {
         + createPartner(CreatePartnerCommand) : Partner
         + addAddressToPartner(PNumber, CreateAddressCommand) : Partner
