@@ -1,9 +1,14 @@
 package net.bakaar.sandbox.person.data.jpa.adapter;
 
 import net.bakaar.sandbox.person.data.jpa.PersonDataJpaConfiguration;
+import net.bakaar.sandbox.person.data.jpa.entity.AddressEntity;
+import net.bakaar.sandbox.person.data.jpa.repository.AddressJpaRepository;
 import net.bakaar.sandbox.person.domain.PartnerRepository;
+import net.bakaar.sandbox.person.domain.entity.Address;
 import net.bakaar.sandbox.person.domain.entity.Partner;
+import net.bakaar.sandbox.person.domain.vo.AddressNumber;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
+import org.assertj.core.groups.Tuple;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +20,7 @@ import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.transaction.TestTransaction;
 import org.springframework.transaction.annotation.Transactional;
 import org.testcontainers.containers.PostgreSQLContainer;
 
@@ -30,15 +36,27 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
 @AutoConfigureTestDatabase(replace = NONE)
 @Transactional
 public class PartnerRepositoryAdapterIT {
-//TODO with testcontainer
 
     @ClassRule
     public static PostgreSQLContainer postgreSQLContainer = new PostgreSQLContainer("postgres:11.1")
             .withDatabaseName("integration-tests-db")
             .withUsername("sa")
             .withPassword("sa");
+
     @Autowired
     private PartnerRepository adapter;
+
+    private final String name = "Testname";
+    private final String forename = "Testforename";
+    private final LocalDate birthDate = LocalDate.now().minus(20, ChronoUnit.YEARS);
+    private final PNumber id = PNumber.of(12345678L);
+    private final long number = 75612345676890L;
+    private final Partner toSave = Partner.of(name, forename, birthDate)
+            .withId(id)
+            .withSocialSecurityNumber(number)
+            .build();
+    @Autowired
+    private AddressJpaRepository addressJpaRepository;
 
 
     // TODO put doit tester la mise à jour des champs de person mais aussi d'adresse et la suppression de cette dernière, ainsi que la liaison d'une adresse pré existante dans la base.
@@ -46,18 +64,13 @@ public class PartnerRepositoryAdapterIT {
     @Test
     public void putPartner_should_store_a_person_in_the_db() {
         //Given
-        String name = "Testname";
-        String forename = "Testforename";
-        LocalDate birthDate = LocalDate.now().minus(20, ChronoUnit.YEARS);
-        PNumber id = PNumber.of(12345678L);
-        long number = 75612345676890L;
-        Partner toSave = Partner.of(name, forename, birthDate)
-                .withId(id)
-                .withSocialSecurityNumber(number)
-                .build();
         //When
         Partner saved = adapter.putPartner(toSave);
         //Then
+        checkPersonValues(saved);
+    }
+
+    private void checkPersonValues(Partner saved) {
         assertThat(saved).isNotNull();
         assertThat(saved.getId()).isEqualTo(id);
         assertThat(saved.getBirthDate()).isEqualTo(birthDate);
@@ -66,7 +79,57 @@ public class PartnerRepositoryAdapterIT {
         assertThat(saved.getSocialSecurityNumber()).isEqualTo(number);
     }
 
-//    @Test
+    @Test
+    public void putPartner_should_store_the_address_with_the_person() {
+        // Given
+        AddressNumber number = AddressNumber.of(123456789);
+        String addressLine = "My Address";
+        Address address = Address.of(number, addressLine);
+        toSave.addNewAddress(address);
+        // When
+        Partner saved = adapter.putPartner(toSave);
+        // Then
+        checkPersonValues(saved);
+        assertThat(saved.getAddresses()).isNotEmpty()
+                .extracting("id", "address", "main")
+                .contains(new Tuple(number, addressLine, true));
+    }
+
+    @Test
+    public void putPartner_should_use_existing_address() {
+        // Given
+        long addressNumber = 756473824L;
+        TestTransaction.flagForCommit();
+        AddressEntity addressEntity = new AddressEntity();
+        long id = 999L;
+        addressEntity.setId(id);
+        addressEntity.setNumber(addressNumber);
+        String line = "My AddressLine";
+        addressEntity.setAddressLine(line);
+        addressJpaRepository.save(addressEntity);
+        TestTransaction.end();
+        AddressNumber number = AddressNumber.of(addressNumber);
+        Address address = Address.of(number, line);
+        toSave.addNewAddress(address);
+        // When
+        TestTransaction.start();
+        Partner saved = adapter.putPartner(toSave);
+        TestTransaction.end();
+        // Then
+        checkPersonValues(saved);
+        assertThat(saved.getAddresses()).isNotEmpty()
+                .extracting("id", "address", "main")
+                .contains(new Tuple(number, line, true));
+        TestTransaction.start();
+        Iterable<AddressEntity> addresses = addressJpaRepository.findAll();
+        assertThat(addresses).isNotEmpty()
+                .hasSize(1)
+                .extracting("id", "number", "addressLine")
+                .contains(new Tuple(id, addressNumber, line));
+
+    }
+
+    //    @Test
 //    public void fetchPartnerById_should_read_data_from_db() {
 //        //Given
 //        //When

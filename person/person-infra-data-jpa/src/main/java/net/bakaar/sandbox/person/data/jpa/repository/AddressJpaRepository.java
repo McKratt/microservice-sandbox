@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface AddressJpaRepository extends CrudRepository<AddressEntity, Long> {
 
     Optional<AddressEntity> findByAddressLine(String addressLine);
+
+    Optional<AddressEntity> findByNumber(long number);
 }

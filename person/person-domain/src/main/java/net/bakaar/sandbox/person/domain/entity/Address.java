@@ -25,7 +25,7 @@ public class Address {
         return new Address(id, address);
     }
 
-    Address makeItMain() {
+    public Address makeItMain() {
         this.main = true;
         return this;
     }

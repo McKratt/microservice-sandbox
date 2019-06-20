@@ -1,16 +1,4 @@
 @startuml
-skinparam class {
-    BackgroundColor<<root entity>> #chartreuse
-    BackgroundColor<<entity>> #DodgerBlue
-    FontColor<<entity>> #Linen
-    AttributeFontColor<<entity>> #Linen
-    StereotypeFontColor<<entity>> #Linen
-    BackgroundColor<<vo>> #White
-    BackgroundColor<<service>> #PaleTurquoise
-    BackgroundColor<<application service>> #Gold
-    BackgroundColor<<repository>> #lightgreen
-}
-
 package partner {
     class PersonApplicationService <<application service>> {
         + createPartner(CreatePartnerCommand) : Partner

@@ -1,0 +1,123 @@
+@startuml
+package Person {
+    class PersonApplicationService <<application service>> {
+        + createPerson(CreatePersonCommand) : Person
+        + addSecondaryAddressToPerson(PNumber,AddressNumber) : Person
+        + removeSecondaryAddress(PNumber, AddressNumber) : Person
+        + movePerson(PNumber, AddressNumber): Person
+        + changeName(PNumber, PostalLine) : Person
+        ...()
+    }
+    class PersonFactory <<service>> {
+        - idRepository : BusinessNumberRepository
+        + createAddress (CreateAddressCommand) : Address
+    }
+    class PersonRepository <<repository>> {
+        + putPerson(Person) : Person
+        + fetchPersonById(PNumber) : Person
+        + searchPerson(SearchPersonQuery) : List<Person>
+    }
+    class CreatePersonCommand <<vo>> {
+        - name : String
+        - forename : String
+        - birthDate : LocalDate
+        - socialSecurityNumber : String
+        - mainAddress : AddressNumber
+    }
+    class SearchPersonQuery <<vo>> {
+        - name : String
+        - socialSecurityNumber : String
+    }
+    class Person <<root entity>> {
+        - id : PNumber
+        - forename : PostalLine
+        - name : PostalLine
+        - birthDate : LocalDate
+        - socialSecurityNumber : SocialSecurityNumber¨
+        - mainAddress : Address
+        - secondaryAddresses : List<Address>
+        + move(Address) : void
+        + addSecondaryAddress(Address) : void
+        + removeSecondaryAddress(Address) : void
+        + secondaryAddresses() : List<Address>
+        + mainAddress() : Address
+    }
+    class AddressVO <<vo>> {
+        - id : AddressNumber
+        - address : String
+    }
+    class PostalLine <<vo>> {
+        - line : String
+    }
+    class SocialSecurityNumber <<vo>> {
+        number : long
+    }
+    PersonApplicationService -- PersonFactory
+    PersonApplicationService -- PersonRepository
+
+    PersonFactory -- CreatePersonCommand
+
+    PersonRepository -- Person
+    PersonRepository -- SearchPersonQuery
+
+    Person -- PostalLine
+    Person o-- AddressVO
+    Person -- SocialSecurityNumber
+
+}
+
+package Address {
+    class AddressApplicationService <<application service>> {
+        + createAddress(CreateAddressCommand) : Address
+        + changeStreetName(AddressNumber, String) : Address
+    }
+    class AddressFactory <<service>> {
+        - idRepository : BusinessNumberRepository
+        + createAddress (CreateAddressCommand) : Address
+    }
+    class AddressRepository <<repository>> {
+        + putAddress(Address) : Address
+    }
+    class CreateAddressCommand <<vo>> {
+        - address : String
+        - main : boolean
+    }
+    class Address <<root entity>> {
+        - id : AddressNumber
+        - address : String
+    }
+
+    AddressApplicationService -- AddressRepository
+    AddressApplicationService -- AddressFactory
+
+    AddressFactory -- CreateAddressCommand
+
+    AddressRepository -- Address
+}
+
+package shared {
+    class AddressNumber <<vo>>
+    class PNumber <<vo>>
+
+    abstract BusinessNumber <<vo>> {
+        - number : long
+        {abstract} format() : String
+    }
+
+    PNumber --|> BusinessNumber
+    
+    AddressNumber --|> BusinessNumber
+}
+
+Address -- AddressNumber
+AddressVO -- AddressNumber
+Person -> PNumber
+
+legend left
+- PNumber has format 'P' followed by 8 digits (ex : P12345678)
+- PostalLine can only contains 30 characters
+- SocialSecurityNumber is 13 digits number which begin by '756' that is formatted in string as 756.XXXX.XXXX.XX
+
+end legend
+
+@enduml

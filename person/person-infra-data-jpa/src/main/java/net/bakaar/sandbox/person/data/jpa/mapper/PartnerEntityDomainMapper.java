@@ -1,6 +1,8 @@
 package net.bakaar.sandbox.person.data.jpa.mapper;
 
+import net.bakaar.sandbox.person.data.jpa.entity.PersonAddressesEntity;
 import net.bakaar.sandbox.person.data.jpa.entity.PersonEntity;
+import net.bakaar.sandbox.person.domain.entity.Address;
 import net.bakaar.sandbox.person.domain.entity.Partner;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 
@@ -17,7 +19,11 @@ public class PartnerEntityDomainMapper {
         if (entity.getSocialSecurityNumber() != 0) {
             builder.withSocialSecurityNumber(entity.getSocialSecurityNumber());
         }
-        return builder.build();
+        Partner toReturn = builder.build();
+        for (PersonAddressesEntity link : entity.getPersonAddresses()) {
+            toReturn.addNewAddress(addressMapper.mapToDomain(link));
+        }
+        return toReturn;
     }
 
     public PersonEntity mapToEntity(Partner partner) {
@@ -28,9 +34,13 @@ public class PartnerEntityDomainMapper {
         entity.setPNumber(partner.getId().getValue());
         entity.setSocialSecurityNumber(partner.getSocialSecurityNumber());
 
-//        for (Address current : partner.getAddresses()) {
-//            entity.getAddresses().add(addressMapper.mapToEntity(current));
-//        }
+        for (Address current : partner.getAddresses()) {
+            PersonAddressesEntity link = new PersonAddressesEntity();
+            link.setAddress(addressMapper.mapToEntity(current));
+            link.setPerson(entity);
+            link.setMain(current.isMain());
+            entity.getPersonAddresses().add(link);
+        }
         return entity;
     }
 }
