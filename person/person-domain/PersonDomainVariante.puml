@@ -4,7 +4,7 @@ package Person {
         + createPerson(CreatePersonCommand) : Person
         + addSecondaryAddressToPerson(PNumber,AddressNumber) : Person
         + removeSecondaryAddress(PNumber, AddressNumber) : Person
-        + movePerson(PNumber, AddressNumber): Person
+        + relocatePerson(PNumber, AddressNumber): Person
         + changeName(PNumber, PostalLine) : Person
         ...()
     }

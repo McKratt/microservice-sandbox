@@ -1,5 +1,6 @@
 package net.bakaar.sandbox.domain.person;
 
+import net.bakaar.sandbox.domain.person.address.Address;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.junit.Test;
 
@@ -78,29 +79,6 @@ public class PersonTest {
         assertThat(toModify.getMainAddress()).isSameAs(address);
         assertThat(toModify.getSecondaryAddresses()).isEmpty();
 
-    }
-
-    @Test
-    public void changeForename_should_update_forename() {
-        //Given
-        String name = "myName";
-        String forename = "myForename";
-        String newForename = "NewNames";
-        LocalDate birthDate = LocalDate.now().minus(1, ChronoUnit.YEARS);
-        PNumber number = PNumber.of(12345678);
-        Person toModify = Person.of(name, forename, birthDate, address)
-                .withId(number)
-                .build();
-        //When
-        assertThat(toModify.changeForename(newForename)).isNotNull();
-        //Then
-        assertThat(toModify).isNotNull();
-        assertThat(toModify.getForename().getLine()).isEqualTo(newForename);
-        assertThat(toModify.getName().getLine()).isEqualTo(name);
-        assertThat(toModify.getBirthDate()).isEqualTo(birthDate);
-        assertThat(toModify.getId()).isEqualTo(number);
-        assertThat(toModify.getMainAddress()).isSameAs(address);
-        assertThat(toModify.getSecondaryAddresses()).isEmpty();
     }
 
     @Test

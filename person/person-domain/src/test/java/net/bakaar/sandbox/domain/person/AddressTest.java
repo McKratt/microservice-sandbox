@@ -1,5 +1,6 @@
 package net.bakaar.sandbox.domain.person;
 
+import net.bakaar.sandbox.domain.person.address.Address;
 import net.bakaar.sandbox.domain.shared.AddressNumber;
 import org.junit.Test;
 

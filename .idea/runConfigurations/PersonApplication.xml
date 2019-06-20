@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="PersonApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-    <module name="person-application" />
+    <module name="person-bootstrap" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="net.bakaar.sandbox.domain.person.infra.service.*" />

@@ -1,6 +1,7 @@
 package net.bakaar.sandbox.domain.person;
 
 import lombok.Getter;
+import net.bakaar.sandbox.domain.person.address.Address;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 
 import java.time.LocalDate;
@@ -30,11 +31,6 @@ public class Person {
 
     public static WithIdBuilder of(String name, String forename, LocalDate birthDate, Address mainAddress) {
         return new Builder(name, forename, birthDate, mainAddress);
-    }
-
-    public Person changeForename(String forename) {
-        this.forename = PostalLine.of(forename);
-        return this;
     }
 
     public Person changeName(String name) {
