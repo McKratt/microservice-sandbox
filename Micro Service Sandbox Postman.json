@@ -97,7 +97,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"name\": \"Cury\",\n    \"forename\": \"Marie\",\n    \"mainAddress\": {\n        \"id\": \"A65748392\",\n        \"address\": \"This is where I live\"\n    }\n}"
+          "raw": "{\n    \"name\": \"Cury\",\n    \"forename\": \"Marie\",\n    \"birthDate\": \"15.04.1915\",\n    \"mainAddress\": {\n        \"id\": \"A657483926\",\n        \"address\": \"This is where I live\"\n    }\n}"
         },
         "url": {
           "raw": "http://localhost:9081/person/rest/api/v1/persons",
@@ -128,7 +128,7 @@
           }
         ],
         "url": {
-          "raw": "http://localhost:9081/person/rest/api/v1/persons/P90198173",
+          "raw": "http://localhost:9081/person/rest/api/v1/persons/P54763610",
           "protocol": "http",
           "host": [
             "localhost"
@@ -140,7 +140,7 @@
             "api",
             "v1",
             "persons",
-            "P90198173"
+            "P54763610"
           ]
         }
       },

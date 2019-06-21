@@ -11,7 +11,7 @@ services:
   #      - 8080
   person-db:
     container_name: "person-db"
-    image: postgres:9.6.8-alpine
+    image: postgres:11.1
     environment:
       POSTGRES_PASSWORD: 123456
       POSTGRES_USER: person_user
@@ -31,7 +31,7 @@ services:
       person.db.user: person_user
       person.db.pass: 123456
       person.db.driver: org.postgresql.Driver
-      businessnumber.url: http://bn:8080/business-number
+    #      businessnumber.url: http://bn:8080/business-number
     links:
       - person-db:db
-      - business-number-service:bn
+#      - business-number-service:bn
