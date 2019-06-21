@@ -3,15 +3,15 @@ package net.bakaar.sandbox.domain.person;
 import net.bakaar.sandbox.domain.number.BusinessNumberRepository;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 
-public class PartnerFactory {
+public class PersonFactory {
     private final BusinessNumberRepository businessNumberRepository;
 
 
-    public PartnerFactory(BusinessNumberRepository businessNumberRepository) {
+    public PersonFactory(BusinessNumberRepository businessNumberRepository) {
         this.businessNumberRepository = businessNumberRepository;
     }
 
-    Person createPartner(CreatePersonCommand command) {
+    Person createPerson(CreatePersonCommand command) {
         PNumber number = businessNumberRepository.fetchNextPNumber();
         return Person
                 .of(command.getName(), command.getForename(), command.getBirthDate(), command.getMainAddress())

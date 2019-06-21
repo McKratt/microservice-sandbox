@@ -16,12 +16,12 @@ public class PersonRepositoryAdapter implements PersonRepository {
     }
 
     @Override
-    public Person putPartner(Person toStore) {
+    public Person putPerson(Person toStore) {
         return entityDomainMapper.mapToDomain(repository.save(entityDomainMapper.mapToEntity(toStore)));
     }
 
     @Override
-    public Person fetchPartnerById(PNumber number) {
+    public Person fetchPersonById(PNumber number) {
         return entityDomainMapper.mapToDomain(repository.findByPNumber(number.getValue()));
     }
 }

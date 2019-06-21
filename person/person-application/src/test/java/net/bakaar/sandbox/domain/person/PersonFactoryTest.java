@@ -14,17 +14,17 @@ import static org.mockito.Mockito.mock;
 public class PersonFactoryTest {
 
     private BusinessNumberRepository idRepository = mock(BusinessNumberRepository.class);
-    private PartnerFactory factory = new PartnerFactory(idRepository);
+    private PersonFactory factory = new PersonFactory(idRepository);
 
     @Test
-    public void createPartner_should_call_BusinessNumberRepository_and_return_a_partner_containing_command_fields() {
+    public void createPerson_should_call_BusinessNumberRepository_and_return_a_person_containing_command_fields() {
         //Given
         given(idRepository.fetchNextPNumber()).willReturn(mock(PNumber.class));
         PersonalAddress mainAddress = mock(PersonalAddress.class);
         CreatePersonCommand command = CreatePersonCommand
                 .of("name", "forename", LocalDate.now().minus(1, ChronoUnit.YEARS), mainAddress);
         //When
-        Person createdPerson = factory.createPartner(command);
+        Person createdPerson = factory.createPerson(command);
         //Then
         assertThat(createdPerson).isNotNull();
         assertThat(createdPerson.getName().getLine()).isEqualTo(command.getName());

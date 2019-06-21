@@ -27,10 +27,10 @@ Main classes involved in modules relationships.
 
 ## Use Cases
 
-- Create a Partner in the dedicated system
-- Create a Case linked to a Partner, the Case should received a Business Number.
+- Create a Person in the dedicated system
+- Create a Case linked to a Person, the Case should received a Business Number.
 - When a Case is created, a Task should appear to remind me to treat the Case.
-- Change the Business ID of a Partner (the change should cascade to the Claim domain).
+- Change the Business ID of a Person (the change should cascade to the Claim domain).
 - Interrogate the Claim system and show a Case with all the information of the related person.
 - Once the Case closed, the related Task should closed too (event).
 - When I change the birth date of a person with a Case, a Task should appear to force me to treat this case again.

@@ -23,13 +23,13 @@ public class PersonRepositoryAdapterTest {
     private final Person returned = mock(Person.class);
 
     @Test
-    public void push_should_store_partner_in_db() {
+    public void push_should_store_person_in_db() {
         //Given
         given(entityDomainMapper.mapToEntity(input)).willReturn(mockedEntity);
         given(repository.save(any(PersonEntity.class))).willAnswer(invocation -> invocation.getArgument(0));
         given(entityDomainMapper.mapToDomain(mockedEntity)).willReturn(returned);
         //When
-        Person person = adapter.putPartner(input);
+        Person person = adapter.putPerson(input);
         //Then
         verify(entityDomainMapper).mapToEntity(input);
         verify(repository).save(mockedEntity);
@@ -38,14 +38,14 @@ public class PersonRepositoryAdapterTest {
     }
 
     @Test
-    public void fetchPartnerById_should_read_partner_from_db() {
+    public void fetchPersonById_should_read_partner_from_db() {
         //Given
         long id = 12345678L;
         PNumber pNumber = PNumber.of(id);
         given(repository.findByPNumber(id)).willReturn(mockedEntity);
         given(entityDomainMapper.mapToDomain(mockedEntity)).willReturn(returned);
         //When
-        Person person = adapter.fetchPartnerById(pNumber);
+        Person person = adapter.fetchPersonById(pNumber);
         //Then
         assertThat(person).isNotNull().isSameAs(returned);
         verify(repository).findByPNumber(id);

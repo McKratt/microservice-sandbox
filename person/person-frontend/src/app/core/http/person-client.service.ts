@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Partner} from '../../model';
+import {Person} from '../../model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +12,14 @@ export class PersonClientService {
   }
 
   getBaseUrl(): string {
-    return '/person/rest/api/v1/partners';
+    return '/person/rest/api/v1/persons';
   }
 
-  public createPartner(partner: Partner): Observable<Partner> {
-    return this.http.post<Partner>(this.getBaseUrl(), partner);
+  public createPerson(person: Person): Observable<Person> {
+    return this.http.post<Person>(this.getBaseUrl(), person);
   }
 
-  public readPartner(pNummer: string): Observable<Partner> {
-    return this.http.get<Partner>(`${this.getBaseUrl()}/${pNummer}`);
+  public readPerson(pNummer: string): Observable<Person> {
+    return this.http.get<Person>(`${this.getBaseUrl()}/${pNummer}`);
   }
 }

@@ -71,10 +71,10 @@ public class PersonRepositoryAdapterIT {
     private PersonJpaRepository personJpaRepository;
 
     @Test
-    public void putPartner_should_store_a_person_in_the_db() {
+    public void putPerson_should_store_a_person_in_the_db() {
         //Given
         //When
-        Person saved = adapter.putPartner(toSave);
+        Person saved = adapter.putPerson(toSave);
         //Then
         checkPersonValues(saved);
     }
@@ -89,10 +89,10 @@ public class PersonRepositoryAdapterIT {
     }
 
     @Test
-    public void putPartner_should_store_the_address_with_the_person() {
+    public void putPerson_should_store_the_address_with_the_person() {
         // Given
         // When
-        Person saved = adapter.putPartner(toSave);
+        Person saved = adapter.putPerson(toSave);
         // Then
         checkPersonValues(saved);
         assertThat(saved.getMainAddress()).isNotNull()
@@ -101,14 +101,14 @@ public class PersonRepositoryAdapterIT {
     }
 
     @Test
-    public void putPartner_should_use_existing_address() {
+    public void putPerson_should_use_existing_address() {
         // Given
         TestTransaction.flagForCommit();
         PersonalAddressEntity returnedEntity = createAddressEntity();
         TestTransaction.end();
         // When
         TestTransaction.start();
-        Person saved = adapter.putPartner(toSave);
+        Person saved = adapter.putPerson(toSave);
         TestTransaction.end();
         // Then
         checkPersonValues(saved);
@@ -131,7 +131,7 @@ public class PersonRepositoryAdapterIT {
     }
 
     @Test
-    public void fetchPartnerById_should_read_data_from_db() {
+    public void fetchPersonById_should_read_data_from_db() {
         //Given
         TestTransaction.flagForCommit();
         PersonEntity personEntity = new PersonEntity();
@@ -151,7 +151,7 @@ public class PersonRepositoryAdapterIT {
         TestTransaction.end();
         //When
         TestTransaction.start();
-        Person returnedPerson = adapter.fetchPartnerById(id);
+        Person returnedPerson = adapter.fetchPersonById(id);
         //Then
         checkPersonValues(returnedPerson);
         assertThat(returnedPerson.getMainAddress()).isNotNull()

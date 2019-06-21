@@ -1,0 +1,9 @@
+{
+  "name": "myName",
+  "forename": "myForename",
+  "birthDate": "12.03.1945",
+  "mainAddress": {
+    "id": "AM7568463725",
+    "address": "23, rue du Bac"
+  }
+}

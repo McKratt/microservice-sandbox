@@ -5,7 +5,7 @@ import * as path from 'path';
 import {HttpClientModule} from '@angular/common/http';
 import {term} from '@pact-foundation/pact/dsl/matchers';
 
-describe('Partner API', () => {
+describe('Person API', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -25,7 +25,7 @@ describe('Partner API', () => {
     logLevel: 'debug',
     pactfileWriteMode: 'update',
     consumer: 'person-frontend',
-    provider: 'partner-api',
+    provider: 'person-api',
   });
 
   beforeAll((done) => {
@@ -45,10 +45,10 @@ describe('Partner API', () => {
   beforeAll((done) => {
     provider.addInteraction({
       state: '',
-      uponReceiving: 'create partner',
+      uponReceiving: 'create person',
       withRequest: {
         method: 'POST',
-        path: '/person/rest/api/v1/partners',
+        path: '/person/rest/api/v1/persons',
         body: {
           name: 'Einstein',
           forename: 'Albert',
@@ -74,14 +74,14 @@ describe('Partner API', () => {
     );
   });
 
-  it('should answer that the partner is created', (done) => {
+  it('should answer that the person is created', (done) => {
     const client: PersonClientService = TestBed.get(PersonClientService);
-    client.createPartner({
+    client.createPerson({
       name: 'Einstein', forename: 'Albert', birthDate: '14.03.1879'
     })
       .subscribe(
-        (partner) => {
-          expect(partner.id).toBeTruthy();
+        (person) => {
+          expect(person.id).toBeTruthy();
           done();
         },
         (error) => done.fail(error)
@@ -90,11 +90,11 @@ describe('Partner API', () => {
 
   beforeAll((done) => {
     provider.addInteraction({
-      state: 'Exist a Partner',
-      uponReceiving: 'read partner',
+      state: 'Exist a Person',
+      uponReceiving: 'read person',
       withRequest: {
         method: 'GET',
-        path: '/person/rest/api/v1/partners/P12345678'
+        path: '/person/rest/api/v1/persons/P12345678'
       },
       willRespondWith: {
         status: 200,
@@ -113,9 +113,9 @@ describe('Partner API', () => {
     );
   });
 
-  it('should read the corresponding partner', (done) => {
+  it('should read the corresponding person', (done) => {
     const client: PersonClientService = TestBed.get(PersonClientService);
-    client.readPartner('P12345678')
+    client.readPerson('P12345678')
       .subscribe(
         () => {
           done();

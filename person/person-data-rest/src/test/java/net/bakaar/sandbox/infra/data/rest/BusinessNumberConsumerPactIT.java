@@ -47,13 +47,13 @@ public class BusinessNumberConsumerPactIT {
     }
 
     @Pact(consumer = "person-consumer")
-    public RequestResponsePact createPactForPartnerBusinessNumber(PactDslWithProvider builder) {
+    public RequestResponsePact createPactForPersonBusinessNumber(PactDslWithProvider builder) {
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
 
         return builder
                 .uponReceiving("Ask For Person Business Number")
-                .path("/bns/rest/api/v1/business-number/partner-id")
+                .path("/bns/rest/api/v1/business-number/person-id")
                 .method("GET")
                 .willRespondWith()
                 .status(200)
@@ -64,7 +64,7 @@ public class BusinessNumberConsumerPactIT {
 
     @Test
     @PactVerification
-    public void control_get_partner_businessnumber() {
+    public void control_get_person_businessnumber() {
         //Given
         //When
         PNumber pnumber = repository.fetchNextPNumber();

@@ -3,7 +3,7 @@ package net.bakaar.sandbox.bootstrap;
 import net.bakaar.sandbox.domain.number.BusinessNumberRepository;
 import net.bakaar.sandbox.domain.person.PersonApplicationService;
 import net.bakaar.sandbox.domain.person.PersonRepository;
-import net.bakaar.sandbox.rest.controller.PartnerRestController;
+import net.bakaar.sandbox.rest.controller.PersonRestController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PersonApplicationIT {
 
     @Autowired
-    private PartnerRestController restController;
+    private PersonRestController restController;
     @Autowired
     private BusinessNumberRepository numberService;
     @Autowired

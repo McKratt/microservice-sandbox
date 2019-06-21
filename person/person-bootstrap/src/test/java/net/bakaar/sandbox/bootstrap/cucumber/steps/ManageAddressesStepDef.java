@@ -27,9 +27,9 @@ public class ManageAddressesStepDef extends AbstractSpringSteps implements En {
     public ManageAddressesStepDef() {
         Given("^an existing partner without address$", () -> {
             Person givenPerson = Person.of("name", "forename", LocalDate.now().minus(20, ChronoUnit.YEARS)).withId(givenPartnerId).build();
-            personRepository.putPartner(givenPerson);
+            personRepository.putPerson(givenPerson);
 
-            assertThat(personRepository.fetchPartnerById(givenPartnerId)).isNotNull();
+            assertThat(personRepository.fetchPersonById(givenPartnerId)).isNotNull();
         });
         When("^I add an address to this partner$", () -> {
             CreateAddressCommand newAddressCommand = CreateAddressCommand.mainOf("AddressNumber");

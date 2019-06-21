@@ -7,7 +7,7 @@ skinparam component {
 node "Business Number" as bn {
     [Business Number Service] as bns
 }
-node "Partner" as pdv {
+node "Person" as pdv {
     [Person Service] as ps
     [Links Service] as ls
 

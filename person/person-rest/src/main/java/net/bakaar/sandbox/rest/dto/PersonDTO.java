@@ -8,9 +8,12 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-public class CreatePartnerCommandDTO {
+public class PersonDTO {
+
+    private String id;
     private String name;
     private String forename;
     @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDate birthDate;
+    private PersonalAddressDTO mainAddress;
 }

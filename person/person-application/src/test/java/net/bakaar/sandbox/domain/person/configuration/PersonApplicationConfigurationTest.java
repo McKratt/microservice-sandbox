@@ -1,8 +1,8 @@
 package net.bakaar.sandbox.domain.person.configuration;
 
 import net.bakaar.sandbox.domain.number.BusinessNumberRepository;
-import net.bakaar.sandbox.domain.person.PartnerFactory;
 import net.bakaar.sandbox.domain.person.PersonApplicationService;
+import net.bakaar.sandbox.domain.person.PersonFactory;
 import net.bakaar.sandbox.domain.person.PersonRepository;
 import org.junit.Test;
 
@@ -24,8 +24,8 @@ public class PersonApplicationConfigurationTest {
         //Then
         assertThat(returnedService).isInstanceOf(PersonApplicationService.class);
         assertThat(getField(returnedService, "personRepository")).isSameAs(personRepository);
-        PartnerFactory factory = (PartnerFactory) getField(returnedService, "partnerFactory");
-        assertThat(factory).isNotNull().isInstanceOf(PartnerFactory.class);
+        PersonFactory factory = (PersonFactory) getField(returnedService, "partnerFactory");
+        assertThat(factory).isNotNull().isInstanceOf(PersonFactory.class);
         assertThat(getField(factory, "businessNumberRepository")).isNotNull().isSameAs(numberRepository);
     }
 }

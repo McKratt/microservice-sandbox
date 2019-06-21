@@ -38,13 +38,13 @@
       "response": []
     },
     {
-      "name": "Partner Id",
+      "name": "Person Id",
       "request": {
         "method": "GET",
         "header": [],
         "body": {},
         "url": {
-          "raw": "http://localhost:8080/bns/rest/api/v1/business-number/partner-id",
+          "raw": "http://localhost:8080/bns/rest/api/v1/business-number/person-id",
           "protocol": "http",
           "host": [
             "localhost"
@@ -56,7 +56,7 @@
             "api",
             "v1",
             "business-number",
-            "partner-id"
+            "person-id"
           ]
         }
       },
@@ -88,7 +88,7 @@
       "response": []
     },
     {
-      "name": "Create Partner",
+      "name": "Create Person",
       "request": {
         "method": "POST",
         "header": [
@@ -102,7 +102,7 @@
           "raw": "{\n\t\"name\": \"Cury\",\n\t\"forename\": \"Marie\"\n}"
         },
         "url": {
-          "raw": "http://localhost:9081/person/rest/api/v1/partners",
+          "raw": "http://localhost:9081/person/rest/api/v1/persons",
           "protocol": "http",
           "host": [
             "localhost"
@@ -113,14 +113,14 @@
             "rest",
             "api",
             "v1",
-            "partners"
+            "persons"
           ]
         }
       },
       "response": []
     },
     {
-      "name": "Fetch Partner By Id",
+      "name": "Fetch Person By Id",
       "request": {
         "method": "GET",
         "header": [
@@ -134,7 +134,7 @@
           "raw": "{\n\t\"name\": \"Cury\",\n\t\"forename\": \"Marie\"\n}"
         },
         "url": {
-          "raw": "http://localhost:9081/person/rest/api/v1/partners/P90198173",
+          "raw": "http://localhost:9081/person/rest/api/v1/persons/P90198173",
           "protocol": "http",
           "host": [
             "localhost"
@@ -145,7 +145,7 @@
             "rest",
             "api",
             "v1",
-            "partners",
+            "persons",
             "P90198173"
           ]
         }

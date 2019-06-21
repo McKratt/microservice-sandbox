@@ -1,1 +1,1 @@
-export {Partner} from './partner.model';
+export {Person} from './person.model';

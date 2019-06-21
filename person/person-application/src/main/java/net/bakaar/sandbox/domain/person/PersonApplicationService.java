@@ -5,20 +5,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 public class PersonApplicationService {
     private final PersonRepository personRepository;
-    private final PartnerFactory partnerFactory;
+    private final PersonFactory personFactory;
 
-    public PersonApplicationService(PersonRepository personRepository, PartnerFactory factory) {
+    public PersonApplicationService(PersonRepository personRepository, PersonFactory factory) {
         this.personRepository = personRepository;
-        this.partnerFactory = factory;
+        this.personFactory = factory;
     }
 
     @Transactional
-    public Person createPartner(CreatePersonCommand command) {
-        return personRepository.putPartner(partnerFactory.createPartner(command));
+    public Person createPerson(CreatePersonCommand command) {
+        return personRepository.putPerson(personFactory.createPerson(command));
     }
 
     @Transactional(readOnly = true)
-    public Person readPartner(PNumber id) {
-        return personRepository.fetchPartnerById(id);
+    public Person readPerson(PNumber id) {
+        return personRepository.fetchPersonById(id);
     }
 }

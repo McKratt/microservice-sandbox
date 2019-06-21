@@ -28,7 +28,7 @@ public class BusinessNumberEndpointTest {
     public void createPartnerId_should_return_200_and_partnerId() {
         //Given
         //When
-        ResponseEntity response = endpoint.createPartnerId();
+        ResponseEntity response = endpoint.createPersonId();
         //Then
         assertThat(response).isNotNull();
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);

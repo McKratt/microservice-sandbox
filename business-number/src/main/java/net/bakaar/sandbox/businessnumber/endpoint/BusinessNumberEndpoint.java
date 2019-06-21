@@ -19,8 +19,8 @@ class BusinessNumberEndpoint {
         return ResponseEntity.ok(UUID.randomUUID());
     }
 
-    @GetMapping("/partner-id")
-    public ResponseEntity<Long> createPartnerId() {
+    @GetMapping("/person-id")
+    public ResponseEntity<Long> createPersonId() {
         // Don't do that at home...
         int highest = 99999999;
         int lowest = 10000000;

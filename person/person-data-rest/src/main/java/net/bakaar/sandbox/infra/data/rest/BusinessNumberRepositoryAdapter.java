@@ -19,7 +19,7 @@ public class BusinessNumberRepositoryAdapter implements BusinessNumberRepository
 
     @Override
     public PNumber fetchNextPNumber() {
-        String url = String.format("%s/%s/partner-id", properties.getUrl(), API_URL);
+        String url = String.format("%s/%s/person-id", properties.getUrl(), API_URL);
         return PNumber.of(restTemplate.getForObject(url, Long.class));
     }
 

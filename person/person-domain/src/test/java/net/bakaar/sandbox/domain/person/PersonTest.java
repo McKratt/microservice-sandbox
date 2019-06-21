@@ -13,7 +13,7 @@ public class PersonTest {
     private PersonalAddress personalAddress = mock(PersonalAddress.class);
 
     @Test
-    public void builder_should_build_partner_without_socialNumber() {
+    public void builder_should_build_person_without_socialNumber() {
         //Given
         String name = "myName";
         String forename = "myForename";
@@ -33,7 +33,7 @@ public class PersonTest {
     }
 
     @Test
-    public void builder_should_build_partner_with_socialNumber() {
+    public void builder_should_build_person_with_socialNumber() {
         //Given
         String name = "myName";
         String forename = "myForename";

@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 @Getter
-class CreatePersonCommand {
+public class CreatePersonCommand {
 
     private final String name;
     private final String forename;

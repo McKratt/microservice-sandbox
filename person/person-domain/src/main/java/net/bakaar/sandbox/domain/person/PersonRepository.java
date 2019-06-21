@@ -4,7 +4,7 @@ import net.bakaar.sandbox.shared.domain.vo.PNumber;
 
 public interface PersonRepository {
 
-    Person putPartner(Person person);
+    Person putPerson(Person person);
 
-    Person fetchPartnerById(PNumber id);
+    Person fetchPersonById(PNumber id);
 }
