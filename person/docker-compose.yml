@@ -1,10 +1,14 @@
 version: '3'
 services:
-  business-number-service:
-    container_name: "businessnumber"
-    image: sandbox/businessnumber:BETA
-    ports:
-      - 8080
+  #  business-number-service:
+  #    container_name: "businessnumber"
+  #    build:
+  #      context: ../business-number
+  #      args:
+  #        JAR_FILE: target/businessnumber.jar
+  #    image: bakaar/businessnumber:local
+  #    ports:
+  #      - 8080
   person-db:
     container_name: "person-db"
     image: postgres:9.6.8-alpine
@@ -15,9 +19,13 @@ services:
       - "5432:5432"
   person-service:
     container_name: "person-service"
-    image: sandbox/person-application:BETA
+    build:
+      context: ./person-bootstrap
+      args:
+        JAR_FILE: target/person-bootstrap.jar
+    image: bakaar/person:local
     ports:
-      - "9080:8080"
+      - "9081:8080"
     environment:
       person.db.url: jdbc:postgresql://db:5432/person_user
       person.db.user: person_user

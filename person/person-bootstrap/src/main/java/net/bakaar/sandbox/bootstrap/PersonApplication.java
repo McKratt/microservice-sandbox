@@ -7,9 +7,7 @@ import net.bakaar.sandbox.infra.data.rest.configuration.PersonDataRestConfigurat
 import net.bakaar.sandbox.rest.PersonRestConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
-import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @Import({PersonApplicationConfiguration.class,
@@ -21,9 +19,9 @@ public class PersonApplication {
     public static void main(String[] args) {
         SpringApplication.run(PersonApplication.class);
     }
-
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
+//
+//    @Bean
+//    public RestTemplate restTemplate() {
+//        return new RestTemplate();
+//    }
 }

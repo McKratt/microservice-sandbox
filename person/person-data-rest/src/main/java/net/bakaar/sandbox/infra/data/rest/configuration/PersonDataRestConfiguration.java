@@ -1,18 +1,21 @@
 package net.bakaar.sandbox.infra.data.rest.configuration;
 
 import net.bakaar.sandbox.domain.number.BusinessNumberRepository;
-import net.bakaar.sandbox.infra.data.rest.BusinessNumberRepositoryAdapter;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import net.bakaar.sandbox.infra.data.rest.BusinessNumberFakeAdapater;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.client.RestTemplate;
 
 @Configuration
-@EnableConfigurationProperties(BusinessNumberServiceProperties.class)
+//@EnableConfigurationProperties(BusinessNumberServiceProperties.class)
 public class PersonDataRestConfiguration {
 
+//    @Bean
+//    public BusinessNumberRepository businessNumberService(BusinessNumberServiceProperties properties, RestTemplate restTemplate) {
+//        return new BusinessNumberRepositoryAdapter(properties, restTemplate);
+//    }
+
     @Bean
-    public BusinessNumberRepository businessNumberService(BusinessNumberServiceProperties properties, RestTemplate restTemplate) {
-        return new BusinessNumberRepositoryAdapter(properties, restTemplate);
+    public BusinessNumberRepository fakeBusinessNumberService() {
+        return new BusinessNumberFakeAdapater();
     }
 }
