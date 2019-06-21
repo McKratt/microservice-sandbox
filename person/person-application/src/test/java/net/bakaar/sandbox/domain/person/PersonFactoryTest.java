@@ -31,6 +31,6 @@ public class PersonFactoryTest {
         assertThat(createdPerson.getForename().getLine()).isEqualTo(command.getForename());
         assertThat(createdPerson.getBirthDate()).isEqualTo(command.getBirthDate());
         assertThat(createdPerson.getId()).isNotNull();
-        assertThat(createdPerson.getMainPersonalAddress()).isSameAs(mainAddress);
+        assertThat(createdPerson.getMainAddress()).isSameAs(mainAddress);
     }
 }

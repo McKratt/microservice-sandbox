@@ -1,9 +1,11 @@
 package net.bakaar.sandbox.domain.shared;
 
+import lombok.EqualsAndHashCode;
 import net.bakaar.sandbox.shared.domain.vo.BusinessNumber;
 
 import java.util.regex.Pattern;
 
+@EqualsAndHashCode
 public class AddressNumber extends BusinessNumber {
     private AddressNumber(long value) {
         super(value);

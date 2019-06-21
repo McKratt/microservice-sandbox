@@ -1,10 +1,10 @@
 package net.bakaar.sandbox.infra.data.jpa.mapper;
 
-import net.bakaar.sandbox.domain.address.Address;
 import net.bakaar.sandbox.domain.person.Person;
-import net.bakaar.sandbox.infra.data.jpa.entity.AddressEntity;
+import net.bakaar.sandbox.domain.person.PersonalAddress;
 import net.bakaar.sandbox.infra.data.jpa.entity.PersonAddressesEntity;
 import net.bakaar.sandbox.infra.data.jpa.entity.PersonEntity;
+import net.bakaar.sandbox.infra.data.jpa.entity.PersonalAddressEntity;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
@@ -25,25 +25,27 @@ public class PersonEntityDomainMapperTest {
     private final LocalDate birthDate = LocalDate.now();
     private final AddressEntityDomainMapper addressMapper = mock(AddressEntityDomainMapper.class);
     private final long number = 7541234567890L;
-    private PartnerEntityDomainMapper mapper = new PartnerEntityDomainMapper(addressMapper);
+    private final PersonalAddress address = mock(PersonalAddress.class);
+    private PersonEntityDomainMapper mapper = new PersonEntityDomainMapper(addressMapper);
 
     @Test
     public void mapToEntity_should_map_correctly() {
         //Given
-        Address address = mock(Address.class);
-        Person person = Person.of(name, forename, birthDate)
+        Person person = Person.of(name, forename, birthDate, address)
                 .withId(pNumber)
                 .withSocialSecurityNumber(number)
-                .build()
-                .addNewAddress(address);
-        AddressEntity returnedAddressEntity = mock(AddressEntity.class);
-        given(addressMapper.mapToEntity(address)).willReturn(returnedAddressEntity);
+                .build();
+        PersonalAddressEntity returnedPersonalAddressEntity = mock(PersonalAddressEntity.class);
+        given(addressMapper.mapToEntity(address)).willReturn(returnedPersonalAddressEntity);
         //When
         PersonEntity entity = mapper.mapToEntity(person);
         //Then
         checkPersonEntityValues(entity);
         verify(addressMapper).mapToEntity(address);
-        assertThat(entity.getPersonAddresses()).isNotEmpty().extracting("address").containsOnly(returnedAddressEntity);
+        assertThat(entity.getPersonAddresses()).isNotEmpty()
+                .extracting("address")
+                .containsOnly(returnedPersonalAddressEntity);
+        assertThat(entity.getSocialSecurityNumber()).isEqualTo(number);
     }
 
     private void checkPersonEntityValues(PersonEntity entity) {
@@ -52,34 +54,22 @@ public class PersonEntityDomainMapperTest {
         assertThat(entity.getName()).isEqualTo(name);
         assertThat(entity.getForename()).isEqualTo(forename);
         assertThat(entity.getPNumber()).isEqualTo(id);
-        assertThat(entity.getSocialSecurityNumber()).isEqualTo(number);
     }
 
     @Test
-    public void mapToEntity_should_map_person_correctly() {
+    public void mapToEntity_should_map_correctly_without_sn() {
         // Given
-        Person person = Person.of(name, forename, birthDate)
+        Person person = Person.of(name, forename, birthDate, address)
                 .withId(pNumber)
-                .withSocialSecurityNumber(number)
                 .build();
-        // Then
+        // When
         PersonEntity entity = mapper.mapToEntity(person);
+        // Then
         checkPersonEntityValues(entity);
+        assertThat(entity.getSocialSecurityNumber()).isNull();
     }
 
-    // TODO faire le test si le numéro de sécurité social est vide
-
-    @Test
-    public void mapToDomain_should_map_person_correctly() {
-        //Given
-        PersonEntity entity = createPersonEntity();
-        //When
-        Person domain = mapper.mapToDomain(entity);
-        //Then
-        checkParnterValues(domain);
-    }
-
-    private void checkParnterValues(Person domain) {
+    private void checkPersonValues(Person domain) {
         assertThat(domain).isNotNull();
         assertThat(domain.getId()).isEqualTo(pNumber);
         assertThat(domain.getName().getLine()).isEqualTo(name);
@@ -105,17 +95,20 @@ public class PersonEntityDomainMapperTest {
         // Given
         PersonEntity entity = createPersonEntity();
         PersonAddressesEntity link = new PersonAddressesEntity();
-        AddressEntity addressEntity = mock(AddressEntity.class);
+        PersonalAddressEntity personalAddressEntity = mock(PersonalAddressEntity.class);
         link.setPerson(entity);
-        link.setAddress(addressEntity);
+        link.setAddress(personalAddressEntity);
+        link.setMain(true);
         entity.getPersonAddresses().add(link);
-        Address mappedAddress = mock(Address.class);
-        given(addressMapper.mapToDomain(link)).willReturn(mappedAddress);
+        PersonalAddress mappedAddress = mock(PersonalAddress.class);
+        given(addressMapper.mapToDomain(personalAddressEntity)).willReturn(mappedAddress);
         // When
         Person domain = mapper.mapToDomain(entity);
         // Then
-        checkParnterValues(domain);
-        verify(addressMapper).mapToDomain(link);
-        assertThat(domain.getSecondaryPersonalAddresses()).isNotEmpty().containsOnly(mappedAddress);
+        checkPersonValues(domain);
+        verify(addressMapper).mapToDomain(personalAddressEntity);
+        assertThat(domain.getMainAddress()).isNotNull().isEqualTo(mappedAddress);
     }
+
+    // TODO do a test with secondary addresses
 }

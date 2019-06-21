@@ -36,10 +36,10 @@ public class ManageAddressesStepDef extends AbstractSpringSteps implements En {
             testedPerson = service.addAddressToPartner(givenPartnerId, newAddressCommand);
         });
         Then("^the partner has exactly one address$", () -> {
-            assertThat(testedPerson.getSecondaryPersonalAddresses()).hasSize(1);
+            assertThat(testedPerson.getSecondaryAddresses()).hasSize(1);
         });
         Then("^this address is the main address of the partner$", () -> {
-            assertThat(testedPerson.getSecondaryPersonalAddresses().get(0).isMain()).isTrue();
+            assertThat(testedPerson.getSecondaryAddresses().get(0).isMain()).isTrue();
         });
     }
 }

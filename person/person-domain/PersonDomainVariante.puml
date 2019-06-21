@@ -22,7 +22,7 @@ package Person {
         - forename : String
         - birthDate : LocalDate
         - socialSecurityNumber : String
-        - mainAddressNumber : PersonalAddress
+        - mainAddress : PersonalAddress
     }
     class SearchPersonQuery <<vo>> {
         - name : String

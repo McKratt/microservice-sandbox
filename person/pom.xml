@@ -14,11 +14,11 @@
     <version>1.0.0-SNAPSHOT</version>
     <modules>
         <module>person-domain</module>
-        <module>person-data-jpa</module>
-        <module>person-rest</module>
         <module>person-application</module>
-        <module>person-bootstrap</module>
+        <module>person-rest</module>
+        <module>person-data-jpa</module>
         <module>person-data-rest</module>
+        <module>person-bootstrap</module>
     </modules>
     <properties>
         <shared.version>1.0.0-SNAPSHOT</shared.version>

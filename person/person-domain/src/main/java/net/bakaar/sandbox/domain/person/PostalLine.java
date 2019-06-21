@@ -5,7 +5,7 @@ import lombok.Getter;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 @Getter
-class PostalLine {
+public class PostalLine {
 
     private static final int MAX_LENGTH = 30;
 

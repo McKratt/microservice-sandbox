@@ -23,7 +23,7 @@ public class PersonAddressesEntity {
 
     @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "ADDRESS_FK", referencedColumnName = "ADDRESS_PK")
-    private AddressEntity address;
+    private PersonalAddressEntity address;
 
     private boolean main;
 }

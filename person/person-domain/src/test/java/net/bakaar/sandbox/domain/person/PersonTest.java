@@ -28,8 +28,8 @@ public class PersonTest {
         assertThat(createdPerson.getBirthDate()).isEqualTo(birthDate);
         assertThat(createdPerson.getId()).isEqualTo(number);
         assertThat(createdPerson.getSocialSecurityNumber()).isNull();
-        assertThat(createdPerson.getMainPersonalAddress()).isSameAs(personalAddress);
-        assertThat(createdPerson.getSecondaryPersonalAddresses()).isEmpty();
+        assertThat(createdPerson.getMainAddress()).isSameAs(personalAddress);
+        assertThat(createdPerson.getSecondaryAddresses()).isEmpty();
     }
 
     @Test
@@ -52,8 +52,8 @@ public class PersonTest {
         assertThat(createdPerson.getBirthDate()).isEqualTo(birthDate);
         assertThat(createdPerson.getId()).isEqualTo(number);
         assertThat(createdPerson.getSocialSecurityNumber()).isEqualTo(socialNumber);
-        assertThat(createdPerson.getMainPersonalAddress()).isSameAs(personalAddress);
-        assertThat(createdPerson.getSecondaryPersonalAddresses()).isEmpty();
+        assertThat(createdPerson.getMainAddress()).isSameAs(personalAddress);
+        assertThat(createdPerson.getSecondaryAddresses()).isEmpty();
     }
 
     @Test
@@ -75,8 +75,8 @@ public class PersonTest {
         assertThat(toModify.getName().getLine()).isEqualTo(newName);
         assertThat(toModify.getBirthDate()).isEqualTo(birthDate);
         assertThat(toModify.getId()).isEqualTo(number);
-        assertThat(toModify.getMainPersonalAddress()).isSameAs(personalAddress);
-        assertThat(toModify.getSecondaryPersonalAddresses()).isEmpty();
+        assertThat(toModify.getMainAddress()).isSameAs(personalAddress);
+        assertThat(toModify.getSecondaryAddresses()).isEmpty();
 
     }
 
@@ -91,13 +91,13 @@ public class PersonTest {
                 .withId(number)
                 .build();
         PersonalAddress secondaryPersonalAddress = mock(PersonalAddress.class);
-        assertThat(person.getSecondaryPersonalAddresses()).isEmpty();
+        assertThat(person.getSecondaryAddresses()).isEmpty();
         //When
-        Person modifiedPerson = person.addSecondaryAddress(secondaryPersonalAddress);
+        Person modifiedPerson = person.addSecondaryAddresses(secondaryPersonalAddress);
         //Then
         assertThat(modifiedPerson).isNotNull();
-        assertThat(modifiedPerson.getSecondaryPersonalAddresses()).containsOnly(secondaryPersonalAddress);
-        assertThat(modifiedPerson.getMainPersonalAddress()).isSameAs(personalAddress);
+        assertThat(modifiedPerson.getSecondaryAddresses()).containsOnly(secondaryPersonalAddress);
+        assertThat(modifiedPerson.getMainAddress()).isSameAs(personalAddress);
     }
 
     @Test
@@ -111,11 +111,11 @@ public class PersonTest {
                 .withId(number)
                 .build();
         PersonalAddress newPersonalAddress = mock(PersonalAddress.class);
-        assertThat(person.getSecondaryPersonalAddresses()).isEmpty();
-        assertThat(person.getMainPersonalAddress()).isSameAs(personalAddress);
+        assertThat(person.getSecondaryAddresses()).isEmpty();
+        assertThat(person.getMainAddress()).isSameAs(personalAddress);
         // When
         person.relocate(newPersonalAddress);
         // Then
-        assertThat(person.getMainPersonalAddress()).isSameAs(newPersonalAddress);
+        assertThat(person.getMainAddress()).isSameAs(newPersonalAddress);
     }
 }

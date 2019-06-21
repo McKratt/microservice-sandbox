@@ -51,7 +51,7 @@ public class PersonEntityIT {
         TestTransaction.flagForCommit();
         //Given
 
-        AddressEntity address = createAddressEntity();
+        PersonalAddressEntity address = createAddressEntity();
         addressJpaRepository.save(address);
 
         PersonEntity person = createPersonEntity();
@@ -67,13 +67,13 @@ public class PersonEntityIT {
         TestTransaction.end();
         //Then
         TestTransaction.start();
-        AddressEntity expected = addressJpaRepository.findById(address.getId()).orElseThrow(() -> new RuntimeException("Entity not found"));
+        PersonalAddressEntity expected = addressJpaRepository.findById(address.getId()).orElseThrow(() -> new RuntimeException("Entity not found"));
         assertThat(expected).isNotNull();
         assertThat(response).isNotNull();
         assertThat(response.getId()).isNotNull().isNotEqualTo(0L);
     }
 
-    private void createLink(AddressEntity address, PersonEntity person) {
+    private void createLink(PersonalAddressEntity address, PersonEntity person) {
         PersonAddressesEntity link = new PersonAddressesEntity();
         link.setPerson(person);
         link.setAddress(address);
@@ -82,8 +82,8 @@ public class PersonEntityIT {
         person.getPersonAddresses().add(link);
     }
 
-    private AddressEntity createAddressEntity() {
-        AddressEntity address = new AddressEntity();
+    private PersonalAddressEntity createAddressEntity() {
+        PersonalAddressEntity address = new PersonalAddressEntity();
         address.setId(1L);
         address.setNumber(8695746352657L);
         address.setAddressLine("This is my AddressNumber");

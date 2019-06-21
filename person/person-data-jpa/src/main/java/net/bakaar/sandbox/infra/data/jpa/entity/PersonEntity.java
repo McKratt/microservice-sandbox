@@ -25,7 +25,7 @@ public class PersonEntity {
 
     private long pNumber;
 
-    private long socialSecurityNumber;
+    private Long socialSecurityNumber;
 
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private List<PersonAddressesEntity> personAddresses = new ArrayList<>();

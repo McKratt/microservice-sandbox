@@ -5,6 +5,7 @@ import net.bakaar.sandbox.shared.domain.vo.PNumber;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -12,12 +13,12 @@ import java.util.List;
 public class Person {
 
     private final PNumber id;
-    private PersonalAddress mainPersonalAddress;
+    private final Long socialSecurityNumber; // FIXME make it VO
     private PostalLine name;
     private PostalLine forename;
     private final LocalDate birthDate;
-    private final Long socialSecurityNumber;
-    private List<PersonalAddress> secondaryPersonalAddresses = new ArrayList<>();
+    private PersonalAddress mainAddress;
+    private List<PersonalAddress> secondaryAddresses = new ArrayList<>();
 
     private Person(PNumber id, PostalLine name, PostalLine forename, LocalDate birthDate, Long socialSecurityNumber, PersonalAddress personalAddress) {
         this.id = id;
@@ -25,7 +26,7 @@ public class Person {
         this.forename = forename;
         this.birthDate = birthDate;
         this.socialSecurityNumber = socialSecurityNumber;
-        this.mainPersonalAddress = personalAddress;
+        this.mainAddress = personalAddress;
     }
 
     public static WithIdBuilder of(String name, String forename, LocalDate birthDate, PersonalAddress mainPersonalAddress) {
@@ -37,17 +38,17 @@ public class Person {
         return this;
     }
 
-    public Person addSecondaryAddress(PersonalAddress personalAddress) {
-        secondaryPersonalAddresses.add(personalAddress);
+    public Person addSecondaryAddresses(PersonalAddress... personalAddress) {
+        secondaryAddresses.addAll(Arrays.asList(personalAddress));
         return this;
     }
 
-    public List<PersonalAddress> getSecondaryPersonalAddresses() {
-        return Collections.unmodifiableList(secondaryPersonalAddresses);
+    public List<PersonalAddress> getSecondaryAddresses() {
+        return Collections.unmodifiableList(secondaryAddresses);
     }
 
     public Person relocate(PersonalAddress newPersonalAddress) {
-        mainPersonalAddress = newPersonalAddress;
+        mainAddress = newPersonalAddress;
         return this;
     }
 

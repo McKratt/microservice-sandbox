@@ -2,7 +2,7 @@ package net.bakaar.sandbox.infra.data.jpa.adapter;
 
 import net.bakaar.sandbox.domain.person.Person;
 import net.bakaar.sandbox.infra.data.jpa.entity.PersonEntity;
-import net.bakaar.sandbox.infra.data.jpa.mapper.PartnerEntityDomainMapper;
+import net.bakaar.sandbox.infra.data.jpa.mapper.PersonEntityDomainMapper;
 import net.bakaar.sandbox.infra.data.jpa.repository.PersonJpaRepository;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.junit.Test;
@@ -15,7 +15,7 @@ import static org.mockito.Mockito.verify;
 
 public class PersonRepositoryAdapterTest {
 
-    private final PartnerEntityDomainMapper entityDomainMapper = mock(PartnerEntityDomainMapper.class);
+    private final PersonEntityDomainMapper entityDomainMapper = mock(PersonEntityDomainMapper.class);
     private final PersonJpaRepository repository = mock(PersonJpaRepository.class);
     private final PersonRepositoryAdapter adapter = new PersonRepositoryAdapter(repository, entityDomainMapper);
     private final PersonEntity mockedEntity = mock(PersonEntity.class);
