@@ -1,0 +1,48 @@
+@startuml
+skinparam nodeBackgroundColor #PaleGoldenRod
+
+frame Presentation {
+    node "X-rest" as rest
+'    node "X-message" as mess
+}
+frame "Application Service" as AS {
+    node "X-application" as application
+}
+frame Domain {
+    node "X-domain" as domain
+}
+frame Infrastructure {
+    node "X-data-jpa" as jpa
+    node "X-data-rest" as drest
+'    node "X-event" as event
+}
+
+node "X-bootstrap" as bootstrap
+
+Presentation -[hidden]- AS
+AS -[hidden]- Domain
+Domain -[hidden]- Infrastructure
+
+rest --> application
+'mess --> application
+
+application --> domain
+
+jpa -up-> domain
+drest -up-> domain
+'event -up-> domain
+
+'bootstrap -> mess
+bootstrap -> rest
+bootstrap --> drest
+bootstrap --> jpa
+'bootstrap --> event
+
+legend left
+X is the name of your component
+<b><u>Colors</u></b>
+|<back:PaleGoldenRod>    </back>| Maven Modules|
+|<back:White>    </back>| <b>Layers</b>|
+end legend
+
+@enduml
