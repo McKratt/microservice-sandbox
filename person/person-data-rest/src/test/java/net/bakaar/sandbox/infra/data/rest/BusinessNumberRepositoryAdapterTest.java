@@ -29,7 +29,7 @@ public class BusinessNumberRepositoryAdapterTest {
     public void fetchNextPNumber_should_call_rest_endpoint() {
         //Given
         long result = 98765432L;
-        String completeUrl = String.format(completeUrlPattern, baseUrl, "partner-id");
+        String completeUrl = String.format(completeUrlPattern, baseUrl, "person-id");
         given(restTemplate.getForObject(completeUrl, Long.class)).willReturn(result);
         //When
         PNumber number = client.fetchNextPNumber();

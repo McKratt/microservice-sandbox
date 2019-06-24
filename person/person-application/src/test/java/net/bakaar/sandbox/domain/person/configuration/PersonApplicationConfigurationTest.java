@@ -24,7 +24,7 @@ public class PersonApplicationConfigurationTest {
         //Then
         assertThat(returnedService).isInstanceOf(PersonApplicationService.class);
         assertThat(getField(returnedService, "personRepository")).isSameAs(personRepository);
-        PersonFactory factory = (PersonFactory) getField(returnedService, "partnerFactory");
+        PersonFactory factory = (PersonFactory) getField(returnedService, "personFactory");
         assertThat(factory).isNotNull().isInstanceOf(PersonFactory.class);
         assertThat(getField(factory, "businessNumberRepository")).isNotNull().isSameAs(numberRepository);
     }

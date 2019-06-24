@@ -11,7 +11,7 @@
         <postgresql.lib.version>42.2.5</postgresql.lib.version>
     </properties>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>person-infra-data-jpa</artifactId>
+    <artifactId>person-data-jpa</artifactId>
     <dependencies>
         <dependency>
             <groupId>net.bakaar</groupId>

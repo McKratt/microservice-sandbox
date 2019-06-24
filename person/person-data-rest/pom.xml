@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>person-infra-data-rest</artifactId>
+    <artifactId>person-data-rest</artifactId>
     <dependencies>
         <dependency>
             <groupId>net.bakaar</groupId>

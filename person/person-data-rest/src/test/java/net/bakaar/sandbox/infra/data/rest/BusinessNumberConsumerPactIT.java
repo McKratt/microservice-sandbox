@@ -12,6 +12,7 @@ import net.bakaar.sandbox.infra.data.rest.configuration.PersonDataRestConfigurat
 import net.bakaar.sandbox.infra.data.rest.test.PactTestConfiguration;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +30,7 @@ import static org.mockito.BDDMockito.given;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {PactTestConfiguration.class, PersonDataRestConfiguration.class})
+@Ignore("Until reactivate BNS endpoibnt")
 public class BusinessNumberConsumerPactIT {
 
     @Rule
@@ -58,7 +60,7 @@ public class BusinessNumberConsumerPactIT {
                 .willRespondWith()
                 .status(200)
                 .headers(headers)
-                .body(PactDslRootValue.stringMatcher("[0-9]{8}", "54637289"))
+                .body(PactDslRootValue.integerType(54637289L))
                 .toPact();
     }
 

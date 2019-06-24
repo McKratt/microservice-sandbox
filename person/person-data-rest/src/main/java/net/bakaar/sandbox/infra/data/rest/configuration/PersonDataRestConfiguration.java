@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Configuration;
 //@EnableConfigurationProperties(BusinessNumberServiceProperties.class)
 public class PersonDataRestConfiguration {
 
+    // TODO make it conditional
+
 //    @Bean
 //    public BusinessNumberRepository businessNumberService(BusinessNumberServiceProperties properties, RestTemplate restTemplate) {
 //        return new BusinessNumberRepositoryAdapter(properties, restTemplate);

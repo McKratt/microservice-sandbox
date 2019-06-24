@@ -6,18 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Random;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/rest/api/v1/business-number")
 class BusinessNumberEndpoint {
 
     private final Random r = new Random();
-
-    @GetMapping("/case-id")
-    public ResponseEntity<UUID> createCaseId() {
-        return ResponseEntity.ok(UUID.randomUUID());
-    }
 
     @GetMapping("/person-id")
     public ResponseEntity<Long> createPersonId() {

@@ -11,6 +11,7 @@ import net.bakaar.sandbox.bootstrap.PersonApplication;
 import net.bakaar.sandbox.infra.data.jpa.entity.PersonEntity;
 import net.bakaar.sandbox.infra.data.jpa.repository.PersonJpaRepository;
 import net.bakaar.sandbox.rest.test.config.PactTestConfiguration;
+import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,6 +22,7 @@ import java.time.LocalDate;
 @SpringBootTest(classes = {PactTestConfiguration.class, PersonApplication.class}, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Provider("partner-api")
 @PactFolder("pacts")
+@Ignore("Wait for customer refactoring")
 public class PersonAPIProviderPactIT {
 
     @TestTarget

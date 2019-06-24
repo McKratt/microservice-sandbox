@@ -10,7 +10,7 @@
       "description": "Ask For Partner Business Number",
       "request": {
         "method": "GET",
-        "path": "/bns/rest/api/v1/business-number/partner-id"
+        "path": "/bns/rest/api/v1/business-number/person-id"
       },
       "response": {
         "status": 200,
