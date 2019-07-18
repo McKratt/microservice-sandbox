@@ -7,7 +7,7 @@ public class PersonFactory {
     private final BusinessNumberRepository businessNumberRepository;
 
 
-    public PersonFactory(BusinessNumberRepository businessNumberRepository) {
+    PersonFactory(BusinessNumberRepository businessNumberRepository) {
         this.businessNumberRepository = businessNumberRepository;
     }
 

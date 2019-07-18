@@ -1,6 +1,7 @@
 package net.bakaar.sandbox.domain.person.configuration;
 
 import net.bakaar.sandbox.domain.number.BusinessNumberRepository;
+import net.bakaar.sandbox.domain.person.PersonApplicationConfiguration;
 import net.bakaar.sandbox.domain.person.PersonApplicationService;
 import net.bakaar.sandbox.domain.person.PersonFactory;
 import net.bakaar.sandbox.domain.person.PersonRepository;

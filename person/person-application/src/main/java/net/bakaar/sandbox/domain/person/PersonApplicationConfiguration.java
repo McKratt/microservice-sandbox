@@ -1,9 +1,6 @@
-package net.bakaar.sandbox.domain.person.configuration;
+package net.bakaar.sandbox.domain.person;
 
 import net.bakaar.sandbox.domain.number.BusinessNumberRepository;
-import net.bakaar.sandbox.domain.person.PersonApplicationService;
-import net.bakaar.sandbox.domain.person.PersonFactory;
-import net.bakaar.sandbox.domain.person.PersonRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
