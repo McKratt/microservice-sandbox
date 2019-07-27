@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.mock;
 
-public class AddressNumberTest {
+public class AddressTest {
 
     @Test
     public void secondaryOf_should_create_a_secondary_address() {

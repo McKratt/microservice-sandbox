@@ -9,15 +9,15 @@ import org.junit.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.util.ReflectionTestUtils.getField;
 
-public class PersonalAddressNumberTest {
+public class AddressNumberTest {
 
 
     @Test
     public void of_should_create_a_new_AddressNumber() {
         //Given
-        String pnummer = "A123456789";
+        String number = "A123456789";
         //When
-        AddressNumber created = AddressNumber.of(pnummer);
+        AddressNumber created = AddressNumber.of(number);
         //Then
         assertThat(created).isNotNull();
     }
@@ -25,9 +25,9 @@ public class PersonalAddressNumberTest {
     @Test
     public void should_only_store_number() {
         //Given
-        String pnummer = "A123456789";
+        String number = "A123456789";
         //When
-        AddressNumber created = AddressNumber.of(pnummer);
+        AddressNumber created = AddressNumber.of(number);
         //Then
         assertThat((Long) getField(created, "value")).isEqualTo(123456789);
     }
