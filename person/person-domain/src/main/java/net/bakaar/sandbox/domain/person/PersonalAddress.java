@@ -14,7 +14,7 @@ public class PersonalAddress {
             throw new IllegalArgumentException("Id should not be null !");
         }
         if (StringUtils.isEmpty(address)) {
-            throw new IllegalArgumentException("AddressNumber should not be empty nor null !");
+            throw new IllegalArgumentException("The address should not be empty nor null !");
         }
         this.id = id;
         this.address = address;
