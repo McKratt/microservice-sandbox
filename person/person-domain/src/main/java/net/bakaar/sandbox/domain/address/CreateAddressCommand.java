@@ -16,7 +16,4 @@ class CreateAddressCommand {
         return new CreateAddressCommand(address, false);
     }
 
-    public static CreateAddressCommand mainOf(String address) {
-        return new CreateAddressCommand(address, true);
-    }
 }

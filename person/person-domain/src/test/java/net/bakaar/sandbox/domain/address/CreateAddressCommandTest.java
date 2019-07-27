@@ -16,15 +16,4 @@ public class CreateAddressCommandTest {
         assertThat(command.getAddress()).isSameAs(address);
         assertThat(command.isMain()).isFalse();
     }
-
-    @Test
-    public void mainOf_should_initialize_correctly() {
-        //Given
-        String address = "my AddressNumber";
-        //When
-        CreateAddressCommand command = CreateAddressCommand.mainOf(address);
-        //Then
-        assertThat(command.getAddress()).isSameAs(address);
-        assertThat(command.isMain()).isTrue();
-    }
 }

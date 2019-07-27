@@ -11,7 +11,7 @@ public class CreatePersonCommand {
     private final String forename;
     private final LocalDate birthDate;
     private final Long socialSecurityNumber;
-    private final PersonalAddress mainAddress;
+    private final PersonalAddress mainAddress; // That's an actual address and not a command because it is a reference of an existing address.
 
     private CreatePersonCommand(String name,
                                 String forename,

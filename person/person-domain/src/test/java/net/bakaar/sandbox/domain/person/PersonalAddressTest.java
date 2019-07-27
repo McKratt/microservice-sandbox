@@ -32,4 +32,14 @@ public class PersonalAddressTest {
         assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
         assertThat(thrown.getMessage()).containsIgnoringCase("address");
     }
+
+    @Test
+    public void constructor_should_throw_error_if_id_empty() {
+        // Given
+        // When
+        Throwable thrown = catchThrowable(() -> PersonalAddress.of(null, "My Address"));
+        //Then
+        assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
+        assertThat(thrown.getMessage()).containsIgnoringCase("id");
+    }
 }

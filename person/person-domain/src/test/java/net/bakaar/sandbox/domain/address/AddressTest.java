@@ -10,7 +10,7 @@ import static org.mockito.Mockito.mock;
 public class AddressTest {
 
     @Test
-    public void secondaryOf_should_create_a_secondary_address() {
+    public void of_should_create_an_address() {
         //Given
         AddressNumber id = mock(AddressNumber.class);
         String address = "My AddressNumber";
@@ -21,20 +21,6 @@ public class AddressTest {
         assertThat(createdAddress.getAddress()).isSameAs(address);
         assertThat(createdAddress.getId()).isSameAs(id);
     }
-
-    @Test
-    public void mainOf_should_create_a_main_address() {
-        //Given
-        AddressNumber id = mock(AddressNumber.class);
-        String address = "My AddressNumber";
-        //When
-        Address createdAddress = Address.of(id, address);
-        //Then
-        assertThat(createdAddress).isNotNull();
-        assertThat(createdAddress.getAddress()).isSameAs(address);
-        assertThat(createdAddress.getId()).isSameAs(id);
-    }
-
 
     @Test
     public void constructor_should_throw_error_if_address_empty() {
@@ -45,5 +31,15 @@ public class AddressTest {
         //Then
         assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
         assertThat(thrown.getMessage()).containsIgnoringCase("address");
+    }
+
+    @Test
+    public void constructor_should_throw_error_if_id_empty() {
+        // Given
+        // When
+        Throwable thrown = catchThrowable(() -> Address.of(null, "My Address"));
+        //Then
+        assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
+        assertThat(thrown.getMessage()).containsIgnoringCase("id");
     }
 }
