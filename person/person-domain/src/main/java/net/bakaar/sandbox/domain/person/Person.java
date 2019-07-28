@@ -1,9 +1,11 @@
 package net.bakaar.sandbox.domain.person;
 
+import io.vavr.control.Option;
 import lombok.Getter;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -20,11 +22,24 @@ public class Person {
     private PersonalAddress mainAddress;
     private List<PersonalAddress> secondaryAddresses = new ArrayList<>();
 
-    private Person(PNumber id, PostalLine name, PostalLine forename, LocalDate birthDate, Long socialSecurityNumber, PersonalAddress personalAddress) {
+    private Person(PNumber id,
+                   String name,
+                   String forename,
+                   LocalDate birthDate,
+                   Long socialSecurityNumber,
+                   PersonalAddress personalAddress) {
         this.id = id;
-        this.name = name;
-        this.forename = forename;
-        this.birthDate = birthDate;
+        this.name = PostalLine.of(
+                Option.of(name)
+                        .filter(value -> !value.isEmpty())
+                        .getOrElseThrow(() -> new IllegalArgumentException("The name should not be empty or null !")));
+        this.forename = PostalLine.of(
+                Option.of(forename)
+                        .filter(value -> !value.isEmpty())
+                        .getOrElseThrow(() -> new IllegalArgumentException("The forename should not be empty or null !")));
+        this.birthDate = Option.of(birthDate)
+                .filter(date -> LocalDate.now().plus(1, ChronoUnit.DAYS).isAfter(date)) // we accept today as a valid date
+                .getOrElseThrow(() -> new IllegalArgumentException("The birth date can not be null nor in the future"));
         this.socialSecurityNumber = socialSecurityNumber;
         this.mainAddress = personalAddress;
     }
@@ -90,7 +105,7 @@ public class Person {
         }
 
         public Person build() {
-            return new Person(id, PostalLine.of(name), PostalLine.of(forename), birthDate, ssn, mainPersonalAddress);
+            return new Person(id, name, forename, birthDate, ssn, mainPersonalAddress);
         }
 
     }

@@ -40,6 +40,7 @@ public class CreatePersonStepDef extends AbstractSpringSteps implements En {
             thrown = catchThrowable(() -> createdPerson = service.createPerson(createPersonCommand(true)));
         });
         Then("^I should receive an error mentioning that the mandatory field \"([^\"]*)\" is missing$", (String missingField) -> {
+            assertThat(thrown).isNotNull();
             assertThat(thrown.getMessage()).contains(missingField);
         });
         When("^I create a person with name \"(.*)\" and forename \"(.*)\" born the (\\d+)\\.(\\d+)\\.(\\d+) and located at \"(.*)\"$",

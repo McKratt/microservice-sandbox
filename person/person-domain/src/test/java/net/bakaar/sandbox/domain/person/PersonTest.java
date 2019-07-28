@@ -12,6 +12,8 @@ import static org.mockito.Mockito.mock;
 public class PersonTest {
     private PersonalAddress personalAddress = mock(PersonalAddress.class);
 
+    // TODO test validations
+
     @Test
     public void builder_should_build_person_without_socialNumber() {
         //Given
@@ -118,4 +120,13 @@ public class PersonTest {
         // Then
         assertThat(person.getMainAddress()).isSameAs(newPersonalAddress);
     }
+
+//    @ParameterizedTest
+//    @NullAndEmptySource
+//    void mandatory_fields_should_throw_exception_when_empty_or_null(String name, String forename, LocalDate birthDate, PersonalAddress address) {
+//        // Given
+//        // When
+//        Assertions.assertThrows(IllegalArgumentException.class, () -> Person.of(name, forename, birthDate, address));
+//        // Then
+//    }
 }

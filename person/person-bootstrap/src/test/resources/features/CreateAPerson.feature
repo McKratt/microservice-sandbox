@@ -19,8 +19,8 @@ Feature: Person Creation
     Then I should receive an error mentioning that the mandatory field "<field>" is missing
 
     Examples:
-      | name | forename | day | month | year | address      | field     |
-      |      | John     | 16  | 12    | 1981 | "My Address" | name      |
-      | Do   |          | 16  | 12    | 1981 | "My Address" | forename  |
-      | Do   | John     | 9   | 12    | 9999 | "My Address" | birthDate |
-      | Do   | John     | 16  | 12    | 1981 |              | address   |
+      | name | forename | day | month | year | address      | field      |
+      |      | John     | 16  | 12    | 1981 | "My Address" | name       |
+      | Do   |          | 16  | 12    | 1981 | "My Address" | forename   |
+      | Do   | John     | 9   | 12    | 9999 | "My Address" | birth date |
+      | Do   | John     | 16  | 12    | 1981 |              | address    |

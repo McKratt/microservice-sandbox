@@ -13,6 +13,8 @@
     <artifactId>spring-boot-parent</artifactId>
     <packaging>pom</packaging>
     <properties>
+        <!--        <maven-failsafe-plugin.version>3.0.0-M3</maven-failsafe-plugin.version>-->
+        <!--        <maven-surefire-plugin.version>3.0.0-M3</maven-surefire-plugin.version>-->
         <cucumber.version>1.2.5</cucumber.version>
         <jacoco.plugin.version>0.8.3</jacoco.plugin.version>
         <jacoco.listener.version>5.10.2.17019</jacoco.listener.version>

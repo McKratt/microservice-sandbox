@@ -18,6 +18,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDate;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -91,7 +93,7 @@ public class PersonRestControllerIT {
         AddressNumber addressNumber = AddressNumber.of(7568463725L);
         String addressLine = "23, rue du Bac";
         PersonalAddress mainAddress = PersonalAddress.of(addressNumber, addressLine);
-        Person returnedDto = Person.of(name, forename, null, mainAddress).withId(pNumber).build();
+        Person returnedDto = Person.of(name, forename, LocalDate.now(), mainAddress).withId(pNumber).build();
         given(service.readPerson(pNumber)).willReturn(returnedDto);
         mockMvc.perform(get(baseUrl + "/" + pNumber.format())
                 .accept(APPLICATION_JSON_UTF8)

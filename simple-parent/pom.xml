@@ -11,6 +11,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <!-- plugins versions -->
+        <surefire.plugin.version>3.0.0-M3</surefire.plugin.version>
+        <failsafe.plugin.version>3.0.0-M3</failsafe.plugin.version>
+        <!-- Dependencies versions -->
         <cucumber.version>1.2.5</cucumber.version>
         <jacoco.plugin.version>0.8.3</jacoco.plugin.version>
         <jacoco.listener.version>5.10.2.17019</jacoco.listener.version>
@@ -30,6 +34,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${failsafe.plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -76,6 +81,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.plugin.version}</version>
                 <configuration>
                     <properties>
                         <property>
