@@ -1,21 +1,36 @@
 package net.bakaar.sandbox.domain.person;
 
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
-public class PersonTest {
+class PersonTest {
     private PersonalAddress personalAddress = mock(PersonalAddress.class);
 
-    // TODO test validations
+    private static Stream<Arguments> provideArgumentForMandatoryCheck() {
+        return Stream.of(
+                Arguments.of("", "forename", LocalDate.now(), mock(PersonalAddress.class), mock(PNumber.class)),
+                Arguments.of(null, "forename", LocalDate.now(), mock(PersonalAddress.class), mock(PNumber.class)),
+                Arguments.of("name", "", LocalDate.now(), mock(PersonalAddress.class), mock(PNumber.class)),
+                Arguments.of("name", null, LocalDate.now(), mock(PersonalAddress.class), mock(PNumber.class)),
+                Arguments.of("name", null, LocalDate.now().plus(3, ChronoUnit.DAYS), mock(PersonalAddress.class), mock(PNumber.class)),
+                Arguments.of("name", "forename", LocalDate.now(), null, mock(PNumber.class)),
+                Arguments.of("name", "forename", LocalDate.now(), mock(PersonalAddress.class), null)
+        );
+    }
 
     @Test
-    public void builder_should_build_person_without_socialNumber() {
+    void builder_should_build_person_without_socialNumber() {
         //Given
         String name = "myName";
         String forename = "myForename";
@@ -35,7 +50,7 @@ public class PersonTest {
     }
 
     @Test
-    public void builder_should_build_person_with_socialNumber() {
+    void builder_should_build_person_with_socialNumber() {
         //Given
         String name = "myName";
         String forename = "myForename";
@@ -59,7 +74,7 @@ public class PersonTest {
     }
 
     @Test
-    public void changeName_should_update_name() {
+    void changeName_should_update_name() {
         //Given
         String name = "myName";
         String forename = "myForename";
@@ -83,7 +98,7 @@ public class PersonTest {
     }
 
     @Test
-    public void addSecondaryAddress_should_add_an_address_to_the_list() {
+    void addSecondaryAddress_should_add_an_address_to_the_list() {
         //Given
         String name = "myName";
         String forename = "myForename";
@@ -103,7 +118,7 @@ public class PersonTest {
     }
 
     @Test
-    public void relocate_should_change_main_address() {
+    void relocate_should_change_main_address() {
         // Given
         String name = "myName";
         String forename = "myForename";
@@ -121,12 +136,12 @@ public class PersonTest {
         assertThat(person.getMainAddress()).isSameAs(newPersonalAddress);
     }
 
-//    @ParameterizedTest
-//    @NullAndEmptySource
-//    void mandatory_fields_should_throw_exception_when_empty_or_null(String name, String forename, LocalDate birthDate, PersonalAddress address) {
-//        // Given
-//        // When
-//        Assertions.assertThrows(IllegalArgumentException.class, () -> Person.of(name, forename, birthDate, address));
-//        // Then
-//    }
+    @ParameterizedTest
+    @MethodSource("provideArgumentForMandatoryCheck")
+    void mandatory_fields_should_throw_exception_when_not_correct(String name, String forename, LocalDate birthDate, PersonalAddress mainAddress, PNumber id) {
+        // Given
+        // When
+        Assertions.assertThrows(IllegalArgumentException.class, () -> Person.of(name, forename, birthDate, mainAddress).withId(id).build());
+        // Then
+    }
 }

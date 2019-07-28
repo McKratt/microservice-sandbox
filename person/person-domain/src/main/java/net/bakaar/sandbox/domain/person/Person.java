@@ -2,6 +2,7 @@ package net.bakaar.sandbox.domain.person;
 
 import io.vavr.control.Option;
 import lombok.Getter;
+import lombok.NonNull;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 
 import java.time.LocalDate;
@@ -22,12 +23,12 @@ public class Person {
     private PersonalAddress mainAddress;
     private List<PersonalAddress> secondaryAddresses = new ArrayList<>();
 
-    private Person(PNumber id,
+    private Person(@NonNull PNumber id,
                    String name,
                    String forename,
                    LocalDate birthDate,
                    Long socialSecurityNumber,
-                   PersonalAddress personalAddress) {
+                   @NonNull PersonalAddress personalAddress) {
         this.id = id;
         this.name = PostalLine.of(
                 Option.of(name)
