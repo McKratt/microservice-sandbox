@@ -16,6 +16,7 @@
         <!--        <maven-failsafe-plugin.version>3.0.0-M3</maven-failsafe-plugin.version>-->
         <!--        <maven-surefire-plugin.version>3.0.0-M3</maven-surefire-plugin.version>-->
         <cucumber.version>1.2.5</cucumber.version>
+        <junit-jupiter.version>5.5.1</junit-jupiter.version>
         <jacoco.plugin.version>0.8.3</jacoco.plugin.version>
         <jacoco.listener.version>5.10.2.17019</jacoco.listener.version>
         <equalsverifier.version>3.1.4</equalsverifier.version>
@@ -141,6 +142,34 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.junit.platform</groupId>-->
+        <!--            <artifactId>junit-platform-launcher</artifactId>-->
+        <!--            <version>${junit.platform.version}</version>-->
+        <!--            <scope>test</scope>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.junit.platform</groupId>-->
+        <!--            <artifactId>junit-platform-runner</artifactId>-->
+        <!--            <version>${junit.platform.version}</version>-->
+        <!--            <scope>test</scope>-->
+        <!--        </dependency>-->
     </dependencies>
 </project>
