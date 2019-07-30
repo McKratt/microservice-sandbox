@@ -58,7 +58,7 @@ public class PersonRepositoryAdapterIT {
     private final String addressLine = "My Address";
     private final PersonalAddress address = PersonalAddress.of(addressNumber, addressLine);
 
-    // TODO put a little bit of randomy in this Person creation
+    // TODO put a little bit of random in this Person creation
     private final Person toSave = Person.of(name, forename, birthDate, address)
             .withId(id)
             .withSocialSecurityNumber(socialSecurityNumber)
