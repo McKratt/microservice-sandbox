@@ -15,7 +15,7 @@ public class PersonDataRestConfigurationIT {
 
     @Autowired
     private BusinessNumberRepository businessNumberRepository;
-// TODO when BNS endpoint will go bakc
+// TODO when BNS endpoint will go back
 //    @Autowired
 //    private BusinessNumberServiceProperties properties;
 //

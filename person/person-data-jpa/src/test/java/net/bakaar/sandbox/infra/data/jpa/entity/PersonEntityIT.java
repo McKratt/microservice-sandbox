@@ -33,7 +33,6 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
 @Ignore("should be replaced by the adapter integration test")
 public class PersonEntityIT {
 
-    // TODO do a test which test the cascade behaviour in the DB when we remove a person, the attached address should remain in the DB
     @Autowired
     private PersonJpaRepository repository;
 
