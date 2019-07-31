@@ -56,7 +56,7 @@ class PersonTest {
         String forename = "myForename";
         LocalDate birthDate = LocalDate.now().minus(1, ChronoUnit.YEARS);
         PNumber number = PNumber.of(12345678);
-        long socialNumber = 75604537281L;
+        SocialSecurityNumber socialNumber = mock(SocialSecurityNumber.class);
         //When
         Person createdPerson = Person.of(name, forename, birthDate, personalAddress)
                 .withId(number)

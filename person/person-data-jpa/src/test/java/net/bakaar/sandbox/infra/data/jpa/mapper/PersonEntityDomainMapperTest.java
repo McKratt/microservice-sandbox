@@ -2,6 +2,7 @@ package net.bakaar.sandbox.infra.data.jpa.mapper;
 
 import net.bakaar.sandbox.domain.person.Person;
 import net.bakaar.sandbox.domain.person.PersonalAddress;
+import net.bakaar.sandbox.domain.person.SocialSecurityNumber;
 import net.bakaar.sandbox.infra.data.jpa.entity.PersonAddressesEntity;
 import net.bakaar.sandbox.infra.data.jpa.entity.PersonEntity;
 import net.bakaar.sandbox.infra.data.jpa.entity.PersonalAddressEntity;
@@ -24,7 +25,7 @@ public class PersonEntityDomainMapperTest {
     private final String forename = "Forename";
     private final LocalDate birthDate = LocalDate.now();
     private final AddressEntityDomainMapper addressMapper = mock(AddressEntityDomainMapper.class);
-    private final long number = 7541234567890L;
+    private final long number = 7561234567890L;
     private final PersonalAddress address = mock(PersonalAddress.class);
     private PersonEntityDomainMapper mapper = new PersonEntityDomainMapper(addressMapper);
 
@@ -33,7 +34,7 @@ public class PersonEntityDomainMapperTest {
         //Given
         Person person = Person.of(name, forename, birthDate, address)
                 .withId(pNumber)
-                .withSocialSecurityNumber(number)
+                .withSocialSecurityNumber(SocialSecurityNumber.of(number))
                 .build();
         PersonalAddressEntity returnedPersonalAddressEntity = mock(PersonalAddressEntity.class);
         given(addressMapper.mapToEntity(address)).willReturn(returnedPersonalAddressEntity);
@@ -75,7 +76,7 @@ public class PersonEntityDomainMapperTest {
         assertThat(domain.getName().getLine()).isEqualTo(name);
         assertThat(domain.getForename().getLine()).isEqualTo(forename);
         assertThat(domain.getBirthDate()).isSameAs(birthDate);
-        assertThat(domain.getSocialSecurityNumber()).isEqualTo(number);
+        assertThat(domain.getSocialSecurityNumber().value()).isEqualTo(number);
     }
 
     @NotNull

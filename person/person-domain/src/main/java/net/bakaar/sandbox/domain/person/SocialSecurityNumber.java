@@ -9,13 +9,18 @@ public class SocialSecurityNumber {
     private SocialSecurityNumber(long number) {
         Pattern pattern = Pattern.compile("756[\\d]{10}");
         if (!pattern.matcher(number + "").matches()) {
-            throw new IllegalArgumentException("The number should begin by 756 and contains 13 digits (756 + 10 digits)");
+            throw new IllegalArgumentException(
+                    String.format("The number [%d] should begin by 756 and contains 13 digits (756 + 10 digits)", number));
         }
         this.number = number;
     }
 
     public static SocialSecurityNumber of(long number) {
         return new SocialSecurityNumber(number);
+    }
+
+    public Long value() {
+        return number;
     }
 
     public String format() {

@@ -67,17 +67,17 @@
     <dependencies>
         <dependency>
             <groupId>net.bakaar</groupId>
-            <artifactId>person-infra-data-jpa</artifactId>
+            <artifactId>person-data-jpa</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>net.bakaar</groupId>
-            <artifactId>person-infra-data-rest</artifactId>
+            <artifactId>person-data-rest</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>net.bakaar</groupId>
-            <artifactId>person-infra-rest</artifactId>
+            <artifactId>person-rest</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

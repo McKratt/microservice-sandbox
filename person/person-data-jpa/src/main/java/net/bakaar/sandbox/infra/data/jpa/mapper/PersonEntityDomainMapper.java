@@ -1,7 +1,9 @@
 package net.bakaar.sandbox.infra.data.jpa.mapper;
 
+import io.vavr.control.Option;
 import net.bakaar.sandbox.domain.person.Person;
 import net.bakaar.sandbox.domain.person.PersonalAddress;
+import net.bakaar.sandbox.domain.person.SocialSecurityNumber;
 import net.bakaar.sandbox.infra.data.jpa.entity.PersonAddressesEntity;
 import net.bakaar.sandbox.infra.data.jpa.entity.PersonEntity;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
@@ -31,9 +33,9 @@ public class PersonEntityDomainMapper {
         }
         Person.BaseBuilder builder = Person.of(entity.getName(), entity.getForename(), entity.getBirthDate(), mainAddress)
                 .withId(PNumber.of(entity.getPNumber()));
-        if (entity.getSocialSecurityNumber() != null) {
-            builder.withSocialSecurityNumber(entity.getSocialSecurityNumber());
-        }
+
+        Option.of(entity.getSocialSecurityNumber())
+                .peek((ssn) -> builder.withSocialSecurityNumber(SocialSecurityNumber.of(ssn)));
         return builder.build()
                 .addSecondaryAddresses(secondariesAddresses.toArray(new PersonalAddress[secondariesAddresses.size()]));
     }
@@ -44,8 +46,8 @@ public class PersonEntityDomainMapper {
         entity.setForename(person.getForename().getLine());
         entity.setBirthDate(person.getBirthDate());
         entity.setPNumber(person.getId().getValue());
-        entity.setSocialSecurityNumber(person.getSocialSecurityNumber());
-
+        Option.of(person.getSocialSecurityNumber())
+                .peek((ssn) -> entity.setSocialSecurityNumber(ssn.value()));
         PersonAddressesEntity mainLink = new PersonAddressesEntity();
         mainLink.setAddress(addressMapper.mapToEntity(person.getMainAddress()));
         mainLink.setPerson(entity);

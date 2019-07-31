@@ -40,4 +40,15 @@ class SocialSecurityNumberTest {
         // Then
         assertThat(thrown).isNotNull().isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void value_should_return_number() {
+        // Given
+        long number = 7561234567890L;
+        SocialSecurityNumber ssn = SocialSecurityNumber.of(number);
+        // When
+        Long returned = ssn.value();
+        // Then
+        assertThat(returned).isEqualTo(number);
+    }
 }

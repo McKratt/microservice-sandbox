@@ -3,6 +3,7 @@ package net.bakaar.sandbox.infra.data.jpa.adapter;
 import net.bakaar.sandbox.domain.person.Person;
 import net.bakaar.sandbox.domain.person.PersonRepository;
 import net.bakaar.sandbox.domain.person.PersonalAddress;
+import net.bakaar.sandbox.domain.person.SocialSecurityNumber;
 import net.bakaar.sandbox.domain.shared.AddressNumber;
 import net.bakaar.sandbox.infra.data.jpa.PersonDataJpaConfiguration;
 import net.bakaar.sandbox.infra.data.jpa.entity.PersonAddressesEntity;
@@ -53,14 +54,14 @@ public class PersonRepositoryAdapterIT {
     private final String forename = "Testforename";
     private final LocalDate birthDate = LocalDate.now().minus(20, ChronoUnit.YEARS);
     private final PNumber id = PNumber.of(12345678L);
-    private final long socialSecurityNumber = 75612345676890L;
+    private final long socialSecurityNumber = 7561234567890L;
     private final AddressNumber addressNumber = AddressNumber.of(123456789);
     private final String addressLine = "My Address";
     private final PersonalAddress address = PersonalAddress.of(addressNumber, addressLine);
 
     private final Person toSave = Person.of(name, forename, birthDate, address)
             .withId(id)
-            .withSocialSecurityNumber(socialSecurityNumber)
+            .withSocialSecurityNumber(SocialSecurityNumber.of(socialSecurityNumber))
             .build();
     @Autowired
     private PersonRepository adapter;
@@ -84,7 +85,7 @@ public class PersonRepositoryAdapterIT {
         assertThat(saved.getBirthDate()).isEqualTo(birthDate);
         assertThat(saved.getName().getLine()).isEqualTo(name);
         assertThat(saved.getForename().getLine()).isEqualTo(forename);
-        assertThat(saved.getSocialSecurityNumber()).isEqualTo(socialSecurityNumber);
+        assertThat(saved.getSocialSecurityNumber().value()).isEqualTo(socialSecurityNumber);
     }
 
     @Test

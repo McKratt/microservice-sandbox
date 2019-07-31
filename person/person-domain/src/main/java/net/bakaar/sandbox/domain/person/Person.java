@@ -16,7 +16,7 @@ import java.util.List;
 public class Person {
 
     private final PNumber id;
-    private final Long socialSecurityNumber; // FIXME make it VO
+    private final SocialSecurityNumber socialSecurityNumber;
     private PostalLine name;
     private PostalLine forename;
     private final LocalDate birthDate;
@@ -27,7 +27,7 @@ public class Person {
                    String name,
                    String forename,
                    LocalDate birthDate,
-                   Long socialSecurityNumber,
+                   SocialSecurityNumber socialSecurityNumber,
                    @NonNull PersonalAddress personalAddress) {
         this.id = id;
         this.name = PostalLine.of(
@@ -70,7 +70,7 @@ public class Person {
 
     public interface BaseBuilder {
 
-        BaseBuilder withSocialSecurityNumber(long number);
+        BaseBuilder withSocialSecurityNumber(SocialSecurityNumber number);
 
         Person build();
     }
@@ -85,7 +85,7 @@ public class Person {
         private final LocalDate birthDate;
         private final PersonalAddress mainPersonalAddress;
         private PNumber id;
-        private Long ssn;
+        private SocialSecurityNumber ssn;
 
         Builder(String name, String forename, LocalDate birthDate, PersonalAddress mainPersonalAddress) {
             this.name = name;
@@ -100,7 +100,7 @@ public class Person {
         }
 
         @Override
-        public BaseBuilder withSocialSecurityNumber(long number) {
+        public BaseBuilder withSocialSecurityNumber(SocialSecurityNumber number) {
             this.ssn = number;
             return this;
         }
