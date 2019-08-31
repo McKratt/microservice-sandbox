@@ -33,6 +33,5 @@
             <artifactId>vavr</artifactId>
             <version>0.10.1</version>
         </dependency>
-
     </dependencies>
 </project>
