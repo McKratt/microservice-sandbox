@@ -3,13 +3,17 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>messaging</artifactId>
+        <artifactId>message</artifactId>
         <groupId>net.bakaar</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
-    <artifactId>messaging-common</artifactId>
-
-
+    <artifactId>message-kafka</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>net.bakaar</groupId>
+            <artifactId>message-commons</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>

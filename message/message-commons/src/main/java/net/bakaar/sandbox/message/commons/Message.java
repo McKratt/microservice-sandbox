@@ -1,4 +1,4 @@
-package net.bakaar.sandbox.messaging.common;
+package net.bakaar.sandbox.message.commons;
 
 import java.util.Map;
 
