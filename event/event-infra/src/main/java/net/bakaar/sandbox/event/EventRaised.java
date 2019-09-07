@@ -7,12 +7,12 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
-class EventRaised {
-    private final DomainEvent event;
+class EventRaised<T extends DomainEvent> {
+    private final T event;
     private final LocalDateTime raisedAt;
     private final UUID id;
 
-    public EventRaised(DomainEvent event) {
+    public EventRaised(T event) {
         this.event = event;
         this.raisedAt = LocalDateTime.now();
         this.id = UUID.randomUUID();

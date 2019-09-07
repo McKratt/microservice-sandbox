@@ -13,7 +13,6 @@
     <version>1.0.0-SNAPSHOT</version>
     <modules>
         <module>message-commons</module>
-        <module>message-kafka</module>
     </modules>
     <artifactId>message</artifactId>
 </project>
