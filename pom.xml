@@ -12,7 +12,7 @@
         <module>spring-boot-parent</module>
         <module>business-number</module>
         <module>event</module>
-        <module>message</module>
+        <module>message-spring</module>
         <module>person</module>
         <module>shared</module>
         <module>event-spring</module>
