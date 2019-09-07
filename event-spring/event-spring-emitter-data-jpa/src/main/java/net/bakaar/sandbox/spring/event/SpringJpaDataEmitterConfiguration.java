@@ -1,5 +1,6 @@
 package net.bakaar.sandbox.spring.event;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import net.bakaar.sandbox.event.JpaEventEmitter;
 import net.bakaar.sandbox.event.MessageProducer;
 import net.bakaar.sandbox.event.MessageRaisedEntity;
@@ -15,7 +16,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class SpringJpaDataEmitterConfiguration {
 
     @Bean
-    DomainEmitter domainEmitter(MessageProducer messageProducer, MessageRaisedJpaRepository repository) {
-        return new JpaEventEmitter(messageProducer, new JsonMessageRaisedEntityMapper(), new SpringDataMessageRaisedRepository(repository));
+    DomainEmitter domainEmitter(MessageProducer messageProducer, MessageRaisedJpaRepository repository, ObjectMapper mapper) {
+        return new JpaEventEmitter(messageProducer, new JsonMessageRaisedEntityMapper(mapper), new SpringDataMessageRaisedRepository(repository));
     }
 }

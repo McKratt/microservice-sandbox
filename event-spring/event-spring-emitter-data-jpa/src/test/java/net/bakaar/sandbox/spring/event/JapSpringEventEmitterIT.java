@@ -1,5 +1,7 @@
 package net.bakaar.sandbox.spring.event;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import net.bakaar.sandbox.event.CommandRaised;
 import net.bakaar.sandbox.event.MessageProducer;
 import net.bakaar.sandbox.event.domain.DomainCommand;
@@ -49,14 +51,15 @@ class JapSpringEventEmitterIT {
     @MockBean
     private MessageProducer producer;
 
+    @MockBean
+    private ObjectMapper jsonMapper;
+
     @Test
-    void command_should_be_saved_in_db() {
+    void command_should_be_saved_in_db() throws JsonProcessingException {
         // Given
-        TestTransaction.flagForCommit();
-        TestTransaction.end();
         DomainCommand command = new TestCommand();
         // When
-        TestTransaction.start();
+        TestTransaction.flagForCommit();
         emitter.emit(command);
         TestTransaction.end();
         // Then
@@ -64,6 +67,7 @@ class JapSpringEventEmitterIT {
         assertThat(repository.findAll()).hasSize(1);
         TestTransaction.end();
         verify(producer).produce(any(CommandRaised.class));
+        verify(jsonMapper).writeValueAsString(any(DomainCommand.class));
     }
 
     public static class Initializer
