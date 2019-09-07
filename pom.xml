@@ -15,5 +15,6 @@
         <module>message</module>
         <module>person</module>
         <module>shared</module>
+        <module>event-spring</module>
     </modules>
 </project>
