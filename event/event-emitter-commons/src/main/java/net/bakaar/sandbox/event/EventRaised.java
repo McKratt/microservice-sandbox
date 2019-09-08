@@ -4,7 +4,7 @@ import lombok.Getter;
 import net.bakaar.sandbox.event.domain.DomainEvent;
 
 @Getter
-class EventRaised extends MessageRaised {
+public class EventRaised extends MessageRaised {
     private final DomainEvent event;
 
     public EventRaised(DomainEvent event) {
