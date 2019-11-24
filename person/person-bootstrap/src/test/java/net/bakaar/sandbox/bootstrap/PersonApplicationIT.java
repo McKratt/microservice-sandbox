@@ -4,17 +4,14 @@ import net.bakaar.sandbox.domain.number.BusinessNumberRepository;
 import net.bakaar.sandbox.domain.person.PersonApplicationService;
 import net.bakaar.sandbox.domain.person.PersonRepository;
 import net.bakaar.sandbox.rest.controller.PersonRestController;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
-public class PersonApplicationIT {
+class PersonApplicationIT {
 
     @Autowired
     private PersonRestController restController;
@@ -29,7 +26,7 @@ public class PersonApplicationIT {
 
 
     @Test
-    public void context_should_load_correctly() {
+    void context_should_load_correctly() {
         assertThat(restController).isNotNull();
         assertThat(numberService).isNotNull();
 //        assertThat(restTemplate).isNotNull();

@@ -22,6 +22,6 @@ public class PersonRepositoryAdapter implements PersonRepository {
 
     @Override
     public Person fetchPersonById(PNumber number) {
-        return entityDomainMapper.mapToDomain(repository.findByPNumber(number.getValue()));
+        return entityDomainMapper.mapToDomain(repository.findByNumber(number.getValue()));
     }
 }

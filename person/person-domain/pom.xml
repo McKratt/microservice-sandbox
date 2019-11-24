@@ -9,10 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>person-domain</artifactId>
-    <properties>
-        <junit5.version>5.3.1</junit5.version>
-        <junit.platform.version>1.5.1</junit.platform.version>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>net.bakaar</groupId>
@@ -31,7 +27,7 @@
         <dependency>
             <groupId>io.vavr</groupId>
             <artifactId>vavr</artifactId>
-            <version>0.10.1</version>
+            <version>0.10.2</version>
         </dependency>
     </dependencies>
 </project>

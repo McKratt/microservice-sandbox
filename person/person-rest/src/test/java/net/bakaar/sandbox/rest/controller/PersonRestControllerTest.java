@@ -10,7 +10,7 @@ import net.bakaar.sandbox.rest.dto.PersonalAddressDTO;
 import net.bakaar.sandbox.rest.mapper.PersonDtoMapper;
 import net.bakaar.sandbox.rest.mapper.PersonalAddressDtoMapper;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +23,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class PersonRestControllerTest {
+class PersonRestControllerTest {
 
     private final PersonApplicationService service = mock(PersonApplicationService.class);
     private final PersonDtoMapper mapper = mock(PersonDtoMapper.class);
@@ -33,7 +33,7 @@ public class PersonRestControllerTest {
     private final PersonDTO expectedDto = mock(PersonDTO.class);
 
     @Test
-    public void create_should_call_service() {
+    void create_should_call_service() {
         //Given
         given(service.createPerson(any(CreatePersonCommand.class))).willReturn(returnedPerson);
         given(mapper.mapToDto(returnedPerson)).willReturn(expectedDto);
@@ -65,7 +65,7 @@ public class PersonRestControllerTest {
     }
 
     @Test
-    public void fetchAPartnerById_should_return_the_correct_partner() {
+    void fetchAPartnerById_should_return_the_correct_partner() {
         //Given
         long id = 45678909L;
         PNumber pNumber = PNumber.of(id);

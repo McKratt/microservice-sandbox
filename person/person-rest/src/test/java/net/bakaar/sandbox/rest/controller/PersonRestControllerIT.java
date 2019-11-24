@@ -7,15 +7,13 @@ import net.bakaar.sandbox.domain.person.PersonalAddress;
 import net.bakaar.sandbox.domain.shared.AddressNumber;
 import net.bakaar.sandbox.rest.PersonRestConfiguration;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
@@ -24,18 +22,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
-import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
 @ContextConfiguration(classes = PersonRestConfiguration.class)
 @WebMvcTest
 @AutoConfigureMockMvc
-public class PersonRestControllerIT {
+class PersonRestControllerIT {
 
     private final String baseUrl = "/rest/api/v1/persons";
     @Autowired
@@ -44,7 +41,7 @@ public class PersonRestControllerIT {
     private PersonApplicationService service;
 
     @Test
-    public void create_should_return_a_complete_person() throws Exception {
+    void create_should_return_a_complete_person() throws Exception {
         String pid = "P34567890";
         String name = "MyName";
         String forename = "MyForename";
@@ -59,8 +56,8 @@ public class PersonRestControllerIT {
         });
         mockMvc
                 .perform(post(baseUrl)
-                        .accept(APPLICATION_JSON_UTF8)
-                        .contentType(APPLICATION_JSON_UTF8)
+                        .accept(APPLICATION_JSON)
+                        .contentType(APPLICATION_JSON)
                         .content(String.format("{" +
                                 "  \"name\": \"%s\"," +
                                 "  \"forename\": \"%s\"," +
@@ -85,7 +82,7 @@ public class PersonRestControllerIT {
     }
 
     @Test
-    public void readAPerson_should_answer_OK() throws Exception {
+    void readAPerson_should_answer_OK() throws Exception {
         long id = 56743245L;
         PNumber pNumber = PNumber.of(id);
         String name = "MyName";
@@ -96,8 +93,8 @@ public class PersonRestControllerIT {
         Person returnedDto = Person.of(name, forename, LocalDate.now(), mainAddress).withId(pNumber).build();
         given(service.readPerson(pNumber)).willReturn(returnedDto);
         mockMvc.perform(get(baseUrl + "/" + pNumber.format())
-                .accept(APPLICATION_JSON_UTF8)
-                .contentType(APPLICATION_JSON_UTF8)
+                .accept(APPLICATION_JSON)
+                .contentType(APPLICATION_JSON)
         )
                 .andDo(print())
                 .andExpect(status().isOk())

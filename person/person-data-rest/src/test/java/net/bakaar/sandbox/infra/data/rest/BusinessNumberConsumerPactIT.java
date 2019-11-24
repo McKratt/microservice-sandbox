@@ -1,25 +1,24 @@
 package net.bakaar.sandbox.infra.data.rest;
 
-import au.com.dius.pact.consumer.Pact;
-import au.com.dius.pact.consumer.PactProviderRuleMk2;
-import au.com.dius.pact.consumer.PactVerification;
 import au.com.dius.pact.consumer.dsl.PactDslRootValue;
 import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
-import au.com.dius.pact.model.RequestResponsePact;
+import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
+import au.com.dius.pact.consumer.junit5.PactTestFor;
+import au.com.dius.pact.core.model.RequestResponsePact;
+import au.com.dius.pact.core.model.annotations.Pact;
 import net.bakaar.sandbox.domain.number.BusinessNumberRepository;
 import net.bakaar.sandbox.infra.data.rest.configuration.BusinessNumberServiceProperties;
 import net.bakaar.sandbox.infra.data.rest.configuration.PersonDataRestConfiguration;
 import net.bakaar.sandbox.infra.data.rest.test.PactTestConfiguration;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,13 +27,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
 
-@RunWith(SpringRunner.class)
+@ExtendWith({SpringExtension.class, PactConsumerTestExt.class})
 @ContextConfiguration(classes = {PactTestConfiguration.class, PersonDataRestConfiguration.class})
-@Ignore("Until reactivate BNS endpoibnt")
+@PactTestFor(providerName = "businessNumber-provider", port = "8090")
+@Disabled("Until reactivate BNS endpoibnt")
 public class BusinessNumberConsumerPactIT {
-
-    @Rule
-    public PactProviderRuleMk2 mockProvider = new PactProviderRuleMk2("businessNumber-provider", "localhost", 8090, this);
 
     @Autowired
     private BusinessNumberRepository repository;
@@ -43,12 +40,12 @@ public class BusinessNumberConsumerPactIT {
     private BusinessNumberServiceProperties properties;
 
 
-    @Before
-    public void initMock() {
+    @BeforeEach
+    void initMock() {
         given(properties.getUrl()).willReturn("http://localhost:8090/bns");
     }
 
-    @Pact(consumer = "person-consumer")
+    @Pact(provider = "businessNumber-provider", consumer = "person-consumer")
     public RequestResponsePact createPactForPersonBusinessNumber(PactDslWithProvider builder) {
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
@@ -65,8 +62,7 @@ public class BusinessNumberConsumerPactIT {
     }
 
     @Test
-    @PactVerification
-    public void control_get_person_businessnumber() {
+    void control_get_person_businessnumber() {
         //Given
         //When
         PNumber pnumber = repository.fetchNextPNumber();

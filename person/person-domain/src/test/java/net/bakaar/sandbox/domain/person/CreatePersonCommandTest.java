@@ -1,18 +1,19 @@
 package net.bakaar.sandbox.domain.person;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
-public class CreatePersonCommandTest {
+class CreatePersonCommandTest {
 
     private PersonalAddress mainAddress = mock(PersonalAddress.class);
 
     @Test
-    public void of_only_mandatory_should_set_the_value() {
+    void of_only_mandatory_should_set_the_value() {
         //Given
         String name = "myName";
         String forename = "myForeName";
@@ -28,7 +29,7 @@ public class CreatePersonCommandTest {
     }
 
     @Test
-    public void of_should_set_the_value() {
+    void of_should_set_the_value() {
         //Given
         String name = "myName";
         String forename = "myForeName";

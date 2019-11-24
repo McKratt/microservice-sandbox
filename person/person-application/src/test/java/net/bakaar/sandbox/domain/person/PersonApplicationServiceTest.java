@@ -1,7 +1,7 @@
 package net.bakaar.sandbox.domain.person;
 
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -9,7 +9,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class PersonApplicationServiceTest {
+class PersonApplicationServiceTest {
 
     private final Person mockedPerson = mock(Person.class);
     private PersonRepository repository = mock(PersonRepository.class);
@@ -17,7 +17,7 @@ public class PersonApplicationServiceTest {
     private PersonApplicationService service = new PersonApplicationService(repository, factory);
 
     @Test
-    public void createPerson_should_call_domain_service() {
+    void createPerson_should_call_domain_service() {
         //Given
         CreatePersonCommand input = mock(CreatePersonCommand.class);
         given(factory.createPerson(input)).willReturn(mockedPerson);
@@ -30,7 +30,7 @@ public class PersonApplicationServiceTest {
     }
 
     @Test
-    public void readPerson_should_call_the_repository() {
+    void readPerson_should_call_the_repository() {
         //Given
         PNumber id = mock(PNumber.class);
         given(repository.fetchPersonById(id)).willReturn(mockedPerson);

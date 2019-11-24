@@ -2,15 +2,15 @@ package net.bakaar.sandbox.shared.domain.vo;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.util.ReflectionTestUtils.getField;
 
-public class PNumberTest {
+class PNumberTest {
 
     @Test
-    public void of_should_create_a_new_PNummer() {
+    void of_should_create_a_new_PNummer() {
         //Given
         String pnummer = "P12345678";
         //When
@@ -20,7 +20,7 @@ public class PNumberTest {
     }
 
     @Test
-    public void should_only_store_number() {
+    void should_only_store_number() {
         //Given
         String pnummer = "P12345678";
         //When
@@ -30,7 +30,7 @@ public class PNumberTest {
     }
 
     @Test
-    public void of_should_throw_exception_arg_null() {
+    void of_should_throw_exception_arg_null() {
         //Given
         //When
         Throwable thrown = Assertions.catchThrowable(() -> PNumber.of(null));
@@ -40,7 +40,7 @@ public class PNumberTest {
     }
 
     @Test
-    public void of_should_throw_exception_if_pattern_wrong() {
+    void of_should_throw_exception_if_pattern_wrong() {
         //Given
         //When
         Throwable thrown = Assertions.catchThrowable(() -> PNumber.of("jhd31"));
@@ -50,7 +50,7 @@ public class PNumberTest {
     }
 
     @Test
-    public void format_should_return_in_good_pattern() {
+    void format_should_return_in_good_pattern() {
         //Given
         PNumber pNumber = PNumber.of("P12345678");
         //When
@@ -60,13 +60,13 @@ public class PNumberTest {
     }
 
     @Test
-    public void equalsContract() {
+    void equalsContract() {
         EqualsVerifier.forClass(PNumber.class)
                 .verify();
     }
 
     @Test
-    public void of_should_convert_to_string() {
+    void of_should_convert_to_string() {
         //Given
         long id = 12345678L;
         //When

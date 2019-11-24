@@ -32,7 +32,7 @@ public class PersonEntityDomainMapper {
             throw new RuntimeException(String.format("The person : %s doesn't have any main address.", entity.getId()));
         }
         Person.BaseBuilder builder = Person.of(entity.getName(), entity.getForename(), entity.getBirthDate(), mainAddress)
-                .withId(PNumber.of(entity.getPNumber()));
+                .withId(PNumber.of(entity.getNumber()));
 
         Option.of(entity.getSocialSecurityNumber())
                 .peek((ssn) -> builder.withSocialSecurityNumber(SocialSecurityNumber.of(ssn)));
@@ -45,7 +45,7 @@ public class PersonEntityDomainMapper {
         entity.setName(person.getName().getLine());
         entity.setForename(person.getForename().getLine());
         entity.setBirthDate(person.getBirthDate());
-        entity.setPNumber(person.getId().getValue());
+        entity.setNumber(person.getId().getValue());
         Option.of(person.getSocialSecurityNumber())
                 .peek((ssn) -> entity.setSocialSecurityNumber(ssn.value()));
         PersonAddressesEntity mainLink = new PersonAddressesEntity();

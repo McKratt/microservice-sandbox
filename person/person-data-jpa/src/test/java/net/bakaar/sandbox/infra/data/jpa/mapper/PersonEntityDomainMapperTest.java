@@ -8,7 +8,7 @@ import net.bakaar.sandbox.infra.data.jpa.entity.PersonEntity;
 import net.bakaar.sandbox.infra.data.jpa.entity.PersonalAddressEntity;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.jetbrains.annotations.NotNull;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
@@ -17,7 +17,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class PersonEntityDomainMapperTest {
+class PersonEntityDomainMapperTest {
 
     private final long id = 12345678;
     private final PNumber pNumber = PNumber.of(id);
@@ -30,7 +30,7 @@ public class PersonEntityDomainMapperTest {
     private PersonEntityDomainMapper mapper = new PersonEntityDomainMapper(addressMapper);
 
     @Test
-    public void mapToEntity_should_map_correctly() {
+    void mapToEntity_should_map_correctly() {
         //Given
         Person person = Person.of(name, forename, birthDate, address)
                 .withId(pNumber)
@@ -54,11 +54,11 @@ public class PersonEntityDomainMapperTest {
         assertThat(entity.getId()).isNull();
         assertThat(entity.getName()).isEqualTo(name);
         assertThat(entity.getForename()).isEqualTo(forename);
-        assertThat(entity.getPNumber()).isEqualTo(id);
+        assertThat(entity.getNumber()).isEqualTo(id);
     }
 
     @Test
-    public void mapToEntity_should_map_correctly_without_sn() {
+    void mapToEntity_should_map_correctly_without_sn() {
         // Given
         Person person = Person.of(name, forename, birthDate, address)
                 .withId(pNumber)
@@ -82,7 +82,7 @@ public class PersonEntityDomainMapperTest {
     @NotNull
     private PersonEntity createPersonEntity() {
         PersonEntity entity = new PersonEntity();
-        entity.setPNumber(id);
+        entity.setNumber(id);
         entity.setName(name);
         entity.setForename(forename);
         entity.setBirthDate(birthDate);
@@ -92,7 +92,7 @@ public class PersonEntityDomainMapperTest {
     }
 
     @Test
-    public void mapToDomain_should_map_correctly() {
+    void mapToDomain_should_map_correctly() {
         // Given
         PersonEntity entity = createPersonEntity();
         PersonAddressesEntity link = new PersonAddressesEntity();

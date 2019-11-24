@@ -12,18 +12,18 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <!-- plugins versions -->
-        <surefire.plugin.version>3.0.0-M3</surefire.plugin.version>
-        <failsafe.plugin.version>3.0.0-M3</failsafe.plugin.version>
+        <surefire.plugin.version>2.22.1</surefire.plugin.version>
+        <failsafe.plugin.version>2.22.1</failsafe.plugin.version>
         <!-- Dependencies versions -->
-        <cucumber.version>1.2.5</cucumber.version>
-        <jacoco.plugin.version>0.8.3</jacoco.plugin.version>
-        <jacoco.listener.version>5.10.2.17019</jacoco.listener.version>
-        <assertj.version>3.11.1</assertj.version>
-        <mockito.version>2.23.4</mockito.version>
+        <cucumber.version>5.0.0-RC1</cucumber.version>
+        <jacoco.plugin.version>0.8.5</jacoco.plugin.version>
+        <jacoco.listener.version>5.14.0.18788</jacoco.listener.version>
         <equalsverifier.version>3.1.4</equalsverifier.version>
-        <lombok.version>1.18.4</lombok.version>
-        <junitparam.version>1.1.1</junitparam.version>
-        <junit.version>5.5.1</junit.version>
+        <testcontainer.version>1.12.3</testcontainer.version>
+        <assertj.version>3.14.0</assertj.version>
+        <mockito.version>3.1.0</mockito.version>
+        <lombok.version>1.18.10</lombok.version>
+        <junit.version>5.5.2</junit.version>
         <!-- additional JVM arguments passed to the surefire and failsafe plugins -->
         <surefire.jvm.args></surefire.jvm.args>
         <failsafe.jvm.args></failsafe.jvm.args>
@@ -115,13 +115,13 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>info.cukes</groupId>
+            <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java8</artifactId>
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>info.cukes</groupId>
+            <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
             <version>${cucumber.version}</version>
             <scope>test</scope>
@@ -145,21 +145,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.junit.vintage</groupId>
-            <artifactId>junit-vintage-engine</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>pl.pragmatists</groupId>
-            <artifactId>JUnitParams</artifactId>
-            <version>${junitparam.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

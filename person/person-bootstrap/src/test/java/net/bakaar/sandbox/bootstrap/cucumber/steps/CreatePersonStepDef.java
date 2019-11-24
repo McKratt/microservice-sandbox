@@ -1,6 +1,6 @@
 package net.bakaar.sandbox.bootstrap.cucumber.steps;
 
-import cucumber.api.java8.En;
+import io.cucumber.java8.En;
 import lombok.extern.slf4j.Slf4j;
 import net.bakaar.sandbox.domain.person.CreatePersonCommand;
 import net.bakaar.sandbox.domain.person.Person;

@@ -3,14 +3,14 @@ package net.bakaar.sandbox.rest.mapper;
 import net.bakaar.sandbox.domain.person.PersonalAddress;
 import net.bakaar.sandbox.domain.shared.AddressNumber;
 import net.bakaar.sandbox.rest.dto.PersonalAddressDTO;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PersonalAddressDtoMapperTest {
+class PersonalAddressDtoMapperTest {
 
     @Test
-    public void mapToDomain_should_map_correctly() {
+    void mapToDomain_should_map_correctly() {
         // Given
         String addressLine = "My Address bli";
         AddressNumber addressId = AddressNumber.of(674397124L);

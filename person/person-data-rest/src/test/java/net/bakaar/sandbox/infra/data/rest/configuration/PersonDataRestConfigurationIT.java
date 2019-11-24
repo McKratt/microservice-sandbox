@@ -1,17 +1,17 @@
 package net.bakaar.sandbox.infra.data.rest.configuration;
 
 import net.bakaar.sandbox.domain.number.BusinessNumberRepository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
-@ContextConfiguration(classes = {PersonDataRestConfiguration.class})
-public class PersonDataRestConfigurationIT {
+@ExtendWith(SpringExtension.class)
+@Import({PersonDataRestConfiguration.class})
+class PersonDataRestConfigurationIT {
 
     @Autowired
     private BusinessNumberRepository businessNumberRepository;
@@ -23,7 +23,7 @@ public class PersonDataRestConfigurationIT {
 //    private RestTemplate restTemplate;
 
     @Test
-    public void context_should_load() {
+    void context_should_load() {
 //        assertThat(properties).isNotNull();
         assertThat(businessNumberRepository).isNotNull();
 //        assertThat(getField(businessNumberRepository, "restTemplate")).isSameAs(restTemplate);

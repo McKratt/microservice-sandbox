@@ -23,7 +23,7 @@ public class PersonEntity {
 
     private String forename;
 
-    private long pNumber;
+    private long number;
 
     private Long socialSecurityNumber;
 

@@ -13,9 +13,7 @@ import net.bakaar.sandbox.infra.data.jpa.repository.AddressJpaRepository;
 import net.bakaar.sandbox.infra.data.jpa.repository.PersonJpaRepository;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.assertj.core.groups.Tuple;
-import org.junit.ClassRule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -24,10 +22,11 @@ import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.transaction.TestTransaction;
 import org.springframework.transaction.annotation.Transactional;
 import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -36,7 +35,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
 import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD;
 
-@RunWith(SpringRunner.class)
+@Testcontainers
 @DataJpaTest
 @ContextConfiguration(classes = PersonDataJpaConfiguration.class, initializers = {PersonRepositoryAdapterIT.Initializer.class})
 @AutoConfigureTestDatabase(replace = NONE) // Don't take H2, wait for in class configuration
@@ -44,8 +43,8 @@ import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER
 @DirtiesContext(classMode = AFTER_EACH_TEST_METHOD) //reset DB after each test
 public class PersonRepositoryAdapterIT {
 
-    @ClassRule
-    public static PostgreSQLContainer postgreSQLContainer = new PostgreSQLContainer("postgres:11.1")
+    @Container
+    private static PostgreSQLContainer postgreSQLContainer = new PostgreSQLContainer("postgres:11.1")
             .withDatabaseName("integration-tests-db")
             .withUsername("sa")
             .withPassword("sa");
@@ -138,7 +137,7 @@ public class PersonRepositoryAdapterIT {
         personEntity.setBirthDate(birthDate);
         personEntity.setForename(forename);
         personEntity.setName(name);
-        personEntity.setPNumber(id.getValue());
+        personEntity.setNumber(id.getValue());
         personEntity.setSocialSecurityNumber(socialSecurityNumber);
         PersonalAddressEntity personalAddressEntity = createAddressEntity();
         PersonAddressesEntity link = new PersonAddressesEntity();
@@ -156,7 +155,7 @@ public class PersonRepositoryAdapterIT {
         checkPersonValues(returnedPerson);
         assertThat(returnedPerson.getMainAddress()).isNotNull()
                 .extracting("address")
-                .contains(addressLine);
+                .isEqualTo(addressLine);
     }
 
     public static class Initializer

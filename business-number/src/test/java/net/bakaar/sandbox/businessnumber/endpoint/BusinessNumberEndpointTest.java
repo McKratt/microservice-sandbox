@@ -1,18 +1,18 @@
 package net.bakaar.sandbox.businessnumber.endpoint;
 
 import org.assertj.core.api.Condition;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class BusinessNumberEndpointTest {
+class BusinessNumberEndpointTest {
 
     private final BusinessNumberEndpoint endpoint = new BusinessNumberEndpoint();
 
     @Test
-    public void createPartnerId_should_return_200_and_partnerId() {
+    void createPartnerId_should_return_200_and_partnerId() {
         //Given
         //When
         ResponseEntity response = endpoint.createPersonId();

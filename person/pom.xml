@@ -23,6 +23,7 @@
     <properties>
         <shared.version>1.0.0-SNAPSHOT</shared.version>
         <event.lib.version>1.0.0-SNAPSHOT</event.lib.version>
+        <pact.version>4.0.3</pact.version>
     </properties>
     <dependencies>
         <dependency>

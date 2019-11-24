@@ -6,17 +6,17 @@ import net.bakaar.sandbox.domain.shared.AddressNumber;
 import net.bakaar.sandbox.rest.dto.PersonDTO;
 import net.bakaar.sandbox.rest.dto.PersonalAddressDTO;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PersonDtoMapperTest {
+class PersonDtoMapperTest {
 
 
     @Test
-    public void mapToDto_should_map_correctly() {
+    void mapToDto_should_map_correctly() {
         //Given
         String id = "P12345678";
         PNumber pNumber = PNumber.of(id);

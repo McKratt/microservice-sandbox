@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Collections;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
@@ -18,7 +16,7 @@ class SocialSecurityNumberTest {
         // When
         SocialSecurityNumber ssn = SocialSecurityNumber.of(number);
         // Then
-        assertThat(ssn).isNotNull().extracting("number").isEqualTo(Collections.singletonList(number));
+        assertThat(ssn).isNotNull().extracting("number").isEqualTo(number);
     }
 
     @Test

@@ -16,7 +16,7 @@ public class PostalLine {
     }
 
     public static PostalLine of(String value) {
-        if (value == null || isEmpty(value) || value.length() > MAX_LENGTH) {
+        if (value == null || isEmpty(value.trim()) || value.length() > MAX_LENGTH) {
             throw new IllegalArgumentException("A PostalLine cannot be empty or longer than 30 characters !");
         }
         return new PostalLine(value);

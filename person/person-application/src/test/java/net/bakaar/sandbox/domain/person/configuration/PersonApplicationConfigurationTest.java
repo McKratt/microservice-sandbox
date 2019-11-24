@@ -5,16 +5,16 @@ import net.bakaar.sandbox.domain.person.PersonApplicationConfiguration;
 import net.bakaar.sandbox.domain.person.PersonApplicationService;
 import net.bakaar.sandbox.domain.person.PersonFactory;
 import net.bakaar.sandbox.domain.person.PersonRepository;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.springframework.test.util.ReflectionTestUtils.getField;
 
-public class PersonApplicationConfigurationTest {
+class PersonApplicationConfigurationTest {
 
     @Test
-    public void createPartnerApplicationService_should_instantiate_domainService() {
+    void createPartnerApplicationService_should_instantiate_domainService() {
         //Given
         PersonApplicationConfiguration configuration = new PersonApplicationConfiguration();
         PersonRepository personRepository = mock(PersonRepository.class);
