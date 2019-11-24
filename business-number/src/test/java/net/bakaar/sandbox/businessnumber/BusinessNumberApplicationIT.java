@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class BusinessNumberApplicationIT {
 
     @Test
-    void contextLoads() throws Exception {
+    void contextLoads() {
         // Check only that the context correctly load...
     }
 
