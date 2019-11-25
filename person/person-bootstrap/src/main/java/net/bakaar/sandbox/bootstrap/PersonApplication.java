@@ -1,7 +1,7 @@
 package net.bakaar.sandbox.bootstrap;
 
 
-import net.bakaar.sandbox.domain.person.configuration.PersonApplicationConfiguration;
+import net.bakaar.sandbox.domain.person.PersonApplicationConfiguration;
 import net.bakaar.sandbox.infra.data.jpa.PersonDataJpaConfiguration;
 import net.bakaar.sandbox.infra.data.rest.configuration.PersonDataRestConfiguration;
 import net.bakaar.sandbox.rest.PersonRestConfiguration;
