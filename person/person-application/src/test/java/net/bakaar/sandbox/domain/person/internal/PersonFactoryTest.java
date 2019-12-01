@@ -1,6 +1,9 @@
-package net.bakaar.sandbox.domain.person;
+package net.bakaar.sandbox.domain.person.internal;
 
 import net.bakaar.sandbox.domain.number.BusinessNumberRepository;
+import net.bakaar.sandbox.domain.person.CreatePersonCommand;
+import net.bakaar.sandbox.domain.person.Person;
+import net.bakaar.sandbox.domain.person.PersonalAddress;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.junit.jupiter.api.Test;
 

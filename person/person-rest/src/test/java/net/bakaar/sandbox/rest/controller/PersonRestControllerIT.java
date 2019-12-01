@@ -29,9 +29,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ContextConfiguration(classes = PersonRestConfiguration.class)
 @WebMvcTest
 @AutoConfigureMockMvc
+@ContextConfiguration(classes = PersonRestConfiguration.class)
 class PersonRestControllerIT {
 
     private final String baseUrl = "/rest/api/v1/persons";
@@ -106,3 +106,4 @@ class PersonRestControllerIT {
         ;
     }
 }
+

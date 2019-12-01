@@ -1,5 +1,9 @@
-package net.bakaar.sandbox.domain.person;
+package net.bakaar.sandbox.domain.person.internal;
 
+import net.bakaar.sandbox.domain.person.CreatePersonCommand;
+import net.bakaar.sandbox.domain.person.Person;
+import net.bakaar.sandbox.domain.person.PersonApplicationService;
+import net.bakaar.sandbox.domain.person.PersonRepository;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 import org.junit.jupiter.api.Test;
 
@@ -9,12 +13,12 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-class PersonApplicationServiceTest {
+class TransactionalPersonApplicationServiceTest {
 
     private final Person mockedPerson = mock(Person.class);
     private PersonRepository repository = mock(PersonRepository.class);
     private PersonFactory factory = mock(PersonFactory.class);
-    private PersonApplicationService service = new PersonApplicationService(repository, factory);
+    private PersonApplicationService service = new TransactionalPersonApplicationService(repository, factory);
 
     @Test
     void createPerson_should_call_domain_service() {

@@ -1,13 +1,15 @@
-package net.bakaar.sandbox.domain.person;
+package net.bakaar.sandbox.domain.person.internal;
 
 import net.bakaar.sandbox.domain.number.BusinessNumberRepository;
+import net.bakaar.sandbox.domain.person.CreatePersonCommand;
+import net.bakaar.sandbox.domain.person.Person;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
 
 public class PersonFactory {
     private final BusinessNumberRepository businessNumberRepository;
 
 
-    PersonFactory(BusinessNumberRepository businessNumberRepository) {
+    public PersonFactory(BusinessNumberRepository businessNumberRepository) {
         this.businessNumberRepository = businessNumberRepository;
     }
 
