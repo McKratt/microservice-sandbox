@@ -18,7 +18,6 @@
         <module>event-spring</module>
     </modules>
     <properties>
-        <aggregate.report.dir>tests/target/jacoco/jacoco.xml</aggregate.report.dir>
         <sonar.host.url>http://sonarcloud.io</sonar.host.url>
         <sonar.projectName>Microservice Sandbox</sonar.projectName>
         <sonar.organization>mckratt-github</sonar.organization>
