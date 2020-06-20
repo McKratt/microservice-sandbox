@@ -1,6 +1,8 @@
-.idea/**
-!.idea/runConfigurations
-!.idea/runConfigurations/*.xml
+.idea
 **.iml
-**/target
+**target
 **.DS_Store
+**.settings
+**.factorypath
+**.classpath
+**.project
