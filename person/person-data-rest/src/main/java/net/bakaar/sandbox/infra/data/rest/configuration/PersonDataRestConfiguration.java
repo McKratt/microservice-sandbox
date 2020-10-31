@@ -5,7 +5,7 @@ import net.bakaar.sandbox.infra.data.rest.BusinessNumberFakeAdapater;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 //@EnableConfigurationProperties(BusinessNumberServiceProperties.class)
 public class PersonDataRestConfiguration {
 

@@ -9,7 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 
-@SpringBootApplication
+@SpringBootApplication(proxyBeanMethods = false)
 @Import({PersonApplicationConfiguration.class,
         PersonRestConfiguration.class,
         PersonDataJpaConfiguration.class,

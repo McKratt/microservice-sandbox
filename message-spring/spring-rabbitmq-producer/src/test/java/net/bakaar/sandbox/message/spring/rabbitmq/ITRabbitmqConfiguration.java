@@ -11,7 +11,7 @@ import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
-@SpringBootConfiguration
+@SpringBootConfiguration(proxyBeanMethods = false)
 @Import(RabbitmqMessageConfiguration.class)
 public class ITRabbitmqConfiguration {
     static final String topicExchangeName = "spring-boot-exchange";

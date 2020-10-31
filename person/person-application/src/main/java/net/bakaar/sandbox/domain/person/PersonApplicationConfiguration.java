@@ -6,7 +6,7 @@ import net.bakaar.sandbox.domain.person.internal.TransactionalPersonApplicationS
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class PersonApplicationConfiguration {
 
     @Bean
