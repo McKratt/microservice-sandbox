@@ -16,7 +16,7 @@
         <cucumber.version>6.8.2</cucumber.version>
         <jacoco.plugin.version>0.8.6</jacoco.plugin.version>
         <jacoco.listener.version>5.14.0.18788</jacoco.listener.version>
-        <equalsverifier.version>3.1.4</equalsverifier.version>
+        <equalsverifier.version>3.5</equalsverifier.version>
         <testcontainer.version>1.15.0-rc2</testcontainer.version>
         <dockerfile.plugin.version>1.4.13</dockerfile.plugin.version>
         <!-- additional JVM arguments passed to the surefire and failsafe plugins -->
@@ -25,6 +25,7 @@
         <!-- SonarQube -->
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <sonar.coverage.exclusions>**/*Application*</sonar.coverage.exclusions>
+        <java.version>11</java.version>
     </properties>
     <build>
         <plugins>
