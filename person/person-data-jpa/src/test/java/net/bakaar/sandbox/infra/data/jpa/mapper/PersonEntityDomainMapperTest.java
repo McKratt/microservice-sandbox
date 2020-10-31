@@ -7,8 +7,8 @@ import net.bakaar.sandbox.infra.data.jpa.entity.PersonAddressesEntity;
 import net.bakaar.sandbox.infra.data.jpa.entity.PersonEntity;
 import net.bakaar.sandbox.infra.data.jpa.entity.PersonalAddressEntity;
 import net.bakaar.sandbox.shared.domain.vo.PNumber;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
+import org.springframework.lang.NonNull;
 
 import java.time.LocalDate;
 
@@ -27,7 +27,7 @@ class PersonEntityDomainMapperTest {
     private final AddressEntityDomainMapper addressMapper = mock(AddressEntityDomainMapper.class);
     private final long number = 7561234567890L;
     private final PersonalAddress address = mock(PersonalAddress.class);
-    private PersonEntityDomainMapper mapper = new PersonEntityDomainMapper(addressMapper);
+    private final PersonEntityDomainMapper mapper = new PersonEntityDomainMapper(addressMapper);
 
     @Test
     void mapToEntity_should_map_correctly() {
@@ -79,8 +79,8 @@ class PersonEntityDomainMapperTest {
         assertThat(domain.getSocialSecurityNumber().value()).isEqualTo(number);
     }
 
-    @NotNull
-    private PersonEntity createPersonEntity() {
+    private @NonNull
+    PersonEntity createPersonEntity() {
         PersonEntity entity = new PersonEntity();
         entity.setNumber(id);
         entity.setName(name);
