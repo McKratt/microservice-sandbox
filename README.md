@@ -1,4 +1,4 @@
-[![Build Master](https://github.com/McKratt/microservice-sandbox/workflows/MicroService%20Sandbox/badge.svg?branch=master)](https://github.com/McKratt/microservice-sandbox/workflows/MicroService%20Sandbox/badge.svg?branch=master)
+![MicroService Sandbox](https://github.com/McKratt/microservice-sandbox/workflows/MicroService%20Sandbox/badge.svg?branch=master)
 [![Quality Status](https://sonarcloud.io/api/project_badges/measure?project=net.bakaar%3Amicroservice-sandbox&metric=alert_status)](https://sonarcloud.io/api/project_badges/measure?project=net.bakaar%3Amicroservice-sandbox&metric=alert_status)
 # Microservice Sandbox 
 
