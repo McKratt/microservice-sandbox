@@ -1,4 +1,4 @@
-name: Build + Sonar
+name: MicroService Sandbox
 
 on: [push]
 
