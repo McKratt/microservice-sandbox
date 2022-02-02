@@ -11,7 +11,7 @@
     <artifactId>event-spring-emitter-data-jpa</artifactId>
     <properties>
         <event.lib.version>1.0.0-SNAPSHOT</event.lib.version>
-        <postgresql.lib.version>42.2.5</postgresql.lib.version>
+        <postgresql.lib.version>42.2.25</postgresql.lib.version>
     </properties>
     <dependencies>
         <dependency>
