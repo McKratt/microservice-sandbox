@@ -8,7 +8,7 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <properties>
-        <postgresql.lib.version>42.2.5</postgresql.lib.version>
+        <postgresql.lib.version>42.2.25</postgresql.lib.version>
     </properties>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>person-data-jpa</artifactId>
